@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const DescriptionSchema = new Schema(
+const TaskSchema = new Schema(
   {
     description: {
       type: String,
@@ -12,4 +12,4 @@ const DescriptionSchema = new Schema(
   }
 );
 
-export default model("Description", DescriptionSchema);
+export default model("Task", TaskSchema);
