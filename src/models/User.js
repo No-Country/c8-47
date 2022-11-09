@@ -23,8 +23,13 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["client", "admin"],
-      default: "client",
+      enum: ["user", "admin"],
+      default: "user",
+    },
+
+    contact: {
+      type: Schema.Types.ObjectId,
+      ref: "Contact",
     },
   },
   {
