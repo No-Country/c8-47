@@ -6,6 +6,8 @@ const User = require("../models/User");
 const { JWT_SECRET_CODE } = process.env;
 
 const signUp = async (req, res, next) => {
+  const { email, password, rep_password, first_name, last_name } = req.body;
+
   return res.send("Account created");
 };
 
