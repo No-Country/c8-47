@@ -34,7 +34,7 @@ const repPasswordValidation = body(
 const router = Router();
 
 router.post(
-  "/signup",
+  "/signup", //!VOLVER A VER agregar require a toda la data de body
   [emailValidation, passwordValidation, repPasswordValidation],
   signUp
 );

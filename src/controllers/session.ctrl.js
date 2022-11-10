@@ -1,21 +1,48 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+import { validationResult } from "express-validator";
 
 const User = require("../models/User");
 
 const { JWT_SECRET_CODE } = process.env;
 
 const signUp = async (req, res, next) => {
-  const { email, password, rep_password, first_name, last_name } = req.body;
+  const errors = validationResult(req);
 
-  return res.send("Account created");
+  if (!errors.isEmpty()) {
+    return res.json({ errors: errors.array() });
+  }
+
+  const { email, password, first_name, last_name } = req.body;
+
+  try {
+    const userFound = await User.exists({ email });
+    if (userFound) return res.json({ message: "Email ya registrado" });
+
+    const newUser = await User.create({
+      email,
+      password,
+      first_name,
+      last_name,
+    });
+
+    return res.json({ message: "Cuenta creada con éxito" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const logIn = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.json({ errors: errors.array() });
+  }
+
   const { email, password } = req.body;
 
-  if (!email || !password)
-    return res.json({ message: "Por favor ingresa tu email y contraseña" });
+  /* if (!email || !password)
+    return res.json({ message: "Por favor ingresa tu email y contraseña" }); */
 
   try {
     const userFound = await User.findOne({ email });
