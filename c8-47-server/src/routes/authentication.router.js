@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { signUp, logIn } from "../controllers/session.ctrl.js";
+import { signUp, logIn } from "../controllers/authentication.ctrl.js";
 import {
   signUpValidation,
   logInValidation,
