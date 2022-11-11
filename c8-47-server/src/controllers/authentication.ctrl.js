@@ -72,7 +72,6 @@ const logIn = async (req, res, next) => {
 };
 
 const authenticationRequired = async (req, res, next) => {
-  console.log("req.user", req.user);
   res.send("you are authenticated");
 };
 
