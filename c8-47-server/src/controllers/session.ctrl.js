@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { validationResult } from "express-validator";
 
-const User = require("../models/User");
+import User from "../models/User.js";
 
 const { JWT_SECRET_CODE } = process.env;
 

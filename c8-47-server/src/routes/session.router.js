@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { body } from "express-validator";
 
 import { signUp, logIn } from "../controllers/session.ctrl.js";
-import { signUpValidation, logInValidation } from "../middlewares/validators";
+import {
+  signUpValidation,
+  logInValidation,
+} from "../middlewares/validators.js";
 
 const router = Router();
 

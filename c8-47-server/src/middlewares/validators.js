@@ -12,8 +12,8 @@ const passwordValidation = body("password", "Ingresa una contraseña válida")
   .isLength({ min: 6 })
   .escape();
 
-const repPasswordValidation = body(
-  "rep_password",
+const repeatPasswordValidation = body(
+  "repeat_password",
   "Ingresa una contraseña válida"
 )
   .trim()
@@ -31,7 +31,7 @@ const repPasswordValidation = body(
 const signUpValidation = [
   emailValidation,
   passwordValidation,
-  repPasswordValidation,
+  repeatPasswordValidation,
 ];
 
 const logInValidation = [emailValidation, passwordValidation];

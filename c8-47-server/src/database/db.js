@@ -34,4 +34,4 @@ const connectMongo = async (req, res, next) => {
   }
 };
 
-export default connectMongo;
+export { connectMongo };

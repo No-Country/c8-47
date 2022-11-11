@@ -2,7 +2,7 @@ import morgan from "morgan";
 import express from "express";
 import cors from "cors";
 
-import connectMongo from "./database/db";
+import { connectMongo } from "./database/db.js";
 import router from "./routes/index.js";
 
 export const app = express();
