@@ -56,8 +56,10 @@ const logIn = async (req, res, next) => {
         .status(401)
         .json({ message: "Email o contraseña incorrectos" });
 
+    const payload = { email, id: userFound._id };
+
     //!VOLVER A VER ver que usar para la firma
-    const token = jwt.sign({ email }, JWT_SECRET_CODE, {
+    const token = jwt.sign({ payload }, JWT_SECRET_CODE, {
       expiresIn: 864000,
     });
 
@@ -69,4 +71,13 @@ const logIn = async (req, res, next) => {
   }
 };
 
-export { signUp, logIn };
+const authenticationRequired = async (req, res, next) => {
+  console.log("req.user", req.user);
+  res.send("you are authenticated");
+};
+
+const adminRequired = async (req, res, next) => {
+  res.send("welcome admin");
+};
+
+export { signUp, logIn, authenticationRequired, adminRequired };
