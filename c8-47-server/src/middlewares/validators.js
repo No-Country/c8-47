@@ -1,43 +1,51 @@
-import { body, check } from "express-validator";
+import { check } from "express-validator";
 
-const emailValidation = body("email", "Ingresa un email válido")
+const emailValidation = check("email")
   .trim()
   .notEmpty()
+  .withMessage("Ingresa tu email")
   .isEmail()
+  .withMessage("Ingresa un email válido")
+  .toLowerCase()
   .escape();
 
-const passwordValidation = body("password", "Ingresa una contraseña válida")
+const passwordValidation = check("password")
   .trim()
   .notEmpty()
+  .withMessage("Ingresa tu contraseña")
   .isLength({ min: 6 })
+  .withMessage("La contraseña debe tener al menos 6 caracteres")
   .escape();
 
-const repeatPasswordValidation = body(
-  "repeat_password",
-  "Ingresa una contraseña válida"
-)
+const repeatPasswordValidation = check("repeat_password")
   .trim()
   .notEmpty()
-  .isLength({ min: 6 })
+  .withMessage("Repite tu contraseña")
   .escape()
   .custom((value, { req }) => {
     if (value !== req.body.password) {
-      throw new Error("Las contraseñas deben coincidir");
+      throw new Error("Las contraseñas no coinciden");
     } else {
       return value;
     }
   });
 
-const firstNameValidation = body("first_name", "Ingresa un nombre válido")
+const firstNameValidation = check("first_name")
   .trim()
   .notEmpty()
-  .isLength({ min: 6 })
+  .withMessage("Ingresa un nombre válido")
+  .isLength({ min: 2 })
+  .withMessage("El campo Nombre debe tener al menos 2 caracteres")
+  .toLowerCase()
   .escape();
 
-const lastNameValidation = body("last_name", "Ingresa una apellido válido")
+const lastNameValidation = check("last_name")
   .trim()
   .notEmpty()
-  .isLength({ min: 6 })
+  .withMessage("Ingresa un apellido válido")
+  .isLength({ min: 2 })
+  .withMessage("El campo Apellido debe tener al menos 2 caracteres")
+  .toLowerCase()
   .escape();
 
 const signUpValidation = [
