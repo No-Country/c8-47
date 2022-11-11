@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 import { validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
 
 import User from "../models/User.js";
 
@@ -49,7 +50,7 @@ const logIn = async (req, res, next) => {
         .status(401)
         .json({ message: "Email o contraseña incorrectos" });
 
-    const validity = await User.comparePassword(password);
+    const validity = await userFound.comparePassword(password);
     if (!validity)
       return res
         .status(401)

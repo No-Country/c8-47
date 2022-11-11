@@ -13,8 +13,10 @@ const passwordValidation = check("password")
   .trim()
   .notEmpty()
   .withMessage("Ingresa tu contraseña")
-  .isLength({ min: 6 })
-  .withMessage("La contraseña debe tener al menos 6 caracteres")
+  .isLength({ min: 8 })
+  .withMessage("La contraseña debe tener al menos 8 caracteres")
+  .isLength({ max: 32 })
+  .withMessage("La contraseña acepta como máximo 32 caracteres")
   .escape();
 
 const repeatPasswordValidation = check("repeat_password")
@@ -31,20 +33,28 @@ const repeatPasswordValidation = check("repeat_password")
   });
 
 const firstNameValidation = check("first_name")
+  .isString()
+  .withMessage("Ingresa un nombre válido")
   .trim()
   .notEmpty()
   .withMessage("Ingresa un nombre válido")
   .isLength({ min: 2 })
   .withMessage("El campo Nombre debe tener al menos 2 caracteres")
+  .isLength({ max: 24 })
+  .withMessage("El campo Nombre debe tener como máximo 24 caracteres")
   .toLowerCase()
   .escape();
 
 const lastNameValidation = check("last_name")
+  .isString()
+  .withMessage("Ingresa un apellido válido")
   .trim()
   .notEmpty()
   .withMessage("Ingresa un apellido válido")
-  .isLength({ min: 2 })
+  .isLength({ min: 2, max: 24 })
   .withMessage("El campo Apellido debe tener al menos 2 caracteres")
+  .isLength({ max: 24 })
+  .withMessage("El campo Nombre debe tener como máximo 24 caracteres")
   .toLowerCase()
   .escape();
 
