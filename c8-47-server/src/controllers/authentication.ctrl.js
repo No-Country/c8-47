@@ -10,14 +10,15 @@ const signUp = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   }
 
   const { email, password, first_name, last_name } = req.body;
 
   try {
     const userFound = await User.exists({ email });
-    if (userFound) return res.json({ message: "Email ya registrado" });
+    if (userFound)
+      return res.status(200).json({ message: "Email ya registrado" });
 
     const newUser = await User.create({
       email,
@@ -26,7 +27,7 @@ const signUp = async (req, res, next) => {
       last_name,
     });
 
-    return res.json({ message: "Cuenta creada con éxito" });
+    return res.status(201).json({ message: "Cuenta creada con éxito" });
   } catch (error) {
     next(error);
   }
@@ -41,24 +42,27 @@ const logIn = async (req, res, next) => {
 
   const { email, password } = req.body;
 
-  /* if (!email || !password)
-    return res.json({ message: "Por favor ingresa tu email y contraseña" }); */
-
   try {
     const userFound = await User.findOne({ email });
     if (!userFound)
-      return res.json({ message: "Email o contraseña incorrectos" });
+      return res
+        .status(401)
+        .json({ message: "Email o contraseña incorrectos" });
 
     const validity = await User.comparePassword(password);
     if (!validity)
-      return res.json({ message: "Email o contraseña incorrectos" });
+      return res
+        .status(401)
+        .json({ message: "Email o contraseña incorrectos" });
 
     //!VOLVER A VER ver que usar para la firma
     const token = jwt.sign({ email }, JWT_SECRET_CODE, {
       expiresIn: 864000,
     });
 
-    return res.json({ token, message: "Sesión iniciada con éxito" });
+    return res
+      .status(200)
+      .json({ token, message: "Sesión iniciada con éxito" });
   } catch (error) {
     next(error);
   }

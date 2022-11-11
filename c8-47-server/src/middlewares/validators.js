@@ -28,10 +28,24 @@ const repeatPasswordValidation = body(
     }
   });
 
+const firstNameValidation = body("first_name", "Ingresa un nombre válido")
+  .trim()
+  .notEmpty()
+  .isLength({ min: 6 })
+  .escape();
+
+const lastNameValidation = body("last_name", "Ingresa una apellido válido")
+  .trim()
+  .notEmpty()
+  .isLength({ min: 6 })
+  .escape();
+
 const signUpValidation = [
   emailValidation,
   passwordValidation,
   repeatPasswordValidation,
+  firstNameValidation,
+  lastNameValidation,
 ];
 
 const logInValidation = [emailValidation, passwordValidation];
