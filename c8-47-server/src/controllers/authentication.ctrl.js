@@ -71,12 +71,4 @@ const logIn = async (req, res, next) => {
   }
 };
 
-const authenticationRequired = async (req, res, next) => {
-  res.send("you are authenticated");
-};
-
-const adminRequired = async (req, res, next) => {
-  res.send("welcome admin");
-};
-
-export { signUp, logIn, authenticationRequired, adminRequired };
+export { signUp, logIn };

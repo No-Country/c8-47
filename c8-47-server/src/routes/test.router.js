@@ -1,9 +1,17 @@
 import { Router } from "express";
 
-import { testController } from "../controllers/test.ctrl.js";
+import { verifyToken, verifyAdmin } from "../middlewares/verify.js";
+
+import {
+  testController,
+  authenticationRequired,
+  adminRequired,
+} from "../controllers/test.ctrl.js";
 
 const router = Router();
 
 router.get("/", testController);
+router.get("/authentication", verifyToken, authenticationRequired);
+router.get("/admin", verifyAdmin, adminRequired);
 
 export default router;

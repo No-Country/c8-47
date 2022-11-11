@@ -44,12 +44,14 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-const verifyAdmin = async (req, res, next) => {
+const verifyAdminFunction = async (req, res, next) => {
   if (req.user.role === "admin") {
     next();
   } else {
     return res.status(403).json({ message: "Sin autorización" });
   }
 };
+
+const verifyAdmin = [verifyToken, verifyAdminFunction];
 
 export { verifyToken, verifyAdmin };
