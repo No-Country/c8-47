@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 router.get("/", testController);
-router.get("/authentication", verifyToken, authenticationRequired);
+router.get("/auth", verifyToken, authenticationRequired);
 router.get("/admin", verifyAdmin, adminRequired);
 
 export default router;

@@ -38,7 +38,7 @@ const logIn = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   }
 
   const { email, password } = req.body;
