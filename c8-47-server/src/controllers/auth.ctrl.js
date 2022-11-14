@@ -58,9 +58,8 @@ const logIn = async (req, res, next) => {
 
     const payload = { email, id: userFound._id };
 
-    //!VOLVER A VER ver que usar para la firma
     const token = jwt.sign({ payload }, JWT_SECRET_CODE, {
-      expiresIn: 864000,
+      expiresIn: 60 * 60 * 24 * 30,
     });
 
     return res

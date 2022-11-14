@@ -16,14 +16,20 @@ app.use('/', connectMongo);
 
 app.use('/', router);
 
-app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  const message = err.message || err;
-  return res.status(status).send(message);
-});
-
 app.get('/', (req, res) => {
   return res.status(200).send('Welcome to c8-47 API');
+});
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+app.use((error, req, res, next) => {
+  console.error(error);
+  const status = error.status || 500;
+  const message = error.message || error;
+  if (error.name === 'CastError')
+    return res.status(status).json({ message: 'Invalid id' });
 });
 
 export { app };
