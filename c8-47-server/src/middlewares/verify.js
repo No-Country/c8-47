@@ -7,40 +7,36 @@ import User from "../models/User.js";
 const { JWT_SECRET_CODE } = process.env;
 
 const verifyToken = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader)
+    return res.status(400).json({ message: "Header no recibido" });
+
+  const token = authHeader.split(" ")[1];
+
+  if (!token) return res.status(400).json({ message: "Token no recibido" });
+
   try {
-    const authHeader = req.headers.authorization;
+    const userDecoded = jwt.verify(token, JWT_SECRET_CODE);
 
-    if (!authHeader)
-      return res.status(400).json({ message: "Header no recibido" });
+    req.user = userDecoded.payload;
 
-    const token = authHeader.split(" ")[1];
-
-    if (!token) return res.status(400).json({ message: "Token no recibido" });
-
-    try {
-      const userDecoded = jwt.verify(token, JWT_SECRET_CODE);
-
-      req.user = userDecoded.payload;
-
-      const userFound = await User.findById(req.user.id);
-      if (!userFound) {
-        return res.status(404).json({ message: "Cuenta no encontrada" });
-      }
-
-      req.user.role = userFound.role;
-    } catch (error) {
-      if (error.name === "TokenExpiredError")
-        return res.status(401).json({
-          message: "Sesión expirada, vuelve a iniciar sesión",
-          expiredToken: true,
-        });
-
-      return res.status(401).json({ message: "Token inválido" });
+    const userFound = await User.findById(req.user.id);
+    if (!userFound) {
+      return res.status(404).json({ message: "Cuenta no encontrada" });
     }
+
+    req.user.role = userFound.role;
 
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Sin autorización" });
+    if (error.name === "TokenExpiredError")
+      return res.status(401).json({
+        message: "Sesión expirada, vuelve a iniciar sesión",
+        expiredToken: true,
+      });
+
+    return res.status(401).json({ message: "Token inválido" });
   }
 };
 
