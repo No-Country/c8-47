@@ -1,28 +1,28 @@
-import request from "supertest";
-import mongoose from "mongoose";
+import request from 'supertest';
+import mongoose from 'mongoose';
 
-import { app } from "../app.js";
-import { server } from "../../index.js";
-import User from "../models/User.js";
+import { app } from '../app.js';
+import { server } from '../../index.js';
+import User from '../models/User.js';
 
 const api = request(app);
 
 const newUser = {
-  email: "new@user.com",
-  password: "contraseña",
-  repeat_password: "contraseña",
-  first_name: "new user",
-  last_name: "created",
+  email: 'new@user.com',
+  password: 'contraseña',
+  confirm_password: 'contraseña',
+  first_name: 'new user',
+  last_name: 'created',
 };
 
-describe("/auth", () => {
-  describe("/signup", () => {
-    test("POST should create a new user", async () => {
+describe('/auth', () => {
+  describe('/signup', () => {
+    test('POST should create a new user', async () => {
       await api
-        .post("/auth/signup")
+        .post('/auth/signup')
         .send(newUser)
         .expect(201)
-        .expect("Content-Type", /application\/json/);
+        .expect('Content-Type', /application\/json/);
 
       const allUsersAfter = await User.find({});
       expect(allUsersAfter).toHaveLength(1);
@@ -31,8 +31,8 @@ describe("/auth", () => {
         (user) => user.email === newUser.email
       );
 
-      console.log("userFound", userFound);
-      expect(userFound.first_name).toBe("new user");
+      console.log('userFound', userFound);
+      expect(userFound.first_name).toBe('new user');
     });
 
     // test("POST shouldn't create a user with an email already in use", async () => {});

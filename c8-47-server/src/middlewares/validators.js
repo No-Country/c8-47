@@ -7,19 +7,35 @@ const emailValidation = check('email')
   .isEmail()
   .withMessage('Ingresa un email válido')
   .toLowerCase()
+  .isLength({ max: 64 })
+  .withMessage('El email debe tener como máximo 64 caracteres')
   .escape();
 
-const passwordValidation = check('password')
+const passwordLogInValidation = check('password')
+  .trim()
+  .notEmpty()
+  .withMessage('Ingresa tu contraseña')
+  .isLength({ max: 64 })
+  .withMessage('La contraseña acepta como máximo 64 caracteres')
+  .escape();
+
+const passwordSignUpValidation = check('password')
   .trim()
   .notEmpty()
   .withMessage('Ingresa tu contraseña')
   .isLength({ min: 8 })
-  .withMessage('La contraseña debe tener al menos 8 caracteres')
-  .isLength({ max: 32 })
-  .withMessage('La contraseña acepta como máximo 32 caracteres')
+  .withMessage(
+    'La contraseña debe tener al menos 8 caracteres, una letra en mayúscula, una letra en minúscula y un número'
+  )
+  .isLength({ max: 64 })
+  .withMessage('La contraseña acepta como máximo 64 caracteres')
+  .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+  .withMessage(
+    'La contraseña debe tener al menos 8 caracteres, una letra en mayúscula, una letra en minúscula y un número'
+  )
   .escape();
 
-const repeatPasswordValidation = check('repeat_password')
+const confirmPasswordValidation = check('confirm_password')
   .trim()
   .notEmpty()
   .withMessage('Repite tu contraseña')
@@ -53,7 +69,7 @@ const lastNameValidation = check('last_name')
   .trim()
   .notEmpty()
   .withMessage('Ingresa un apellido válido')
-  .isLength({ min: 2, max: 24 })
+  .isLength({ min: 2 })
   .withMessage('El campo Apellido debe tener al menos 2 caracteres')
   .isLength({ max: 24 })
   .withMessage('El campo Apellido debe tener como máximo 24 caracteres')
@@ -64,12 +80,12 @@ const lastNameValidation = check('last_name')
 
 const signUpValidation = [
   emailValidation,
-  passwordValidation,
-  repeatPasswordValidation,
+  passwordSignUpValidation,
+  confirmPasswordValidation,
   firstNameValidation,
   lastNameValidation,
 ];
 
-const logInValidation = [emailValidation, passwordValidation];
+const logInValidation = [emailValidation, passwordLogInValidation];
 
 export { signUpValidation, logInValidation };
