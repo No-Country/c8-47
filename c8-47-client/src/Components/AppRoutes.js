@@ -12,7 +12,7 @@ import Admin from '../Pages/Admin';
 import { routes } from '../Config/routes';
 
 const AppRoutes = () => {
-  const userLoged = true;
+  const userLoged = false;
   const isAdmin = true;
 
   return (
