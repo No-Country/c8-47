@@ -19,10 +19,51 @@ const Register = () => {
       <h3>Register</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>Full name</label>
-          <input type='text' {...register('fullname', { required: true })} />
-          {errors.fullname?.type === 'required' && (
-            <p>*Full name is required</p>
+          <label>First name</label>
+          <input
+            type='text'
+            {...register('first_name', {
+              required: true,
+              pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+              minLength: 2,
+              maxLength: 24,
+            })}
+          />
+          {errors.first_name?.type === 'required' && (
+            <p>*First name is required.</p>
+          )}
+          {errors.first_name?.type === 'pattern' && (
+            <p>*Please enter a valid first name.</p>
+          )}
+          {errors.first_name?.type === 'minLength' && (
+            <p>*You need a minimun of 2 characters.</p>
+          )}
+          {errors.first_name?.type === 'maxLength' && (
+            <p>*First name is longer than 24 characters.</p>
+          )}
+        </div>
+        <div>
+          <label>Last name</label>
+          <input
+            type='text'
+            {...register('last_name', {
+              required: true,
+              pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+              minLength: 2,
+              maxLength: 24,
+            })}
+          />
+          {errors.last_name?.type === 'required' && (
+            <p>*Last name is required.</p>
+          )}
+          {errors.last_name?.type === 'pattern' && (
+            <p>*Please enter a valid last name.</p>
+          )}
+          {errors.last_name?.type === 'minLength' && (
+            <p>*You need a minimun of 2 characters.</p>
+          )}
+          {errors.last_name?.type === 'maxLength' && (
+            <p>*Last name is longer than 24 characters.</p>
           )}
         </div>
         <div>
@@ -31,13 +72,16 @@ const Register = () => {
             type='text'
             {...register('email', {
               required: true,
-              pattern:
-                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+              pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+              maxLength: 64,
             })}
           />
-          {errors.email?.type === 'required' && <p>*Email is required</p>}
+          {errors.email?.type === 'required' && <p>*Email is required.</p>}
           {errors.email?.type === 'pattern' && (
-            <p>*Please enter a valid email</p>
+            <p>*Please enter a valid email.</p>
+          )}
+          {errors.email?.type === 'maxLength' && (
+            <p>*Email is longer than 64 characters.</p>
           )}
         </div>
         <div>
@@ -61,7 +105,7 @@ const Register = () => {
           <label>Confirm password</label>
           <input
             type='text'
-            {...register('confirmPassword', {
+            {...register('confirm_password', {
               required: true,
               validate: (val) => {
                 if (watch('password') != val) {
@@ -70,10 +114,10 @@ const Register = () => {
               },
             })}
           />
-          {errors.confirmPassword?.type === 'required' && (
+          {errors.confirm_password?.type === 'required' && (
             <p>*Please confirm the password above</p>
           )}
-          {errors.confirmPassword?.type === 'validate' && (
+          {errors.confirm_password?.type === 'validate' && (
             <p>*Passwords do not match</p>
           )}
         </div>
