@@ -10,6 +10,11 @@ const PersonalSchema = new Schema(
       type: String,
       required: true,
     },
+
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'Social',
+    },
   },
   {
     versionKey: false,

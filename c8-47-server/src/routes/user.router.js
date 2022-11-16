@@ -5,6 +5,11 @@ import {
   getContact,
   editContact,
   getSocial,
+  // addSocial,
+  // editSocial,
+  getPersonal,
+  // addPersonal,
+  // editPersonal,
 } from '../controllers/user.ctrl.js';
 
 const router = Router();
@@ -15,7 +20,9 @@ router.post('/contact', contactValidation, editContact);
 router.get('/social', getSocial);
 // router.post('/social', addSocial);
 // router.put('/social', editSocial);
-// router.post('/personal', addData);
+router.get('/personal', getPersonal);
+// router.post('/personal', addPersonal);
+// router.put('/personal', editPersonal);
 
 // router.get('/curriculum', addData);
 // router.post('/presentation', addData);

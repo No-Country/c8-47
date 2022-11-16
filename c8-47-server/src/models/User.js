@@ -31,10 +31,12 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Contact',
     },
-    social: {
-      type: Schema.Types.ObjectId,
-      ref: 'Social',
-    },
+    social: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Social',
+      },
+    ],
   },
   {
     versionKey: false,
