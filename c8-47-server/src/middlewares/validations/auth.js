@@ -1,5 +1,7 @@
 import { check } from 'express-validator';
 
+import { checkValidations } from './checkValidations.js';
+
 const emailValidation = check('email')
   .trim()
   .notEmpty()
@@ -84,8 +86,13 @@ const signUpValidation = [
   confirmPasswordValidation,
   firstNameValidation,
   lastNameValidation,
+  checkValidations,
 ];
 
-const logInValidation = [emailValidation, passwordLogInValidation];
+const logInValidation = [
+  emailValidation,
+  passwordLogInValidation,
+  checkValidations,
+];
 
 export { signUpValidation, logInValidation };
