@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 const Register = () => {
   const {
     register,
@@ -10,9 +10,17 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (form) => {
-    console.log(form);
-    reset();
+  const onSubmit = async (form) => {
+    try {
+      const { data } = await axios.post(
+        'http://localhost:4000/auth/signup',
+        form
+      );
+      console.log(data);
+      reset();
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
