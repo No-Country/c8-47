@@ -2,10 +2,11 @@ import { Router } from 'express';
 
 import { verifyToken } from '../middlewares/verify.js';
 import { contactValidation } from '../middlewares/validations/user.js';
-import { editContact } from '../controllers/user.ctrl.js';
+import { getContact, editContact } from '../controllers/user.ctrl.js';
 
 const router = Router();
 
+router.get('/contact', verifyToken, getContact);
 router.post('/contact', [verifyToken, contactValidation], editContact);
 // router.post('/social', addData);
 // router.post('/personal', addData);
