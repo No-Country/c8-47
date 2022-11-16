@@ -10,9 +10,6 @@ router.post('/contact', [verifyToken, contactValidation], editContact);
 // router.post('/social', addData);
 // router.post('/personal', addData);
 
-// router.post('/course', addData);
-// router.post('/education', addData);
-
 // router.get('/curriculum', addData);
 // router.post('/presentation', addData);
 // router.post('/selector', addData);
@@ -21,6 +18,8 @@ router.post('/contact', [verifyToken, contactValidation], editContact);
 // router.post('/skill', addData);
 // router.post('/tag', addData);
 
+// router.post('/course', addData);
+// router.post('/education', addData);
 // router.post('/job', addData);
 // router.post('/task', addData);
 

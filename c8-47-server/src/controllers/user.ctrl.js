@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 
-//import User from '../models/User.js';
+import User from '../models/User.js';
 import Contact from '../models/Contact.js';
 
 const editContact = async (req, res, next) => {
@@ -15,15 +15,21 @@ const editContact = async (req, res, next) => {
   const options = { upsert: true, new: true };
 
   try {
-    const contactFound = await Contact.findOneAndUpdate(
+    const contactEdited = await Contact.findOneAndUpdate(
       { user: user.id },
       req.body,
       options
     );
 
-    console.log('-----contactFound', contactFound);
+    await User.findOneAndUpdate(
+      { _id: user.id },
+      { contact: contactEdited._id },
+      options
+    );
 
-    return res.status(200).json({ message: 'Contacto modificado con éxito' });
+    return res
+      .status(201)
+      .json({ contactEdited, message: 'Contacto modificado con éxito' });
   } catch (error) {
     next(error);
   }

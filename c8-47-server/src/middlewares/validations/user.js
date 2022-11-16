@@ -44,11 +44,10 @@ const addressValidation = [
     .escape(),
 
   check('address.city')
+    .optional({ checkFalsy: true })
     .isString()
     .withMessage('Ingresa una Ciudad válida')
     .trim()
-    .notEmpty()
-    .withMessage('Ingresa una Ciudad válida')
     .isLength({ max: 24 })
     .withMessage('El campo Ciudad debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
@@ -57,6 +56,7 @@ const addressValidation = [
     .escape(),
 
   check('address.zip_code')
+    .optional({ checkFalsy: true })
     .isString()
     .withMessage('Ingresa un Código Postal válido')
     .trim()
@@ -69,6 +69,7 @@ const addressValidation = [
     .escape(),
 
   check('address.street_name')
+    .optional({ checkFalsy: true })
     .isString()
     .withMessage('Ingresa una Calle válida')
     .trim()
@@ -82,11 +83,12 @@ const addressValidation = [
     .escape(),
 
   check('address.street_number')
+    .optional({ checkFalsy: true })
     .isString()
-    .withMessage('Ingresa un Número válida')
+    .withMessage('Ingresa un Número válido')
     .trim()
     .notEmpty()
-    .withMessage('Ingresa un Número válida')
+    .withMessage('Ingresa un Número válido')
     .isLength({ max: 24 })
     .withMessage('El campo Número debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
