@@ -39,6 +39,11 @@ const ContactSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Social',
     },
+
+    user: {
+      type: String,
+      required: true,
+    },
   },
   {
     versionKey: false,
