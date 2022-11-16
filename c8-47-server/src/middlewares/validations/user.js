@@ -36,8 +36,6 @@ const addressValidation = [
     .trim()
     .notEmpty()
     .withMessage('Ingresa un Estado válido')
-    .isLength({ min: 2 })
-    .withMessage('El campo Estado debe tener al menos 2 caracteres')
     .isLength({ max: 24 })
     .withMessage('El campo Estado debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/)
@@ -51,8 +49,6 @@ const addressValidation = [
     .trim()
     .notEmpty()
     .withMessage('Ingresa una Ciudad válida')
-    .isLength({ min: 2 })
-    .withMessage('El campo Ciudad debe tener al menos 2 caracteres')
     .isLength({ max: 24 })
     .withMessage('El campo Ciudad debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
@@ -60,50 +56,43 @@ const addressValidation = [
     .toLowerCase()
     .escape(),
 
-  /*   check('address.zip_code')
+  check('address.zip_code')
     .isString()
-    .withMessage('Ingresa un Código Postal válida')
+    .withMessage('Ingresa un Código Postal válido')
     .trim()
     .notEmpty()
-    .withMessage('Ingresa un Código Postal válida')
-    .isLength({ min: 2 })
-    .withMessage('El campo Código Postal debe tener al menos 2 caracteres')
-    .isLength({ max: 24 })
-    .withMessage('El campo Código Postal debe tener como máximo 24 caracteres')
-    .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
-    .withMessage('El campo Código Postal solo acepta letras y números')
-    .toLowerCase()
-    .escape(), */
+    .withMessage('Ingresa un Código Postal válido')
+    .isLength({ max: 12 })
+    .withMessage('El campo Código Postal debe tener como máximo 12 caracteres')
+    .matches(/^[0-9]+$/)
+    .withMessage('El campo Código Postal solo acepta números')
+    .escape(),
 
-  /*   check('address.street_name')
+  check('address.street_name')
     .isString()
     .withMessage('Ingresa una Calle válida')
     .trim()
     .notEmpty()
     .withMessage('Ingresa una Calle válida')
-    .isLength({ min: 2 })
-    .withMessage('El campo Calle debe tener al menos 2 caracteres')
     .isLength({ max: 24 })
     .withMessage('El campo Calle debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
     .withMessage('El campo Calle solo acepta letras y números')
     .toLowerCase()
-    .escape(), */
+    .escape(),
 
-  /*   check('address.street_number')
+  check('address.street_number')
     .isString()
     .withMessage('Ingresa un Número válida')
     .trim()
     .notEmpty()
     .withMessage('Ingresa un Número válida')
-    .isLength({ min: 2 })
-    .withMessage('El campo Número debe tener al menos 2 caracteres')
     .isLength({ max: 24 })
     .withMessage('El campo Número debe tener como máximo 24 caracteres')
     .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
     .withMessage('El campo Número solo acepta letras y números')
     .toLowerCase()
-    .escape(), */
+    .escape(),
 ];
 
 const contactValidation = [
