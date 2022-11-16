@@ -13,7 +13,6 @@ const ContactSchema = new Schema(
       },
       zip_code: {
         type: String,
-        required: true,
       },
       street_name: {
         type: String,
@@ -29,7 +28,6 @@ const ContactSchema = new Schema(
     },
     phone: {
       type: String,
-      required: true,
     },
     web: {
       type: String,

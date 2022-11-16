@@ -1,9 +1,15 @@
-import User from '../models/User.js';
+import { validationResult } from 'express-validator';
+
+//import User from '../models/User.js';
 import Contact from '../models/Contact.js';
 
-const addData = async (req, res, next) => {};
-
 const editContact = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   const { user } = req;
 
   const options = { upsert: true, new: true };
@@ -23,4 +29,4 @@ const editContact = async (req, res, next) => {
   }
 };
 
-export { addData, editContact };
+export { editContact };
