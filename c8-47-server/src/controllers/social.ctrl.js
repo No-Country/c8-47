@@ -50,16 +50,20 @@ const addSocial = async (req, res, next) => {
 };
 
 const editSocial = async (req, res, next) => {
-  const { user } = req;
+  const { id, url } = req.body;
+  //!VOLVER A VER preguntar si envian respuesta por query
 
   const options = { new: true };
 
   try {
     const socialEdited = await Social.findOneAndUpdate(
-      { user: user.id },
-      req.body,
+      { _id: id },
+      { url },
       options
     );
+
+    if (!socialEdited)
+      return res.status(404).json({ message: 'Social no encontrada' });
 
     return res.status(201).json({
       social: socialEdited,
@@ -73,9 +77,13 @@ const editSocial = async (req, res, next) => {
 const deleteSocial = async (req, res, next) => {
   const { user } = req;
   const { id } = req.body;
+  //!VOLVER A VER preguntar si envian respuesta por query
 
   try {
-    await Social.findOneAndDelete({ _id: id });
+    const deletedSocial = await Social.findOneAndDelete({ _id: id });
+
+    if (!deletedSocial)
+      return res.status(404).json({ message: 'Social no encontrada' });
 
     const contactFound = await Contact.findOne({ user: user.id });
 

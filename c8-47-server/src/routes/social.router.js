@@ -1,18 +1,18 @@
 import { Router } from 'express';
 
-//import {  } from '../middlewares/validations/social.js';
+import { socialValidation } from '../middlewares/validations/social.js';
 import {
   getSocial,
   addSocial,
-  // editSocial,
+  editSocial,
   deleteSocial,
 } from '../controllers/social.ctrl.js';
 
 const router = Router();
 
 router.get('/', getSocial);
-router.post('/', addSocial); //!VOLVER A VER validar
-// router.put('/',VALIDAR, editSocial);
+router.post('/', socialValidation, addSocial);
+router.put('/', socialValidation, editSocial);
 router.delete('/', deleteSocial);
 
 export default router;

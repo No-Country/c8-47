@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { verifyToken } from '../middlewares/verify.js';
+import { verifyToken } from '../middlewares/verifyAuth.js';
 
 import testRouter from './test.router.js';
 import authRouter from './auth.router.js';
