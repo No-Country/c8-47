@@ -89,7 +89,7 @@ const getSocial = async (req, res, next) => {
  const editSocial = async (req, res, next) => {
   const { user } = req;
 
-  const options = { upsert: true, new: true };
+  const options = { new: true };
 
   try {
     const contactEdited = await Contact.findOneAndUpdate(
@@ -128,8 +128,59 @@ const getPersonal = async (req, res, next) => {
   }
 };
 
-// const addPersonal =  async (req, res, next) => {};
-// const editPersonal =  async (req, res, next) => {};
+//!VOLVER A VER preguntar por modelo Personal, si es uno por usuario o puede haber varios
+const addPersonal = async (req, res, next) => {
+  const { user } = req;
+  const { heading, description } = req.body;
+
+  try {
+    const newPersonal = new Personal({
+      heading,
+      description,
+      user: user.id,
+    });
+
+    await newPersonal.save();
+
+    await User.findOneAndUpdate(
+      { _id: user.id },
+      { personal: newPersonal._id }
+    );
+
+    return res
+      .status(201)
+      .json({ newPersonal, message: 'Personal agregado con éxito' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const editPersonal = async (req, res, next) => {
+  const { user } = req;
+
+  const options = { new: true };
+
+  try {
+    const personalEdited = await Personal.findOneAndUpdate(
+      { user: user.id },
+      req.body,
+      options
+    );
+
+    await User.findOneAndUpdate(
+      { _id: user.id },
+      { personal: personalEdited._id },
+      options
+    );
+
+    return res.status(201).json({
+      personal: personalEdited,
+      message: 'Personal modificado con éxito',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export {
   getContact,
@@ -138,6 +189,6 @@ export {
   // addSocial,
   // editSocial,
   getPersonal,
-  // addPersonal,
-  // editPersonal,
+  addPersonal,
+  editPersonal,
 };

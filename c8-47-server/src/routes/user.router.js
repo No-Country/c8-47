@@ -16,13 +16,13 @@ const router = Router();
 
 router.get('/contact', getContact);
 router.post('/contact', contactValidation, editContact);
-
 router.get('/social', getSocial);
-// router.post('/social', addSocial);
-// router.put('/social', editSocial);
+// router.post('/social',VALIDAR, addSocial);
+// router.put('/social',VALIDAR, editSocial);
+
 router.get('/personal', getPersonal);
-// router.post('/personal', addPersonal);
-// router.put('/personal', editPersonal);
+//router.post('/personal',VALIDAR, addPersonal);
+// router.put('/personal',VALIDAR, editPersonal);
 
 // router.get('/curriculum', addData);
 // router.post('/presentation', addData);
