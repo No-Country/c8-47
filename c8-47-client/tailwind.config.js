@@ -17,6 +17,9 @@ module.exports = {
         btnHoverG: "#E2E2E2",
         btnDisable: "#757575",
         errorColor: "#b30000",
+        bgDarkMode: "#121212",
+        borderDarkmode: "#85D3EB",
+        
       }
     },
   },
