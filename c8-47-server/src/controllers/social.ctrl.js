@@ -11,8 +11,6 @@ const getSocial = async (req, res, next) => {
     if (!socialFound || socialFound.length === 0)
       return res.status(200).json({ social: null });
 
-    console.log('---------socialFound', socialFound);
-
     return res.status(200).json({ social: socialFound });
   } catch (error) {
     next(error);
@@ -63,19 +61,34 @@ const editSocial = async (req, res, next) => {
       options
     );
 
-    await Contact.findOneAndUpdate(
-      { _id: user.id },
-      { social: socialEdited._id },
-      options
-    );
-
     return res.status(201).json({
       social: socialEdited,
-      message: 'Contacto modificado con éxito',
+      message: 'Social modificada con éxito',
     });
   } catch (error) {
     next(error);
   }
 };
 
-export { getSocial, addSocial, editSocial };
+const deleteSocial = async (req, res, next) => {
+  const { user } = req;
+  const { id } = req.body;
+
+  try {
+    await Social.findOneAndDelete({ _id: id });
+
+    const contactFound = await Contact.findOne({ user: user.id });
+
+    contactFound.socials.filter((social) => social !== id);
+
+    await contactFound.save();
+
+    return res.status(201).json({
+      message: 'Social eliminada con éxito',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getSocial, addSocial, editSocial, deleteSocial };
