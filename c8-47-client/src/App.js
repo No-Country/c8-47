@@ -12,9 +12,9 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Header />
-        <Banner />
-        <FeatureList />
-        <Paragraph />
+        {/* <Banner /> */}
+        {/* <FeatureList /> */}
+        {/* <Paragraph /> */}
         <AppRoutes />
         <Footer />
       </BrowserRouter>

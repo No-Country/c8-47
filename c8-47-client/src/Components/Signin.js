@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Input from './input/Input';
+import login from '../Assets/Images/login.jpg';
 const Signin = () => {
   const {
     register,
@@ -22,57 +24,57 @@ const Signin = () => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email</label>
-          <input
-            type='text'
-            {...register('email', {
-              required: true,
-              pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-              maxLength: 64,
+    <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[900px]'>
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name={'Email'}
+            type={'text'}
+            register={register('email', {
+              required: { value: true, message: '*Email is required.' },
+              pattern: {
+                value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                message: '*Please enter a valid email.',
+              },
+              maxLength: {
+                value: 64,
+                message: '*Email is longer than 64 characters.',
+              },
             })}
+            error={errors.email}
           />
-          {errors.email?.type === 'required' && <p>*Email is required.</p>}
-          {errors.email?.type === 'pattern' && (
-            <p>*Please enter a valid email.</p>
-          )}
-          {errors.email?.type === 'maxLength' && (
-            <p>*Email is longer than 64 characters.</p>
-          )}
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type='text'
-            {...register('password', {
-              required: true,
-              pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+          <Input
+            name={'Password'}
+            type={'text'}
+            register={register('password', {
+              required: { value: true, message: '*Password is required.' },
+              pattern: {
+                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                message:
+                  '*Password must have at least 8 characters, one uppercase, one lowercase and one digit',
+              },
             })}
+            error={errors.password}
           />
-          {errors.password?.type === 'required' && <p>*Password is required</p>}
-          {errors.password?.type === 'pattern' && (
-            <p>
-              *Password must have at least 8 characters, one uppercase, one
-              lowercase and one digit
-            </p>
-          )}
+
+          <div>
+            Forgot your password?
+            <span>
+              <Link to='/resetPassword'>Reset your password</Link>
+            </span>
+          </div>
+          <button type='submit'>Log in</button>
+          <div>
+            Don&#39;t have an account?
+            <span>
+              <Link to='/registro'>Sign up</Link>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div className='w-full h-[550px] hidden md:block'>
+          <img className='w-full h-full' src={login} alt='login' />
         </div>
-        <div>
-          Forgot your password?
-          <span>
-            <Link to='/resetPassword'>Reset your password</Link>
-          </span>
-        </div>
-        <button type='submit'>Log in</button>
-        <div>
-          Don&#39;t have an account?
-          <span>
-            <Link to='/registro'>Sign up</Link>
-          </span>
-        </div>
-      </form>
     </div>
   );
 };
