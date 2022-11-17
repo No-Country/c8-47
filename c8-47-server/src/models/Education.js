@@ -1,12 +1,12 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const DetailSchema = new Schema(
+const EducationSchema = new Schema(
   {
     title: {
       type: String,
       required: true,
     },
-    organization: {
+    institution: {
       type: String,
       required: true,
     },
@@ -18,10 +18,14 @@ const DetailSchema = new Schema(
       type: String,
       required: true,
     },
+    comment: {
+      type: String,
+      required: true,
+    },
   },
   {
     versionKey: false,
   }
 );
 
-export default model("Detail", DetailSchema);
+export default model('Education', EducationSchema);

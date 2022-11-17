@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import bcrypt from "bcryptjs";
+import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema(
   {
@@ -23,13 +23,21 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: ['user', 'admin'],
+      default: 'user',
     },
 
     contact: {
       type: Schema.Types.ObjectId,
-      ref: "Contact",
+      ref: 'Contact',
+    },
+    social: {
+      type: Schema.Types.ObjectId,
+      ref: 'Social',
+    },
+    personal: {
+      type: Schema.Types.ObjectId,
+      ref: 'Personal',
     },
   },
   {
@@ -37,9 +45,9 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   const user = this;
-  if (!user.isModified("password")) return next();
+  if (!user.isModified('password')) return next();
 
   const hash = await bcrypt.hash(user.password, 10);
   user.password = hash;
@@ -53,4 +61,4 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
   return compare;
 };
 
-export default model("User", UserSchema);
+export default model('User', UserSchema);

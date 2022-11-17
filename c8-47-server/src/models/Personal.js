@@ -1,8 +1,12 @@
 import { Schema, model } from 'mongoose';
 
-const SocialSchema = new Schema(
+const PersonalSchema = new Schema(
   {
-    url: {
+    heading: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       required: true,
     },
@@ -17,4 +21,4 @@ const SocialSchema = new Schema(
   }
 );
 
-export default model('Social', SocialSchema);
+export default model('Personal', PersonalSchema);

@@ -1,19 +1,16 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const ContactSchema = new Schema(
   {
     address: {
       state: {
         type: String,
-        required: true,
       },
       city: {
         type: String,
-        required: true,
       },
       zip_code: {
         type: String,
-        required: true,
       },
       street_name: {
         type: String,
@@ -25,14 +22,24 @@ const ContactSchema = new Schema(
 
     email: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
-      required: true,
     },
     web: {
       type: String,
+    },
+
+    socials: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Social',
+      },
+    ],
+
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   {
@@ -40,4 +47,4 @@ const ContactSchema = new Schema(
   }
 );
 
-export default model("Contact", ContactSchema);
+export default model('Contact', ContactSchema);

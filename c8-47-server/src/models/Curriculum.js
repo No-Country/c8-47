@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const ResumeSchema = new Schema(
+const CurriculumSchema = new Schema(
   {
     created_at: {
       type: Number,
@@ -14,10 +14,15 @@ const ResumeSchema = new Schema(
       type: String,
       required: true,
     },
+
+    selector: {
+      type: Schema.Types.ObjectId,
+      ref: 'Selector',
+    },
   },
   {
     versionKey: false,
   }
 );
 
-export default model("Resume", ResumeSchema);
+export default model('Curriculum', CurriculumSchema);
