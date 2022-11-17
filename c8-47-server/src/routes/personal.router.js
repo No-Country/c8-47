@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-// import {  } from '../middlewares/validations/personal.js';
+import { personalValidation } from '../middlewares/validations/personal.js';
 import {
   getPersonal,
   addPersonal,
@@ -10,7 +10,7 @@ import {
 const router = Router();
 
 router.get('/', getPersonal);
-// router.post('/', VALIDAR, addPersonal);
-// router.put('/', VALIDAR, editPersonal);
+router.post('/', personalValidation, addPersonal);
+router.put('/', personalValidation, editPersonal);
 
 export default router;
