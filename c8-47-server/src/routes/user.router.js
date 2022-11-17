@@ -1,28 +1,17 @@
 import { Router } from 'express';
 
-import { contactValidation } from '../middlewares/validations/user.js';
+//import {  } from '../middlewares/validations/contact.js';
 import {
-  getContact,
-  editContact,
   getSocial,
   // addSocial,
   // editSocial,
-  getPersonal,
-  // addPersonal,
-  // editPersonal,
 } from '../controllers/user.ctrl.js';
 
 const router = Router();
 
-router.get('/contact', getContact);
-router.post('/contact', contactValidation, editContact);
 router.get('/social', getSocial);
 // router.post('/social',VALIDAR, addSocial);
 // router.put('/social',VALIDAR, editSocial);
-
-router.get('/personal', getPersonal);
-//router.post('/personal',VALIDAR, addPersonal);
-// router.put('/personal',VALIDAR, editPersonal);
 
 // router.get('/curriculum', addData);
 // router.post('/presentation', addData);
