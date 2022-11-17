@@ -1,14 +1,17 @@
-import User from '../models/User.js';
+import Contact from '../models/Contact.js';
 import Social from '../models/Social.js';
 
 const getSocial = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const socialFound = await Social.findOne({ user: user.id });
+    const socialFound = await Social.find({ user: user.id });
 
     //!VOLVER A VER preguntar por respuesta null
-    if (!socialFound) return res.status(200).json({ social: null });
+    if (!socialFound || socialFound.length === 0)
+      return res.status(200).json({ social: null });
+
+    console.log('---------socialFound', socialFound);
 
     return res.status(200).json({ social: socialFound });
   } catch (error) {
@@ -16,8 +19,7 @@ const getSocial = async (req, res, next) => {
   }
 };
 
-//!VOLVER A VER preguntar por modelo Social, agregar un array de urls. Los iconos deben pedirse desde el front
-/*const addSocial = async (req, res, next) => {
+const addSocial = async (req, res, next) => {
   const { user } = req;
   const { url } = req.body;
 
@@ -29,7 +31,16 @@ const getSocial = async (req, res, next) => {
 
     await newSocial.save();
 
-    await User.findOneAndUpdate({ _id: user.id }, { social: newSocial._id });
+    const contactFound = await Contact.findOne({ user: user.id });
+
+    if (contactFound) {
+      contactFound.socials.push(newSocial._id);
+      await contactFound.save();
+    } else {
+      const newContact = new Contact({ user: user.id });
+      newContact.socials.push(newSocial._id);
+      await newContact.save();
+    }
 
     return res.status(201).json({
       social: newSocial,
@@ -40,35 +51,31 @@ const getSocial = async (req, res, next) => {
   }
 };
 
- const editSocial = async (req, res, next) => {
+const editSocial = async (req, res, next) => {
   const { user } = req;
 
   const options = { new: true };
 
   try {
-    const contactEdited = await Contact.findOneAndUpdate(
+    const socialEdited = await Social.findOneAndUpdate(
       { user: user.id },
       req.body,
       options
     );
 
-    await User.findOneAndUpdate(
+    await Contact.findOneAndUpdate(
       { _id: user.id },
-      { contact: contactEdited._id },
+      { social: socialEdited._id },
       options
     );
 
     return res.status(201).json({
-      contact: contactEdited,
+      social: socialEdited,
       message: 'Contacto modificado con éxito',
     });
   } catch (error) {
     next(error);
   }
-}; */
-
-export {
-  getSocial,
-  // addSocial,
-  // editSocial,
 };
+
+export { getSocial, addSocial, editSocial };

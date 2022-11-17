@@ -5,7 +5,9 @@ const getContact = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const contactFound = await Contact.findOne({ user: user.id });
+    const contactFound = await Contact.findOne({ user: user.id }).populate(
+      'socials'
+    );
 
     //!VOLVER A VER preguntar por respuesta null
     if (!contactFound) return res.status(200).json({ contact: null });

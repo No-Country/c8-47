@@ -13,7 +13,7 @@ const PersonalSchema = new Schema(
 
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'Social',
+      ref: 'User',
     },
   },
   {
