@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const Signup = () => {
   return (
-    <div>
+    <div className='mt-[8rem]'>
       <Register />
       <Outlet />
     </div>
