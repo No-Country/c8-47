@@ -24,21 +24,29 @@ const addSocial = async (req, res, next) => {
   try {
     const newSocial = new Social({
       url,
-      user: user.id,
+      //  user: user.id,
     });
 
-    await newSocial.save();
+    // await newSocial.save();
 
     const contactFound = await Contact.findOne({ user: user.id });
 
     if (contactFound) {
       contactFound.socials.push(newSocial._id);
+
+      newSocial.contact = contactFound._id;
+
       await contactFound.save();
     } else {
       const newContact = new Contact({ user: user.id });
       newContact.socials.push(newSocial._id);
+
+      newSocial.contact = newContact._id;
+
       await newContact.save();
     }
+
+    await newSocial.save();
 
     return res.status(201).json({
       social: newSocial,

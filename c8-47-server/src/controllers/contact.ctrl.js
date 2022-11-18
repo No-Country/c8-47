@@ -6,6 +6,7 @@ const getContact = async (req, res, next) => {
 
   try {
     const contactFound = await Contact.findOne({ user: user.id }).populate(
+      //!VOLVER A VER al popular quitar el campo contact
       'socials'
     );
 
