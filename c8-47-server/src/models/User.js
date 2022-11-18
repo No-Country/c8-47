@@ -39,10 +39,12 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Personal',
     },
-    education: {
-      type: Schema.Types.ObjectId,
-      ref: 'Education',
-    },
+    education: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Education',
+      },
+    ],
   },
   {
     versionKey: false,

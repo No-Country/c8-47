@@ -20,7 +20,6 @@ const EducationSchema = new Schema(
     },
     comment: {
       type: String,
-      required: true,
     },
 
     user: {

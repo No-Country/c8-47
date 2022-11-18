@@ -9,6 +9,8 @@ const ERROR_HANDLERS = {
   JsonWebTokenError: (res) =>
     res.status(401).json({ message: 'Token inválido' }),
 
+  SyntaxError: (res) => res.status(422).json({ message: 'Error de sintaxis' }),
+
   defaultError: (res) => res.status(500).json({ message: 'Algo anduvo mal' }),
 };
 

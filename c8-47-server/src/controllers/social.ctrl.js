@@ -87,11 +87,14 @@ const deleteSocial = async (req, res, next) => {
 
     const contactFound = await Contact.findOne({ user: user.id });
 
-    contactFound.socials.filter((social) => social !== id);
+    const newSocialsArray = contactFound.socials.filter(
+      (social) => social.toString() !== id
+    );
 
+    contactFound.socials = newSocialsArray;
     await contactFound.save();
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Social eliminada con éxito',
     });
   } catch (error) {
