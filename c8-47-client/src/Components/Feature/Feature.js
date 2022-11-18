@@ -5,11 +5,11 @@ import { ButtonRoundedPurple } from '../buttons/ButtonRoundedPurple'
 
 export const Feature = (props) => {
   return (
-    <div className=' font-Mon md:justify-items-stretch md:place-items-gap-x-32 md:grid-cols-2 md:grid-rows-2 grid gap-5 gap-x-32 place-items-center	w-full pb-36' >
+    <div className=' dark:text-white font-Mon md:justify-items-stretch md:place-items-gap-x-32 md:grid-cols-2 md:grid-rows-2 grid gap-5 gap-x-32 place-items-center	w-full pb-36' >
         
         <ButtonRoundedPurple button={props.button} />
 
-            <div className=' row-span-2 flex flex-col justify-center items-center h-72 w-3/4 bg-slate-200 mt-6 '>
+            <div className=' dark:text-black row-span-2 flex flex-col justify-center items-center h-72 w-3/4 bg-slate-200 mt-6 '>
                {props.gif} 
             </div>
 
