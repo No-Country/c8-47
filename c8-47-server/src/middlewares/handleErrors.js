@@ -11,6 +11,9 @@ const ERROR_HANDLERS = {
 
   SyntaxError: (res) => res.status(422).json({ message: 'Error de sintaxis' }),
 
+  TypeError: (res) =>
+    res.status(500).json({ message: 'Hubo un error en el servidor' }),
+
   defaultError: (res) => res.status(500).json({ message: 'Algo anduvo mal' }),
 };
 

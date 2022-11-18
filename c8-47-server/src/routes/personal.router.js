@@ -5,6 +5,7 @@ import {
   getPersonal,
   addPersonal,
   editPersonal,
+  deletePersonal,
 } from '../controllers/personal.ctrl.js';
 
 const router = Router();
@@ -12,5 +13,6 @@ const router = Router();
 router.get('/', getPersonal);
 router.post('/', personalValidation, addPersonal);
 router.put('/', personalValidation, editPersonal);
+router.delete('/', deletePersonal);
 
 export default router;

@@ -5,10 +5,11 @@ const getPersonal = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const personalFound = await Personal.findOne({ user: user.id });
+    const personalFound = await Personal.find({ user: user.id });
 
     //!VOLVER A VER preguntar por respuesta null
-    if (!personalFound) return res.status(200).json({ personal: null });
+    if (!personalFound || personalFound.length === 0)
+      return res.status(200).json({ personal: null });
 
     return res.status(200).json({ personal: personalFound });
   } catch (error) {
@@ -16,50 +17,49 @@ const getPersonal = async (req, res, next) => {
   }
 };
 
-//!VOLVER A VER preguntar por modelo Personal, si es uno por usuario o puede haber varios
 const addPersonal = async (req, res, next) => {
   const { user } = req;
-  const { heading, description } = req.body;
+  const { title, about } = req.body;
 
   try {
     const newPersonal = new Personal({
-      heading,
-      description,
+      title,
+      about,
       user: user.id,
     });
 
     await newPersonal.save();
 
-    await User.findOneAndUpdate(
-      { _id: user.id },
-      { personal: newPersonal._id }
-    );
+    const userFound = await User.findOne({ _id: user.id });
+
+    userFound.personal.push(newPersonal._id);
+    await userFound.save();
 
     return res
       .status(201)
-      .json({ newPersonal, message: 'Personal agregado con éxito' });
+      .json({ personal: newPersonal, message: 'Personal agregado con éxito' });
   } catch (error) {
     next(error);
   }
 };
 
 const editPersonal = async (req, res, next) => {
-  const { user } = req;
+  const { id, title, about } = req.body;
+  //!VOLVER A VER preguntar si envian id por query
 
   const options = { new: true };
 
   try {
     const personalEdited = await Personal.findOneAndUpdate(
-      { user: user.id },
-      req.body,
+      { _id: id },
+      { title, about },
       options
     );
 
-    await User.findOneAndUpdate(
-      { _id: user.id },
-      { personal: personalEdited._id },
-      options
-    );
+    if (!personalEdited)
+      return res.status(404).json({ message: 'Personal no encontrado' });
+
+    await personalEdited.save();
 
     return res.status(201).json({
       personal: personalEdited,
@@ -70,4 +70,32 @@ const editPersonal = async (req, res, next) => {
   }
 };
 
-export { getPersonal, addPersonal, editPersonal };
+const deletePersonal = async (req, res, next) => {
+  const { user } = req;
+  const { id } = req.body;
+  //!VOLVER A VER preguntar si envian id por query
+
+  try {
+    const deletedPersonal = await Personal.findOneAndDelete({ _id: id });
+
+    if (!deletedPersonal)
+      return res.status(404).json({ message: 'Personal no encontrada' });
+
+    const userFound = await User.findOne({ _id: user.id });
+
+    const newPersonalArray = userFound.personal.filter(
+      (pers) => pers.toString() !== id
+    );
+
+    userFound.personal = newPersonalArray;
+    await userFound.save();
+
+    return res.status(200).json({
+      message: 'Personal eliminada con éxito',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getPersonal, addPersonal, editPersonal, deletePersonal };
