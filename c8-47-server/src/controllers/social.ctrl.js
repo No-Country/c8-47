@@ -51,7 +51,7 @@ const addSocial = async (req, res, next) => {
 
 const editSocial = async (req, res, next) => {
   const { id, url } = req.body;
-  //!VOLVER A VER preguntar si envian respuesta por query
+  //!VOLVER A VER preguntar si envian id por query
 
   const options = { new: true };
 
@@ -77,7 +77,7 @@ const editSocial = async (req, res, next) => {
 const deleteSocial = async (req, res, next) => {
   const { user } = req;
   const { id } = req.body;
-  //!VOLVER A VER preguntar si envian respuesta por query
+  //!VOLVER A VER preguntar si envian id por query
 
   try {
     const deletedSocial = await Social.findOneAndDelete({ _id: id });
