@@ -22,12 +22,7 @@ const addSocial = async (req, res, next) => {
   const { url } = req.body;
 
   try {
-    const newSocial = new Social({
-      url,
-      //  user: user.id,
-    });
-
-    // await newSocial.save();
+    const newSocial = new Social({ url });
 
     const contactFound = await Contact.findOne({ user: user.id });
 
