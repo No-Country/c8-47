@@ -7,6 +7,8 @@ import authRouter from './auth.router.js';
 import contactRouter from './contact.router.js';
 import personalRouter from './personal.router.js';
 import socialRouter from './social.router.js';
+import educationRouter from './education.router.js';
+// import jobRouter from './job.router.js';
 
 const router = Router();
 
@@ -16,17 +18,20 @@ router.use('/contact', verifyToken, contactRouter);
 router.use('/personal', verifyToken, personalRouter);
 router.use('/social', verifyToken, socialRouter);
 
-// router.get('/curriculum', addData);
-// router.post('/presentation', addData);
-// router.post('/selector', addData);
+router.use('/education', verifyToken, educationRouter);
+// router.use('/course', courseRouter);
+//!VOLVER A VER preguntar si unificar los dos modelos
+// router.use('/job', jobRouter);
+// router.use('/task', taskRouter);
 
-// router.post('/section', addData);
-// router.post('/skill', addData);
-// router.post('/tag', addData);
+// router.use('/curriculum', curriculumRouter);
+// router.use('/presentation', presentationRouter);
+// router.use('/selector', selectorRouter);
 
-// router.post('/course', addData);
-// router.post('/education', addData);
-// router.post('/job', addData);
-// router.post('/task', addData);
+// router.use('/section', sectionRouter);
+// router.use('/skill', skillRouter);
+// router.use('/tag', tagRouter);
+
+// router.use('/admin', adminRouter)
 
 export default router;

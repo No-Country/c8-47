@@ -7,9 +7,9 @@ const SocialSchema = new Schema(
       required: true,
     },
 
-    user: {
+    contact: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Contact',
     },
   },
   {

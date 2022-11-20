@@ -22,23 +22,26 @@ const addSocial = async (req, res, next) => {
   const { url } = req.body;
 
   try {
-    const newSocial = new Social({
-      url,
-      user: user.id,
-    });
-
-    await newSocial.save();
+    const newSocial = new Social({ url });
 
     const contactFound = await Contact.findOne({ user: user.id });
 
     if (contactFound) {
       contactFound.socials.push(newSocial._id);
+
+      newSocial.contact = contactFound._id;
+
       await contactFound.save();
     } else {
       const newContact = new Contact({ user: user.id });
       newContact.socials.push(newSocial._id);
+
+      newSocial.contact = newContact._id;
+
       await newContact.save();
     }
+
+    await newSocial.save();
 
     return res.status(201).json({
       social: newSocial,
@@ -51,7 +54,7 @@ const addSocial = async (req, res, next) => {
 
 const editSocial = async (req, res, next) => {
   const { id, url } = req.body;
-  //!VOLVER A VER preguntar si envian respuesta por query
+  //!VOLVER A VER preguntar si envian id por query
 
   const options = { new: true };
 
@@ -77,7 +80,7 @@ const editSocial = async (req, res, next) => {
 const deleteSocial = async (req, res, next) => {
   const { user } = req;
   const { id } = req.body;
-  //!VOLVER A VER preguntar si envian respuesta por query
+  //!VOLVER A VER preguntar si envian id por query
 
   try {
     const deletedSocial = await Social.findOneAndDelete({ _id: id });
@@ -87,11 +90,14 @@ const deleteSocial = async (req, res, next) => {
 
     const contactFound = await Contact.findOne({ user: user.id });
 
-    contactFound.socials.filter((social) => social !== id);
+    const newSocialsArray = contactFound.socials.filter(
+      (social) => social.toString() !== id
+    );
 
+    contactFound.socials = newSocialsArray;
     await contactFound.save();
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Social eliminada con éxito',
     });
   } catch (error) {

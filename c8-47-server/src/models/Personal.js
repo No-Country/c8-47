@@ -2,11 +2,11 @@ import { Schema, model } from 'mongoose';
 
 const PersonalSchema = new Schema(
   {
-    heading: {
+    title: {
       type: String,
       required: true,
     },
-    description: {
+    about: {
       type: String,
       required: true,
     },
