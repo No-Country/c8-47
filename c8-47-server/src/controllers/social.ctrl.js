@@ -83,9 +83,9 @@ const deleteSocial = async (req, res, next) => {
   //!VOLVER A VER preguntar si envian id por query
 
   try {
-    const deletedSocial = await Social.findOneAndDelete({ _id: id });
+    const socialDeleted = await Social.findOneAndDelete({ _id: id });
 
-    if (!deletedSocial)
+    if (!socialDeleted)
       return res.status(404).json({ message: 'Social no encontrada' });
 
     const contactFound = await Contact.findOne({ user: user.id });

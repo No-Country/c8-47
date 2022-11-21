@@ -76,9 +76,9 @@ const deletePersonal = async (req, res, next) => {
   //!VOLVER A VER preguntar si envian id por query
 
   try {
-    const deletedPersonal = await Personal.findOneAndDelete({ _id: id });
+    const personalDeleted = await Personal.findOneAndDelete({ _id: id });
 
-    if (!deletedPersonal)
+    if (!personalDeleted)
       return res.status(404).json({ message: 'Personal no encontrada' });
 
     const userFound = await User.findOne({ _id: user.id });
