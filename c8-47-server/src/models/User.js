@@ -43,6 +43,12 @@ const UserSchema = new Schema(
         ref: 'Education',
       },
     ],
+    experience: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Job',
+      },
+    ],
   },
   {
     versionKey: false,

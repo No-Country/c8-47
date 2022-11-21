@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const TaskSchema = new Schema(
   {
@@ -6,10 +6,16 @@ const TaskSchema = new Schema(
       type: String,
       required: true,
     },
+
+    job: {
+      type: Schema.Types.ObjectId,
+      ref: 'Job',
+    },
   },
+
   {
     versionKey: false,
   }
 );
 
-export default model("Task", TaskSchema);
+export default model('Task', TaskSchema);

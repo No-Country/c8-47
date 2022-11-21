@@ -19,7 +19,6 @@ const JobSchema = new Schema(
       required: true,
     },
 
-    //!VOLVER A VER testear tasks ref
     tasks: [
       {
         type: Schema.Types.ObjectId,
