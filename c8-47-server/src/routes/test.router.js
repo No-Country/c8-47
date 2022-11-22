@@ -1,17 +1,19 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import { verifyToken, verifyAdmin } from "../middlewares/verify.js";
+import { verifyToken, verifyAdmin } from '../middlewares/verifyAuth.js';
 
 import {
   testController,
   authenticationRequired,
   adminRequired,
-} from "../controllers/test.ctrl.js";
+  userData,
+} from '../controllers/test.ctrl.js';
 
 const router = Router();
 
-router.get("/", testController);
-router.get("/auth", verifyToken, authenticationRequired);
-router.get("/admin", verifyAdmin, adminRequired);
+router.get('/', testController);
+router.get('/auth', verifyToken, authenticationRequired);
+router.get('/admin', verifyAdmin, adminRequired);
+router.get('/user', verifyToken, userData);
 
 export default router;

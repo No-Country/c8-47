@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const SocialSchema = new Schema(
   {
@@ -6,10 +6,15 @@ const SocialSchema = new Schema(
       type: String,
       required: true,
     },
+
+    contact: {
+      type: Schema.Types.ObjectId,
+      ref: 'Contact',
+    },
   },
   {
     versionKey: false,
   }
 );
 
-export default model("Social", SocialSchema);
+export default model('Social', SocialSchema);
