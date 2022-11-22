@@ -2,7 +2,9 @@
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
+
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -18,10 +20,21 @@ module.exports = {
         btnDisable: "#757575",
         errorColor: "#b30000",
         bgDarkMode: "#121212",
-        borderDarkmode: "#85D3EB",
+        borderDarkMode: "#85D3EB",
+        bgHoverDarkMode: "#ACE1F1",
+        bgPushDarkMode: "#58C3E4",
+        bgDisableDarkmode: "#9ABCC6",
         
+        
+
       }
     },
+    screens: {
+
+      'md': '800px',
+      // => @media (min-width: 800px) { ... }
+
+    }
   },
   plugins: [],
 }
