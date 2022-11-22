@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Input from './input/Input';
 import login from '../Assets/Images/login.jpg';
-const Signin = () => {
+import ButtonLinkedin from './buttons/ButtonLinkedin';
+import ButtonGoogle from './buttons/ButtonGoogle';
+import { MdClose } from 'react-icons/md';
+const Signin = ({ isVisible, onClose }) => {
   const {
     register,
     reset,
@@ -23,58 +26,94 @@ const Signin = () => {
       console.log(err);
     }
   };
+  useEffect(() => {
+    reset();
+  }, [isVisible]);
+  if (!isVisible) return null;
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[900px]'>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            name={'Email'}
-            type={'text'}
-            register={register('email', {
-              required: { value: true, message: '*Email is required.' },
-              pattern: {
-                value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                message: '*Please enter a valid email.',
-              },
-              maxLength: {
-                value: 64,
-                message: '*Email is longer than 64 characters.',
-              },
-            })}
-            error={errors.email}
-          />
-          <Input
-            name={'Password'}
-            type={'text'}
-            register={register('password', {
-              required: { value: true, message: '*Password is required.' },
-              pattern: {
-                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-                message:
-                  '*Password must have at least 8 characters, one uppercase, one lowercase and one digit',
-              },
-            })}
-            error={errors.password}
-          />
+    <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto pt-[2.5rem] pb-[2.5rem]'>
+      <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-fit shadow-lg shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px]'>
+        <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
+          <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              name={'Email'}
+              type={'text'}
+              register={register('email', {
+                required: {
+                  value: true,
+                  message: 'El campo email es requerido.',
+                },
+                pattern: {
+                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                  message: 'Ingrese un email válido.',
+                },
+                maxLength: {
+                  value: 64,
+                  message: 'No debe exceder los 64 caracteres.',
+                },
+              })}
+              error={errors.email}
+            />
+            <Input
+              name={'Contraseña'}
+              type={'text'}
+              register={register('password', {
+                required: {
+                  value: true,
+                  message: 'El campo contraseña es requerido.',
+                },
+                pattern: {
+                  value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                  message:
+                    'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
+                },
+              })}
+              error={errors.password}
+            />
 
-          <div>
-            Forgot your password?
-            <span>
-              <Link to='/resetPassword'>Reset your password</Link>
+            <span className='font-Mon  text-[14px] mb-[10px]'>
+              <Link
+                to='/resetPassword'
+                className='underline hover:text-primarioH'
+              >
+                ¿Has olvidado tu contraseña?
+              </Link>
             </span>
-          </div>
-          <button type='submit'>Log in</button>
-          <div>
-            Don&#39;t have an account?
-            <span>
-              <Link to='/registro'>Sign up</Link>
+            <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
+              <button
+                type='submit'
+                className='w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+              >
+                Iniciar Sesión
+              </button>
+              <ButtonLinkedin name={'Registrarme con LinkedIn'} />
+              <ButtonGoogle name={'Registrarme con Google'} />
+            </div>
+            <span className='font-Mon text-center text-[14px] mb-[10px]'>
+              ¿No tienes cuenta?{' '}
+              <Link
+                to='/registro'
+                className='font-[800] text-primario hover:text-primarioH'
+              >
+                Regístrate
+              </Link>
             </span>
-          </div>
-        </form>
-      </div>
-      <div className='w-full h-[550px] hidden md:block'>
-          <img className='w-full h-full' src={login} alt='login' />
+          </form>
         </div>
+        <div className='relative w-full  hidden md:block '>
+          <button
+            className='absolute top-[0px] right-[0px] z-1 text-[#252525] text-[2rem] h-[40px] w-[40px] '
+            onClick={() => onClose()}
+          >
+            <MdClose style={{ width: '100%', height: '100%' }} />
+          </button>
+          <img
+            className='w-full h-full rounded-r-[10px] '
+            src={login}
+            alt='login'
+          />
+        </div>
+      </div>
     </div>
   );
 };
