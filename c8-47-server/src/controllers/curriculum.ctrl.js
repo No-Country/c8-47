@@ -95,7 +95,7 @@ const deleteCurriculum = async (req, res, next) => {
     const userFound = await User.findOne({ _id: user.id });
 
     const newCurriculumArray = userFound.curriculums.filter(
-      (edu) => edu.toString() !== curriculumId
+      (cv) => cv.toString() !== curriculumId
     );
 
     userFound.curriculums = newCurriculumArray;

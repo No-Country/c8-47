@@ -20,7 +20,8 @@ const userData = async (req, res, next) => {
       .populate('contact')
       .populate('personal')
       .populate('education')
-      .populate('experience');
+      .populate('experience')
+      .populate('curriculums');
 
     return res.json({ userFound });
   } catch (error) {

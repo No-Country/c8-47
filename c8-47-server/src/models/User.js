@@ -44,6 +44,12 @@ const UserSchema = new Schema(
         ref: 'Education',
       },
     ],
+    languages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Language',
+      },
+    ],
     experience: [
       {
         type: Schema.Types.ObjectId,
