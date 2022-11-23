@@ -18,6 +18,9 @@ const ContactSchema = new Schema(
       street_number: {
         type: String,
       },
+      door: {
+        type: String,
+      },
     },
 
     email: {
@@ -29,13 +32,7 @@ const ContactSchema = new Schema(
     web: {
       type: String,
     },
-
-    socials: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Social',
-      },
-    ],
+    socials: [String],
 
     user: {
       type: Schema.Types.ObjectId,

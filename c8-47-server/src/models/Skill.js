@@ -6,6 +6,15 @@ const SkillSchema = new Schema(
       type: String,
       required: true,
     },
+
+    tag: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
   {
     versionKey: false,

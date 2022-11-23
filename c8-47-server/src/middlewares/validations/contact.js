@@ -97,13 +97,37 @@ const addressValidation = [
     .withMessage('El campo Número solo acepta letras y números')
     .toLowerCase()
     .escape(),
+
+  check('address.door')
+    .optional({ checkFalsy: true })
+    .isString()
+    .withMessage('Ingresa un Departamento válido')
+    .trim()
+    .notEmpty()
+    .withMessage('Ingresa un Departamento válido')
+    .isLength({ max: 16 })
+    .withMessage('El campo Departamento debe tener como máximo 16 caracteres')
+    .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
+    .withMessage('El campo Departamento solo acepta letras y números')
+    .toLowerCase()
+    .escape(),
 ];
+
+const socialValidation = check('socials.*')
+  .trim()
+  .optional({ checkFalsy: true })
+  .isLength({ min: 6 })
+  .withMessage('La URL debe tener al menos 6 caracteres')
+  .isLength({ max: 64 })
+  .withMessage('La URL acepta como máximo 64 caracteres')
+  .escape();
 
 const contactValidation = [
   emailValidation,
   webValidation,
   phoneValidation,
   addressValidation,
+  socialValidation,
   checkValidations,
 ];
 
