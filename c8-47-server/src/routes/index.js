@@ -8,6 +8,7 @@ import contactRouter from './contact.router.js';
 import personalRouter from './personal.router.js';
 import educationRouter from './education.router.js';
 import jobRouter from './job.router.js';
+import curriculumRouter from './curriculum.router.js';
 
 const router = Router();
 
@@ -18,7 +19,7 @@ router.use('/education', verifyToken, educationRouter);
 router.use('/job', verifyToken, jobRouter);
 router.use('/personal', verifyToken, personalRouter);
 
-// router.use('/curriculum', curriculumRouter);
+router.use('/curriculum', curriculumRouter);
 //! router.use('/presentation', presentationRouter);
 // router.use('/selector', selectorRouter);
 

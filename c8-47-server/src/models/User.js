@@ -50,6 +50,12 @@ const UserSchema = new Schema(
         ref: 'Job',
       },
     ],
+    curriculums: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Curriculum',
+      },
+    ],
   },
   {
     versionKey: false,

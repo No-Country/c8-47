@@ -39,7 +39,7 @@ const addJob = async (req, res, next) => {
 
     return res.status(201).json({
       job: newJob,
-      message: 'Job agregada con éxito',
+      message: 'Experiencia agregada con éxito',
     });
   } catch (error) {
     next(error);
@@ -67,11 +67,11 @@ const editJob = async (req, res, next) => {
     );
 
     if (!jobEdited)
-      return res.status(404).json({ message: 'Job no encontrado' });
+      return res.status(404).json({ message: 'Experiencia no encontrada' });
 
     return res.status(201).json({
       job: jobEdited,
-      message: 'Job modificada con éxito',
+      message: 'Experiencia modificada con éxito',
     });
   } catch (error) {
     next(error);
@@ -87,7 +87,7 @@ const deleteJob = async (req, res, next) => {
     const jobDeleted = await Job.findOneAndDelete({ _id: jobId });
 
     if (!jobDeleted)
-      return res.status(404).json({ message: 'Job no encontrado' });
+      return res.status(404).json({ message: 'Experiencia no encontrada' });
 
     const userFound = await User.findOne({ user: user.id });
 
@@ -99,7 +99,7 @@ const deleteJob = async (req, res, next) => {
     await userFound.save();
 
     return res.status(200).json({
-      message: 'Job eliminada con éxito',
+      message: 'Experiencia eliminada con éxito',
     });
   } catch (error) {
     next(error);

@@ -34,9 +34,10 @@ const addPersonal = async (req, res, next) => {
     userFound.personal.push(newPersonal._id);
     await userFound.save();
 
-    return res
-      .status(201)
-      .json({ personal: newPersonal, message: 'Personal agregado con éxito' });
+    return res.status(201).json({
+      personal: newPersonal,
+      message: 'Información personal agregada con éxito',
+    });
   } catch (error) {
     next(error);
   }
@@ -57,13 +58,15 @@ const editPersonal = async (req, res, next) => {
     );
 
     if (!personalEdited)
-      return res.status(404).json({ message: 'Personal no encontrado' });
+      return res
+        .status(404)
+        .json({ message: 'Información personal no encontrada' });
 
     await personalEdited.save();
 
     return res.status(201).json({
       personal: personalEdited,
-      message: 'Personal modificado con éxito',
+      message: 'Información personal modificada con éxito',
     });
   } catch (error) {
     next(error);
@@ -81,7 +84,9 @@ const deletePersonal = async (req, res, next) => {
     });
 
     if (!personalDeleted)
-      return res.status(404).json({ message: 'Personal no encontrada' });
+      return res
+        .status(404)
+        .json({ message: 'Información personal no encontrada' });
 
     const userFound = await User.findOne({ _id: user.id });
 
@@ -93,7 +98,7 @@ const deletePersonal = async (req, res, next) => {
     await userFound.save();
 
     return res.status(200).json({
-      message: 'Personal eliminada con éxito',
+      message: 'Información personal eliminada con éxito',
     });
   } catch (error) {
     next(error);
