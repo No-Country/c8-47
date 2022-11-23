@@ -10,6 +10,7 @@ import educationRouter from './education.router.js';
 import languageRouter from './language.router.js';
 import jobRouter from './job.router.js';
 import curriculumRouter from './curriculum.router.js';
+import selectorRouter from './selector.router.js';
 
 const router = Router();
 
@@ -23,7 +24,7 @@ router.use('/personal', verifyToken, personalRouter);
 
 router.use('/curriculum', curriculumRouter);
 //! router.use('/presentation', presentationRouter);
-// router.use('/selector', selectorRouter);
+router.use('/selector', selectorRouter);
 
 // router.use('/skill', skillRouter);
 // router.use('/tag', tagRouter);
