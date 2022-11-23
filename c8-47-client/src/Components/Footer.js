@@ -12,23 +12,26 @@ export const Footer = () => {
 
 
   return (
-    <footer className=' dark:text-white flex justify-around item-center my-12 w-full h-36 dark:bg-bgDarkMode mb-0 pb-8'>
+    <footer className=' font-Mon dark:text-white  flex flex-col md:flex-row justify-around item-center my-12 w-full h-72 md:h-36 dark:bg-bgDarkMode mb-0 pb-10 p-5'>
       <div className=' flex flex-col'>
         <img src={LogoNegativo} alt='Logo' className=' hidden dark:block w-36' />
         <img src={Logo} alt='Logo' className=' dark:hidden w-36' />
         
-        <div className=' font-Mon text-gray-400 text-sm border-b-2 tracking-wider'>
-          Terminos y condiciones.
+        <div className=' text-sm   pt-6 md:pt-2'>
+          <span className=' dark:text-white dark:border-white border-b-2 text-textColor border-textColor'>
+
+            Terminos y condiciones.
+          </span>
         </div>
       </div>
 
-      <div className=' flex flex-col justify-center gap-2 '>
-        <a href='/' className=' flex flex-row items-center gap-x-3'>
-          <FaLinkedin /> <span> LinkedIn</span>
+      <div className=' flex flex-col justify-center gap-3 '>
+        <a href='/' className=' dark:visited:text-borderDarkmode flex flex-row items-center gap-x-3 text-sm visited:text-primarioH'>
+          <FaLinkedin className=' text-xl' /> <span> LinkedIn</span>
         </a>
 
-        <a href='/' className=' flex flex-row items-center gap-x-3'>
-          <FaInstagram /> <span> Instagram</span>
+        <a href='/' className='  dark:visited:text-borderDarkmode flex flex-row items-center gap-x-3 text-sm visited:text-primarioH'>
+          <FaInstagram className=' text-xl' /> <span> Instagram</span>
         </a>
         <DarkMode>Boton
         </DarkMode>

@@ -21,6 +21,12 @@ module.exports = {
         errorColor: "#b30000",
         bgDarkMode: "#121212",
         borderDarkmode: "#85D3EB",
+        textHoverDarkmode: "#ACE1F1",
+        textPressDarkmode: "#58C3E4",
+        textDisableDarkmode: "#9ABCC6",
+        errorColorDarkmode: "#FF6161",
+        bgDarkmodeHoverbtn: "#353535",
+
 
       }
     },
