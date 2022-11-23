@@ -47,14 +47,15 @@ const addJob = async (req, res, next) => {
 };
 
 const editJob = async (req, res, next) => {
-  const { id, title, organization, start_date, end_date, tasks } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { title, organization, start_date, end_date, tasks } = req.body;
+  //!VOLVER A VER testear query id
+  const { id: jobId } = req.query;
 
   const options = { new: true };
 
   try {
     const jobEdited = await Job.findOneAndUpdate(
-      { _id: id },
+      { _id: jobId },
       {
         title,
         organization,
@@ -79,8 +80,8 @@ const editJob = async (req, res, next) => {
 
 const deleteJob = async (req, res, next) => {
   const { user } = req;
-  const { id: jobId } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { id: jobId } = req.query;
+  //!VOLVER A VER testear query id
 
   try {
     const jobDeleted = await Job.findOneAndDelete({ _id: jobId });

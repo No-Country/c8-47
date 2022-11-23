@@ -11,14 +11,12 @@ import jobRouter from './job.router.js';
 
 const router = Router();
 
-router.use('/test', testRouter);
 router.use('/auth', authRouter);
 
 router.use('/contact', verifyToken, contactRouter);
-router.use('/personal', verifyToken, personalRouter);
-
 router.use('/education', verifyToken, educationRouter);
 router.use('/job', verifyToken, jobRouter);
+router.use('/personal', verifyToken, personalRouter);
 
 // router.use('/curriculum', curriculumRouter);
 //! router.use('/presentation', presentationRouter);
@@ -27,6 +25,7 @@ router.use('/job', verifyToken, jobRouter);
 // router.use('/skill', skillRouter);
 // router.use('/tag', tagRouter);
 
+router.use('/test', testRouter);
 // router.use('/admin', adminRouter)
 
 export default router;

@@ -43,14 +43,15 @@ const addPersonal = async (req, res, next) => {
 };
 
 const editPersonal = async (req, res, next) => {
-  const { id, title, about } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { title, about } = req.body;
+  const { id: personalId } = req.query;
+  //!VOLVER A VER testear query id
 
   const options = { new: true };
 
   try {
     const personalEdited = await Personal.findOneAndUpdate(
-      { _id: id },
+      { _id: personalId },
       { title, about },
       options
     );
@@ -71,11 +72,13 @@ const editPersonal = async (req, res, next) => {
 
 const deletePersonal = async (req, res, next) => {
   const { user } = req;
-  const { id } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { id: personalId } = req.query;
+  //!VOLVER A VER testear query id
 
   try {
-    const personalDeleted = await Personal.findOneAndDelete({ _id: id });
+    const personalDeleted = await Personal.findOneAndDelete({
+      _id: personalId,
+    });
 
     if (!personalDeleted)
       return res.status(404).json({ message: 'Personal no encontrada' });
@@ -83,7 +86,7 @@ const deletePersonal = async (req, res, next) => {
     const userFound = await User.findOne({ _id: user.id });
 
     const newPersonalArray = userFound.personal.filter(
-      (pers) => pers.toString() !== id
+      (pers) => pers.toString() !== personalId
     );
 
     userFound.personal = newPersonalArray;
