@@ -7,7 +7,6 @@ const getEducation = async (req, res, next) => {
   try {
     const educationFound = await Education.find({ user: user.id });
 
-    //!VOLVER A VER preguntar por respuesta null
     if (!educationFound || educationFound.length === 0)
       return res.status(200).json({ education: null });
 
@@ -29,6 +28,7 @@ const addEducation = async (req, res, next) => {
       end_date,
       comment,
       user: user.id,
+      certification: false, //!VOLVER A VER cambiar nombre certification
     });
 
     await newEducation.save();

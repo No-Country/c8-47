@@ -2,10 +2,6 @@ import { Schema, model } from 'mongoose';
 
 const CurriculumSchema = new Schema(
   {
-    created_at: {
-      type: Number,
-      required: true,
-    },
     deleted_at: {
       type: Number,
       default: 0,
@@ -14,10 +10,23 @@ const CurriculumSchema = new Schema(
       type: String,
       required: true,
     },
+    state: {
+      type: String,
+      enum: ['generated', 'sended', 'rejected', 'interview'],
+      default: 'generated',
+    },
 
     selector: {
       type: Schema.Types.ObjectId,
       ref: 'Selector',
+    },
+    tag: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   {

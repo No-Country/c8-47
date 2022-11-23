@@ -10,12 +10,12 @@ const titleValidation = check('title')
   .withMessage('El título acepta como máximo 64 caracteres')
   .escape();
 
-const institutionValidation = check('institution')
+const organizationValidation = check('organization')
   .trim()
   .notEmpty()
-  .withMessage('Ingresa la institución')
+  .withMessage('Ingresa la organización')
   .isLength({ max: 64 })
-  .withMessage('La institución acepta como máximo 64 caracteres')
+  .withMessage('La organización acepta como máximo 64 caracteres')
   .escape();
 
 const startDateValidation = check('start_date')
@@ -34,25 +34,24 @@ const endDateValidation = check('end_date')
   .withMessage('La fecha de finalización acepta como máximo 8 caracteres')
   .escape();
 
-const commentValidation = check('comment')
+const tasksValidation = check('tasks.*')
   .trim()
-  .optional({ checkFalsy: true })
-  .isLength({ max: 256 })
-  .withMessage('El comentario acepta como máximo 256 caracteres')
+  .isLength({ max: 128 })
+  .withMessage('La tarea acepta como máximo 128 caracteres')
   .escape();
 
-const certificationValidation = check('certification')
+const mainJobValidation = check('main_job')
   .isBoolean()
-  .withMessage('certification solo acepta como valor "true" o "false"');
+  .withMessage('main_job solo acepta como valor "true" o "false"');
 
-const educationValidation = [
+const jobValidation = [
   titleValidation,
-  institutionValidation,
+  organizationValidation,
   startDateValidation,
   endDateValidation,
-  commentValidation,
-  certificationValidation,
+  tasksValidation,
+  mainJobValidation,
   checkValidations,
 ];
 
-export { educationValidation };
+export { jobValidation };

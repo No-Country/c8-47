@@ -18,13 +18,20 @@ const JobSchema = new Schema(
       type: String,
       required: true,
     },
+    tasks: [String],
+    main_job: {
+      type: Boolean,
+      required: true,
+    },
 
-    tasks: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Task',
-      },
-    ],
+    tag: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
   {
     versionKey: false,

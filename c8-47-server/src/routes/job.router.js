@@ -1,18 +1,18 @@
 import { Router } from 'express';
 
-// import { jobValidation } from '../middlewares/validations/job.js';
+import { jobValidation } from '../middlewares/validations/job.js';
 import {
-  getJob,
+  getJobs,
   addJob,
-  //   editJob,
-  //   deleteJob,
+  editJob,
+  deleteJob,
 } from '../controllers/job.ctrl.js';
 
 const router = Router();
 
-router.get('/', getJob);
-// router.post('/', jobValidation, addJob);
-// router.put('/', jobValidation, editJob);
-// router.delete('/', deleteJob);
+router.get('/', getJobs);
+router.post('/', jobValidation, addJob);
+router.put('/', jobValidation, editJob);
+router.delete('/', deleteJob);
 
 export default router;

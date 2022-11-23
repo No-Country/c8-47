@@ -1,10 +1,19 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const PresentationSchema = new Schema(
   {
-    description: {
+    text: {
       type: String,
       required: true,
+    },
+
+    tag: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag',
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   {
@@ -12,4 +21,4 @@ const PresentationSchema = new Schema(
   }
 );
 
-export default model("Presentation", PresentationSchema);
+export default model('Presentation', PresentationSchema);
