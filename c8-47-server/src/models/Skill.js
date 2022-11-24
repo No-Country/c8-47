@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const SkillSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },

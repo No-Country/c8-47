@@ -12,6 +12,7 @@ import jobRouter from './job.router.js';
 import curriculumRouter from './curriculum.router.js';
 import selectorRouter from './selector.router.js';
 import presentationRouter from './presentation.router.js';
+import skillRouter from './skill.router.js';
 
 const router = Router();
 
@@ -27,7 +28,7 @@ router.use('/curriculum', verifyToken, curriculumRouter);
 router.use('/selector', verifyToken, selectorRouter);
 router.use('/presentation', verifyToken, presentationRouter);
 
-// router.use('/skill', verifyToken, skillRouter);
+router.use('/skill', verifyToken, skillRouter);
 // router.use('/tag', verifyToken, tagRouter);
 
 router.use('/test', testRouter);
