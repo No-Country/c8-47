@@ -1,17 +1,16 @@
 import User from '../models/User.js';
 import Personal from '../models/Personal.js';
 
-const getPersonal = async (req, res, next) => {
+const getPersonals = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const personalFound = await Personal.find({ user: user.id });
+    const personalsFound = await Personal.find({ user: user.id });
 
-    //!VOLVER A VER preguntar por respuesta null
-    if (!personalFound || personalFound.length === 0)
-      return res.status(200).json({ personal: null });
+    if (!personalsFound || personalsFound.length === 0)
+      return res.status(200).json({ personals: null });
 
-    return res.status(200).json({ personal: personalFound });
+    return res.status(200).json({ personals: personalsFound });
   } catch (error) {
     next(error);
   }
@@ -76,9 +75,9 @@ const deletePersonal = async (req, res, next) => {
   //!VOLVER A VER preguntar si envian id por query
 
   try {
-    const deletedPersonal = await Personal.findOneAndDelete({ _id: id });
+    const personalDeleted = await Personal.findOneAndDelete({ _id: id });
 
-    if (!deletedPersonal)
+    if (!personalDeleted)
       return res.status(404).json({ message: 'Personal no encontrada' });
 
     const userFound = await User.findOne({ _id: user.id });
@@ -98,4 +97,4 @@ const deletePersonal = async (req, res, next) => {
   }
 };
 
-export { getPersonal, addPersonal, editPersonal, deletePersonal };
+export { getPersonals, addPersonal, editPersonal, deletePersonal };

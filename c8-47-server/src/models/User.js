@@ -21,6 +21,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    images_urls: [String],
     role: {
       type: String,
       enum: ['user', 'admin'],
@@ -41,6 +42,12 @@ const UserSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'Education',
+      },
+    ],
+    experience: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Job',
       },
     ],
   },

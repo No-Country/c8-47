@@ -19,7 +19,8 @@ const userData = async (req, res, next) => {
     const userFound = await User.findOne({ _id: user.id })
       .populate('contact')
       .populate('personal')
-      .populate('education');
+      .populate('education')
+      .populate('experience');
 
     return res.json({ userFound });
   } catch (error) {

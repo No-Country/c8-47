@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { personalValidation } from '../middlewares/validations/personal.js';
 import {
-  getPersonal,
+  getPersonals,
   addPersonal,
   editPersonal,
   deletePersonal,
@@ -10,7 +10,7 @@ import {
 
 const router = Router();
 
-router.get('/', getPersonal);
+router.get('/', getPersonals);
 router.post('/', personalValidation, addPersonal);
 router.put('/', personalValidation, editPersonal);
 router.delete('/', deletePersonal);
