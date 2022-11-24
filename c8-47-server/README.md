@@ -631,6 +631,7 @@ RESPONSE
 `PUT /selector?id=${SELECTOR_ID}`
 
 ```
+REQUEST
 {
    name: STRING (optional)
    organization: STRING
