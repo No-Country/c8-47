@@ -5,7 +5,7 @@ import {
   editSelectorValidation,
 } from '../middlewares/validations/selector.js';
 import {
-  //  getSelectors,
+  getSelectors,
   addSelector,
   editSelector,
   deleteSelector,
@@ -13,7 +13,7 @@ import {
 
 const router = Router();
 
-// router.get('/', getSelectors);
+router.get('/', getSelectors);
 router.post('/', addSelectorValidation, addSelector);
 router.put('/', editSelectorValidation, editSelector);
 router.delete('/', deleteSelector);
