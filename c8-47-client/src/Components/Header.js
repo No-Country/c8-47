@@ -6,10 +6,10 @@ import { FaList } from 'react-icons/fa';
 import { ButtonPurple } from './buttons/ButtonPurple';
 import { ButtonGray } from './buttons/ButtonGray';
 
-export const Header = () => {
+export const Header = ({ onClickRegister, onClickSignin }) => {
   const Links = [
     { name: 'Prueba Cevetae', link: '/' },
-    { name: 'Iniciar sesion', link: '/' },
+    // { name: 'Iniciar sesion', link: '/' },
   ];
 
   const linkRender = Links.map((link) => (
@@ -61,7 +61,10 @@ export const Header = () => {
           }`}
         >
           {linkRender}
-          <ButtonPurple>Registrarse</ButtonPurple>
+          <li className='md:ml-8 text-lg md:my-0 my-7 '>
+            <ButtonGray onClick={onClickSignin}>Iniciar Sesión</ButtonGray>
+          </li>
+          <ButtonPurple onClick={onClickRegister}>Registrarse</ButtonPurple>
         </ul>
       </div>
     </div>
