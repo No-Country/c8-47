@@ -22,7 +22,15 @@ const userData = async (req, res, next) => {
       .populate('education')
       .populate('languages')
       .populate('experience')
-      .populate('curriculums');
+      .populate({
+        path: 'curriculums',
+        populate: {
+          path: 'selector',
+          model: 'Selector',
+        },
+      });
+
+    //!VOLVER A VER quitar campos al popular
 
     return res.json({ userFound });
   } catch (error) {

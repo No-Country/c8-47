@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import Selector from '../models/Selector.js';
 import Curriculum from '../models/Curriculum.js';
 
@@ -46,7 +48,9 @@ const addSelector = async (req, res, next) => {
 const editSelector = async (req, res, next) => {
   const { organization, name, email } = req.body;
   const { id: selectorId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(selectorId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -77,7 +81,9 @@ const editSelector = async (req, res, next) => {
 
 const deleteSelector = async (req, res, next) => {
   const { id: selectorId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(selectorId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const selectorDeleted = await Selector.findOneAndDelete({

@@ -28,11 +28,26 @@ const emailValidation = check('email')
   .withMessage('El email debe tener como máximo 64 caracteres')
   .escape();
 
-const selectorValidation = [
+const cvIdValidation = check('curriculumId')
+  .trim()
+  .notEmpty()
+  .withMessage('Ingresa el ID del curriculum')
+  .isMongoId()
+  .withMessage('Ingresa un ID válido')
+  .escape();
+
+const addSelectorValidation = [
+  nameValidation,
+  organizationValidation,
+  emailValidation,
+  cvIdValidation,
+  checkValidations,
+];
+const editSelectorValidation = [
   nameValidation,
   organizationValidation,
   emailValidation,
   checkValidations,
 ];
 
-export { selectorValidation };
+export { addSelectorValidation, editSelectorValidation };

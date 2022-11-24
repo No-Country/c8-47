@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
-import { selectorValidation } from '../middlewares/validations/selector.js';
+import {
+  addSelectorValidation,
+  editSelectorValidation,
+} from '../middlewares/validations/selector.js';
 import {
   //  getSelectors,
   addSelector,
@@ -11,8 +14,8 @@ import {
 const router = Router();
 
 // router.get('/', getSelectors);
-router.post('/', selectorValidation, addSelector);
-router.put('/', selectorValidation, editSelector);
+router.post('/', addSelectorValidation, addSelector);
+router.put('/', editSelectorValidation, editSelector);
 router.delete('/', deleteSelector);
 
 export default router;

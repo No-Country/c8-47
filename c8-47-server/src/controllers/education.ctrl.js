@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import Education from '../models/Education.js';
 import User from '../models/User.js';
 
@@ -50,7 +52,9 @@ const addEducation = async (req, res, next) => {
 const editEducation = async (req, res, next) => {
   const { title, institution, start_date, end_date, comment } = req.body;
   const { id: educationId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(educationId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -84,7 +88,9 @@ const editEducation = async (req, res, next) => {
 const deleteEducation = async (req, res, next) => {
   const { user } = req;
   const { id: educationId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(educationId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const educationDeleted = await Education.findOneAndDelete({

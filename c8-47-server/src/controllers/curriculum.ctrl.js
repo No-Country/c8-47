@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import Curriculum from '../models/Curriculum.js';
 import User from '../models/User.js';
 
@@ -5,9 +7,10 @@ const getCurriculums = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const curriculumsFound = await Curriculum.find({ user: user.id }).populate(
-      'selector'
-    );
+    const curriculumsFound = await Curriculum.find({
+      user: user.id,
+      deleted_at: 0,
+    }).populate('selector');
 
     if (!curriculumsFound || curriculumsFound.length === 0)
       return res.status(200).json({ curriculums: null });
@@ -48,7 +51,9 @@ const addCurriculum = async (req, res, next) => {
 const editCurriculumStatus = async (req, res, next) => {
   const { status } = req.body;
   const { id: curriculumId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(curriculumId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -76,7 +81,9 @@ const editCurriculumStatus = async (req, res, next) => {
 const deleteCurriculum = async (req, res, next) => {
   const { user } = req;
   const { id: curriculumId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(curriculumId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const curriculumDeleted = await Curriculum.findOneAndUpdate(

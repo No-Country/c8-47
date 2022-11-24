@@ -22,12 +22,12 @@ router.use('/language', verifyToken, languageRouter);
 router.use('/job', verifyToken, jobRouter);
 router.use('/personal', verifyToken, personalRouter);
 
-router.use('/curriculum', curriculumRouter);
-//! router.use('/presentation', presentationRouter);
-router.use('/selector', selectorRouter);
+router.use('/curriculum', verifyToken, curriculumRouter);
+//! router.use('/presentation', verifyToken, presentationRouter);
+router.use('/selector', verifyToken, selectorRouter);
 
-// router.use('/skill', skillRouter);
-// router.use('/tag', tagRouter);
+// router.use('/skill', verifyToken, skillRouter);
+// router.use('/tag', verifyToken, tagRouter);
 
 router.use('/test', testRouter);
 // router.use('/admin', adminRouter)

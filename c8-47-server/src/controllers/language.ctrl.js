@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import Language from '../models/Language.js';
 import User from '../models/User.js';
 
@@ -46,7 +48,9 @@ const addLanguage = async (req, res, next) => {
 const editLanguage = async (req, res, next) => {
   const { language, level } = req.body;
   const { id: languageId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(languageId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -77,7 +81,9 @@ const editLanguage = async (req, res, next) => {
 const deleteLanguage = async (req, res, next) => {
   const { user } = req;
   const { id: languageId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(languageId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const languageDeleted = await Language.findOneAndDelete({

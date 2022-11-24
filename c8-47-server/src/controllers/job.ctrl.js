@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import User from '../models/User.js';
 import Job from '../models/Job.js';
 
@@ -48,8 +50,10 @@ const addJob = async (req, res, next) => {
 
 const editJob = async (req, res, next) => {
   const { title, organization, start_date, end_date, tasks } = req.body;
-  //!VOLVER A VER testear query id
   const { id: jobId } = req.query;
+
+  if (!isValidObjectId(jobId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -81,7 +85,9 @@ const editJob = async (req, res, next) => {
 const deleteJob = async (req, res, next) => {
   const { user } = req;
   const { id: jobId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(jobId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const jobDeleted = await Job.findOneAndDelete({ _id: jobId });

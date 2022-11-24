@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import User from '../models/User.js';
 import Personal from '../models/Personal.js';
 
@@ -46,7 +48,9 @@ const addPersonal = async (req, res, next) => {
 const editPersonal = async (req, res, next) => {
   const { title, about } = req.body;
   const { id: personalId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(personalId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
@@ -76,7 +80,9 @@ const editPersonal = async (req, res, next) => {
 const deletePersonal = async (req, res, next) => {
   const { user } = req;
   const { id: personalId } = req.query;
-  //!VOLVER A VER testear query id
+
+  if (!isValidObjectId(personalId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const personalDeleted = await Personal.findOneAndDelete({
