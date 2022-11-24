@@ -17,7 +17,7 @@ const userData = async (req, res, next) => {
 
   try {
     const userFound = await User.findOne({ _id: user.id })
-      .populate('contact')
+      /* .populate('contact')
       .populate('personal')
       .populate('education')
       .populate('languages')
@@ -28,7 +28,8 @@ const userData = async (req, res, next) => {
           path: 'selector',
           model: 'Selector',
         },
-      });
+      }) */
+      .populate('presentations');
 
     //!VOLVER A VER quitar campos al popular
 

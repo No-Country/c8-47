@@ -62,6 +62,12 @@ const UserSchema = new Schema(
         ref: 'Curriculum',
       },
     ],
+    presentations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Presentation',
+      },
+    ],
   },
   {
     versionKey: false,
