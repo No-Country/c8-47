@@ -5,8 +5,6 @@ import Presentation from '../models/Presentation.js';
 const getPresentations = async (req, res, next) => {
   const { user } = req;
 
-  console.log(user.id);
-
   try {
     const presentationsFound = await Presentation.find({ user: user.id });
 
