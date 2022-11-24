@@ -1,7 +1,7 @@
 import Selector from '../models/Selector.js';
 import Curriculum from '../models/Curriculum.js';
 
-const getSelectors = async (req, res, next) => {
+/* const getSelectors = async (req, res, next) => {
   const { user } = req;
 
   try {
@@ -14,7 +14,7 @@ const getSelectors = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}; */
 
 const addSelector = async (req, res, next) => {
   const { organization, name, email, curriculumId } = req.body;
@@ -103,4 +103,9 @@ const deleteSelector = async (req, res, next) => {
   }
 };
 
-export { getSelectors, addSelector, editSelector, deleteSelector };
+export {
+  //getSelectors,
+  addSelector,
+  editSelector,
+  deleteSelector,
+};

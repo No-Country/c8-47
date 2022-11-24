@@ -5,7 +5,9 @@ const getCurriculums = async (req, res, next) => {
   const { user } = req;
 
   try {
-    const curriculumsFound = await Curriculum.find({ user: user.id });
+    const curriculumsFound = await Curriculum.find({ user: user.id }).populate(
+      'selector'
+    );
 
     if (!curriculumsFound || curriculumsFound.length === 0)
       return res.status(200).json({ curriculums: null });
@@ -23,7 +25,7 @@ const addCurriculum = async (req, res, next) => {
   try {
     const newCurriculum = new Curriculum({
       data,
-      state: 'generated',
+      status: 'generated',
       user: user.id,
     });
 
@@ -43,8 +45,8 @@ const addCurriculum = async (req, res, next) => {
   }
 };
 
-const editCurriculum = async (req, res, next) => {
-  const { state, selector } = req.body;
+const editCurriculumStatus = async (req, res, next) => {
+  const { status } = req.body;
   const { id: curriculumId } = req.query;
   //!VOLVER A VER testear query id
 
@@ -53,10 +55,7 @@ const editCurriculum = async (req, res, next) => {
   try {
     const curriculumEdited = await Curriculum.findOneAndUpdate(
       { _id: curriculumId },
-      {
-        state,
-        selector,
-      },
+      { status },
       options
     );
 
@@ -109,4 +108,9 @@ const deleteCurriculum = async (req, res, next) => {
   }
 };
 
-export { getCurriculums, addCurriculum, editCurriculum, deleteCurriculum };
+export {
+  getCurriculums,
+  addCurriculum,
+  editCurriculumStatus,
+  deleteCurriculum,
+};
