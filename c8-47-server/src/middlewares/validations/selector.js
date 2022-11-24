@@ -28,11 +28,11 @@ const emailValidation = check('email')
   .withMessage('El email debe tener como máximo 64 caracteres')
   .escape();
 
-const jobValidation = [
+const selectorValidation = [
   nameValidation,
   organizationValidation,
   emailValidation,
   checkValidations,
 ];
 
-export { jobValidation };
+export { selectorValidation };
