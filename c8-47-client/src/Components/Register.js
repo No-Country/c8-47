@@ -7,7 +7,7 @@ import Input from './input/Input';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
-const Register = ({ isVisible, onClose }) => {
+const Register = ({ isVisible, onClose, onSwitch }) => {
   const {
     register,
     watch,
@@ -35,8 +35,8 @@ const Register = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
   return (
     <>
-      <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto pt-[2.5rem] pb-[2.5rem]'>
-        <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-fit shadow-lg shadow-gray-600 sm:max-w-[900px] bg-[#FFFFFF] rounded-[10px]'>
+      <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
+        <div className='dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] mt-[4.5%] mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
           <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  '>
               <Input
@@ -142,25 +142,28 @@ const Register = ({ isVisible, onClose }) => {
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
                 <button
                   type='submit'
-                  className='w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                  className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
                 >
                   Regístrate
                 </button>
                 <ButtonLinkedin name={'Registrarme con LinkedIn'} />
                 <ButtonGoogle name={'Registrarme con Google'} />
               </div>
-              <span className='font-Mon text-center text-[14px] mb-[10px]'>
+              <span className='dark:text-[#FFFFFF] font-Mon text-center text-[14px] mb-[10px]'>
                 ¿Ya tienes cuenta?{' '}
-                <Link
-                  to='/login'
-                  className='font-[800]   text-primario hover:text-primarioH'
+                <button
+                  onClick={() => onSwitch()}
+                  className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800]   text-primario hover:text-primarioH'
                 >
                   Inicia sesión
-                </Link>
+                </button>
               </span>
-              <span className='font-Mon text-[14px] text-center'>
+              <span className='dark:text-[#FFFFFF] font-Mon text-[14px] text-center'>
                 Al registrarme declaro que he leído y aceptado los{' '}
-                <Link to='/' className='underline hover:text-primarioH'>
+                <Link
+                  to='/'
+                  className='dark:hover:text-bgPushDarkMode underline hover:text-primarioH'
+                >
                   Términos y Condiciones de Cevetae.
                 </Link>
               </span>

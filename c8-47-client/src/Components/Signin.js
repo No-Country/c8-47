@@ -7,7 +7,7 @@ import login from '../Assets/Images/login.jpg';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
-const Signin = ({ isVisible, onClose }) => {
+const Signin = ({ isVisible, onClose, onSwitch }) => {
   const {
     register,
     reset,
@@ -31,8 +31,8 @@ const Signin = ({ isVisible, onClose }) => {
   }, [isVisible]);
   if (!isVisible) return null;
   return (
-    <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto pt-[2.5rem] pb-[2.5rem]'>
-      <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-fit shadow-lg shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px]'>
+    <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
+      <div className='grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] h-fit shadow-lg shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
         <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
           <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
             <Input
@@ -71,10 +71,10 @@ const Signin = ({ isVisible, onClose }) => {
               error={errors.password}
             />
 
-            <span className='font-Mon  text-[14px] mb-[10px]'>
+            <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
               <Link
                 to='/resetPassword'
-                className='underline hover:text-primarioH'
+                className='underline hover:text-primarioH dark:hover:text-bgPushDarkMode'
               >
                 ¿Has olvidado tu contraseña?
               </Link>
@@ -82,21 +82,21 @@ const Signin = ({ isVisible, onClose }) => {
             <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
               <button
                 type='submit'
-                className='w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode bg- w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
               >
                 Iniciar Sesión
               </button>
-              <ButtonLinkedin name={'Registrarme con LinkedIn'} />
-              <ButtonGoogle name={'Registrarme con Google'} />
+              <ButtonLinkedin name={'Ingresar con LinkedIn'} />
+              <ButtonGoogle name={'Ingresar con Google'} />
             </div>
-            <span className='font-Mon text-center text-[14px] mb-[10px]'>
+            <span className='dark:text-[#FFFFFF] font-Mon text-center text-[14px] mb-[10px]'>
               ¿No tienes cuenta?{' '}
-              <Link
-                to='/registro'
-                className='font-[800] text-primario hover:text-primarioH'
+              <button
+                onClick={() => onSwitch()}
+                className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800] text-primario hover:text-primarioH'
               >
                 Regístrate
-              </Link>
+              </button>
             </span>
           </form>
         </div>

@@ -18,16 +18,24 @@ function App() {
           onClickRegister={() => setShowModalRegister(true)}
           onClickSignin={() => setShowModalSignin(true)}
         />
-
-        <AppRoutes />
         <Register
           isVisible={showModalRegister}
           onClose={() => setShowModalRegister(false)}
+          onSwitch={() => {
+            setShowModalRegister(false);
+            setShowModalSignin(true);
+          }}
         />
         <Signin
           isVisible={showModalSignin}
           onClose={() => setShowModalSignin(false)}
+          onSwitch={() => {
+            setShowModalSignin(false);
+            setShowModalRegister(true);
+          }}
         />
+        <AppRoutes />
+
         <Footer />
       </BrowserRouter>
     </div>
@@ -35,4 +43,3 @@ function App() {
 }
 
 export default App;
-

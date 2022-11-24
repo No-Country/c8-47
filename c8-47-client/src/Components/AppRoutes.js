@@ -2,8 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../Pages/Landing';
 import Home from '../Pages/Home';
-import Login from '../Pages/Login';
-import Signup from '../Pages/Signup';
+
 import Terms from '../Pages/Terms';
 import Dashboard from '../Pages/Dashboard';
 import Profile from '../Pages/Profile';
