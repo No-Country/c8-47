@@ -115,6 +115,8 @@ RESPONSE
 }
 ```
 
+---
+
 - ### Curriculum
 
 `GET /curriculum`
