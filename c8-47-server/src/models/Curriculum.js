@@ -10,7 +10,7 @@ const CurriculumSchema = new Schema(
       type: String,
       required: true,
     },
-    state: {
+    status: {
       type: String,
       enum: ['generated', 'sended', 'rejected', 'interview'],
       default: 'generated',
