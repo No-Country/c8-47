@@ -7,7 +7,7 @@ import User from '../models/User.js';
 const { JWT_SECRET_CODE } = process.env;
 
 const signUp = async (req, res, next) => {
-  const { email, password, first_name, last_name } = req.body;
+  const { email, new_password, first_name, last_name } = req.body;
 
   try {
     const userFound = await User.exists({ email });
@@ -16,7 +16,7 @@ const signUp = async (req, res, next) => {
 
     await User.create({
       email,
-      password,
+      new_password,
       first_name,
       last_name,
     });

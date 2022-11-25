@@ -29,7 +29,7 @@
 REQUEST
 {
    email: STRING
-   password: STRING
+   new_password: STRING
    confirm_password: STRING
    first_name: STRING
    last_name: STRING

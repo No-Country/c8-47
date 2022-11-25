@@ -102,4 +102,11 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
   return compare;
 };
 
+UserSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    // returnedObject.id = returnedObject._id;
+    delete returnedObject.password;
+  },
+});
+
 export default model('User', UserSchema);
