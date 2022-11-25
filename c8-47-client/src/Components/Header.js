@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Logo from '../Assets/Images/Logo.png';
 import LogoNegativo from '../Assets/Images/Logo_negativo.png';
-import { FaRegWindowClose } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillHouseDoorFill } from 'react-icons/bs';
-import { FaList } from 'react-icons/fa';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { ButtonPurple } from './buttons/ButtonPurple';
 import { ButtonGray } from './buttons/ButtonGray';
 import {DarkMode} from "../Components/darkmode/DarkMode"
@@ -42,7 +42,7 @@ export const Header = () => {
             ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
           }
         >
-          <FaList className=' dark:text-white' />
+          <AiOutlineMenu className=' dark:text-white' />
         </div>
 
         <div
@@ -52,11 +52,11 @@ export const Header = () => {
             ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
           }
         >
-          <FaRegWindowClose className=' dark:text-white' />
+          <AiOutlineClose className=' dark:text-white' />
         </div>
 
         <ul
-          className={`  dark:text-white dark:bg-bgDarkMode md:flex md:items-center md:pb-0 pb- absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-400 ease-in ${
+          className={`  dark:text-white dark:bg-bgDarkMode md:flex md:items-center md:pb-0 pb-40 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-400 ease-in ${
             open ? 'left-21 ' : 'left-[-800px]'
           }`}
         >

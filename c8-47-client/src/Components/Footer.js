@@ -26,11 +26,11 @@ export const Footer = () => {
       </div>
 
       <div className=' flex flex-col justify-center gap-3 '>
-        <a href='/' className=' dark:visited:text-borderDarkmode flex flex-row items-center gap-x-3 text-sm visited:text-primarioH'>
+        <a href='/' className=' dark:hover:text-borderDarkmode dark:text-white hover:text-primarioH flex flex-row items-center gap-x-3 text-sm '>
           <FaLinkedin className=' text-xl' /> <span> LinkedIn</span>
         </a>
 
-        <a href='/' className='  dark:visited:text-borderDarkmode flex flex-row items-center gap-x-3 text-sm visited:text-primarioH'>
+        <a href='/' className='  dark:hover:text-borderDarkmode dark:text-white hover:text-primarioH   flex flex-row items-center gap-x-3 text-sm '>
           <FaInstagram className=' text-xl' /> <span> Instagram</span>
         </a>
         <DarkMode>Boton
