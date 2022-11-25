@@ -64,7 +64,7 @@ RESPONSE
 ## All the endpoints below needs the following `Header`
 
 ```
-Authorization Bearer ${TOKEN-RECEIVED-AT-LOGIN}
+Authorization Bearer {TOKEN-RECEIVED-AT-LOGIN}
 ```
 
 ---
@@ -77,17 +77,17 @@ Authorization Bearer ${TOKEN-RECEIVED-AT-LOGIN}
 RESPONSE
 {
    contact: {
-   _id: STRING
-   email: STRING
-   web: STRING
-   address: {
-      state: STRING
-      city: STRING
-      zip_code: STRING
-      street_name: STRING
-      door: STRING
-   }
-   socials: [STRING]
+      _id: STRING
+      email: STRING
+      web: STRING
+      socials: [STRING]
+      address: {
+         state: STRING
+         city: STRING
+         zip_code: STRING
+         street_name: STRING
+         door: STRING
+      }
    }
 }
 ```
@@ -178,7 +178,7 @@ RESPONSE
 }
 ```
 
-`PUT /curriculum?id=${CURRICULUM_ID}`
+`PUT /curriculum?id={CURRICULUM_ID}`
 
 ```
 REQUEST
@@ -199,7 +199,7 @@ RESPONSE
 }
 ```
 
-`DELETE /curriculum?id=${CURRICULUM_ID}`
+`DELETE /curriculum?id={CURRICULUM_ID}`
 
 ```
 RESPONSE
@@ -262,7 +262,7 @@ RESPONSE
 }
 ```
 
-`PUT /education?id=${EDUCATION_ID}`
+`PUT /education?id={EDUCATION_ID}`
 
 ```
 REQUEST
@@ -291,7 +291,7 @@ RESPONSE
 }
 ```
 
-`DELETE /education?id=${EDUCATION_ID}`
+`DELETE /education?id={EDUCATION_ID}`
 
 ```
 RESPONSE
@@ -353,7 +353,7 @@ RESPONSE
 }
 ```
 
-`PUT /job?id=${JOB_ID}`
+`PUT /job?id={JOB_ID}`
 
 ```
 REQUEST
@@ -382,7 +382,7 @@ RESPONSE
 }
 ```
 
-`DELETE /job?id=${JOB_ID}`
+`DELETE /job?id={JOB_ID}`
 
 ```
 RESPONSE
@@ -432,7 +432,7 @@ RESPONSE
 }
 ```
 
-`PUT /language?id=${LANGUAGE_ID}`
+`PUT /language?id={LANGUAGE_ID}`
 
 ```
 REQUEST
@@ -453,7 +453,7 @@ RESPONSE
 }
 ```
 
-`DELETE /language?id=${LANGUAGE_ID}`
+`DELETE /language?id={LANGUAGE_ID}`
 
 ```
 RESPONSE
@@ -503,7 +503,7 @@ RESPONSE
 }
 ```
 
-`PUT /personal?id=${PERSONAL_ID}`
+`PUT /personal?id={PERSONAL_ID}`
 
 ```
 REQUEST
@@ -524,7 +524,7 @@ RESPONSE
 }
 ```
 
-`DELETE /personal?id=${PERSONAL_ID}`
+`DELETE /personal?id={PERSONAL_ID}`
 
 ```
 RESPONSE
@@ -571,7 +571,7 @@ RESPONSE
 }
 ```
 
-`PUT /presentation?id=${PRESENTATION_ID}`
+`PUT /presentation?id={PRESENTATION_ID}`
 
 ```
 REQUEST
@@ -590,7 +590,7 @@ RESPONSE
 }
 ```
 
-`DELETE /presentation?id=${PRESENTATION_ID}`
+`DELETE /presentation?id={PRESENTATION_ID}`
 
 ```
 RESPONSE
@@ -643,9 +643,10 @@ RESPONSE
 }
 ```
 
-`PUT /selector?id=${SELECTOR_ID}`
+`PUT /selector?id={SELECTOR_ID}`
 
 ```
+REQUEST
 {
    name: STRING (optional)
    organization: STRING
@@ -665,7 +666,7 @@ RESPONSE
 }
 ```
 
-`DELETE /selector?id=${SELECTOR_ID}`
+`DELETE /selector?id={SELECTOR_ID}`
 
 ```
 RESPONSE
@@ -720,7 +721,7 @@ RESPONSE
 }
 ```
 
-`PUT /skill?id=${SKILL_ID}`
+`PUT /skill?id={SKILL_ID}`
 
 ```
 REQUEST
@@ -739,7 +740,7 @@ RESPONSE
 }
 ```
 
-`DELETE /skill?id=${SKILL_ID}`
+`DELETE /skill?id={SKILL_ID}`
 
 ```
 RESPONSE
