@@ -68,6 +68,12 @@ const UserSchema = new Schema(
         ref: 'Presentation',
       },
     ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag',
+      },
+    ],
   },
   {
     versionKey: false,

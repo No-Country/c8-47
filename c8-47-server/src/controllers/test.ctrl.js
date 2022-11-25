@@ -29,7 +29,8 @@ const userData = async (req, res, next) => {
           model: 'Selector',
         },
       }) */
-      .populate('presentations');
+      .populate('presentations')
+      .populate('tags');
 
     //!VOLVER A VER quitar campos al popular
 
