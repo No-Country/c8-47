@@ -68,6 +68,18 @@ const UserSchema = new Schema(
         ref: 'Presentation',
       },
     ],
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill',
+      },
+    ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag',
+      },
+    ],
   },
   {
     versionKey: false,
@@ -89,5 +101,12 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 
   return compare;
 };
+
+UserSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    // returnedObject.id = returnedObject._id;
+    delete returnedObject.password;
+  },
+});
 
 export default model('User', UserSchema);

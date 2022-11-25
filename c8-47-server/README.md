@@ -4,9 +4,24 @@
 
 ---
 
-## API ENDPOINTS
+# API ENDPOINTS
 
-- ### User register
+- [User register](#user-register)
+- [User log in](#user-log-in)
+- [Header IMPORTANT](#all-the-endpoints-below-needs-the-following-header)
+- [Contact](#contact)
+- [Curriculum](#curriculum)
+- [Education](#education)
+- [Job](#job)
+- [Language](#language)
+- [Personal](#personal)
+- [Presentation](#presentation)
+- [Selector](#selector)
+- [Skill](#skill)
+
+---
+
+## User register
 
 `POST /auth/signup`
 
@@ -14,7 +29,7 @@
 REQUEST
 {
    email: STRING
-   password: STRING
+   new_password: STRING
    confirm_password: STRING
    first_name: STRING
    last_name: STRING
@@ -26,7 +41,7 @@ RESPONSE
 }
 ```
 
-- ### User log in
+## User log in
 
 `POST /auth/login`
 
@@ -46,7 +61,7 @@ RESPONSE
 
 ---
 
-### All the endpoints below needs the following `Header`
+## All the endpoints below needs the following `Header`
 
 ```
 Authorization Bearer {TOKEN-RECEIVED-AT-LOGIN}
@@ -54,7 +69,7 @@ Authorization Bearer {TOKEN-RECEIVED-AT-LOGIN}
 
 ---
 
-- ### Contact
+## Contact
 
 `GET /contact`
 
@@ -82,17 +97,15 @@ RESPONSE
 ```
 REQUEST
 {
-   contact: {
-      email: STRING
-      web: STRING (optional)
-      socials: [STRING] (optional)
-      address: {
-         state: STRING
-         city: STRING (optional)
-         zip_code: STRING (optional)
-         street_name: STRING (optional)
-         door: STRING (optional)
-      }
+   email: STRING
+   web: STRING (optional)
+   socials: [STRING] (optional)
+   address: {
+      state: STRING
+      city: STRING (optional)
+      zip_code: STRING (optional)
+      street_name: STRING (optional)
+      door: STRING (optional)
    }
 }
 
@@ -117,7 +130,7 @@ RESPONSE
 
 ---
 
-- ### Curriculum
+## Curriculum
 
 `GET /curriculum`
 
@@ -195,7 +208,7 @@ RESPONSE
 
 ---
 
-- ### Education
+## Education
 
 `GET /education`
 
@@ -287,7 +300,7 @@ RESPONSE
 
 ---
 
-- ### Job
+## Job
 
 `GET /job`
 
@@ -378,7 +391,7 @@ RESPONSE
 
 ---
 
-- ### Language
+## Language
 
 `GET /language`
 
@@ -449,7 +462,7 @@ RESPONSE
 
 ---
 
-- ### Personal
+## Personal
 
 `GET /personal`
 
@@ -520,7 +533,7 @@ RESPONSE
 
 ---
 
-- ### Presentation
+## Presentation
 
 `GET /presentation`
 
@@ -586,7 +599,7 @@ RESPONSE
 
 ---
 
-- ### Selector
+## Selector
 
 `GET /selector`
 
@@ -596,9 +609,10 @@ RESPONSE
    selectors: [
       {
          _id: STRING
-         text: STRING
+         name: STRING
          organization: STRING
          email: STRING
+         curriculum: STRING
       }
    ]
 }
@@ -670,7 +684,7 @@ RESPONSE
 
 ---
 
-- ### Skill
+## Skill
 
 `GET /skill`
 

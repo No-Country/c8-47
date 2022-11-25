@@ -1,6 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 
 import Skill from '../models/Skill.js';
+import User from '../models/User.js';
 
 const getSkills = async (req, res, next) => {
   const { user } = req;
@@ -28,6 +29,11 @@ const addSkill = async (req, res, next) => {
     });
 
     await newSkill.save();
+
+    const userFound = await User.findOne({ _id: user.id });
+
+    userFound.skills.push(newSkill);
+    await userFound.save();
 
     return res.status(201).json({
       skill: newSkill,
@@ -70,6 +76,7 @@ const editSkill = async (req, res, next) => {
 
 const deleteSkill = async (req, res, next) => {
   const { id: skillId } = req.query;
+  const { user } = req;
 
   if (!isValidObjectId(skillId))
     return res.status(422).json({ message: 'Ingrese un ID válido' });
@@ -81,6 +88,15 @@ const deleteSkill = async (req, res, next) => {
 
     if (!skillDeleted)
       return res.status(404).json({ message: 'Skill no encontrada' });
+
+    const userFound = await User.findOne({ _id: user.id });
+
+    const newSkillsArray = userFound.skills.filter(
+      (skill) => skill.toString() !== skillId
+    );
+
+    userFound.skills = newSkillsArray;
+    await userFound.save();
 
     return res.status(200).json({
       message: 'Skill eliminada con éxito',

@@ -13,7 +13,7 @@ const emailValidation = check('email')
   .withMessage('El email debe tener como máximo 64 caracteres')
   .escape();
 
-const passwordLogInValidation = check('password')
+const currentPasswordValidation = check('password')
   .trim()
   .notEmpty()
   .withMessage('Ingresa tu contraseña')
@@ -21,7 +21,7 @@ const passwordLogInValidation = check('password')
   .withMessage('La contraseña acepta como máximo 64 caracteres')
   .escape();
 
-const passwordSignUpValidation = check('password')
+const newPasswordValidation = check('new_password')
   .trim()
   .notEmpty()
   .withMessage('Ingresa tu contraseña')
@@ -43,7 +43,7 @@ const confirmPasswordValidation = check('confirm_password')
   .withMessage('Repite tu contraseña')
   .escape()
   .custom((value, { req }) => {
-    if (value !== req.body.password) {
+    if (value !== req.body.new_password) {
       throw new Error('Las contraseñas no coinciden');
     } else {
       return value;
@@ -82,7 +82,7 @@ const lastNameValidation = check('last_name')
 
 const signUpValidation = [
   emailValidation,
-  passwordSignUpValidation,
+  newPasswordValidation,
   confirmPasswordValidation,
   firstNameValidation,
   lastNameValidation,
@@ -91,8 +91,26 @@ const signUpValidation = [
 
 const logInValidation = [
   emailValidation,
-  passwordLogInValidation,
+  currentPasswordValidation,
   checkValidations,
 ];
 
-export { signUpValidation, logInValidation };
+const modifyPasswordValidation = [
+  currentPasswordValidation,
+  newPasswordValidation,
+  confirmPasswordValidation,
+  checkValidations,
+];
+
+const editNameValidation = [
+  firstNameValidation,
+  lastNameValidation,
+  checkValidations,
+];
+
+export {
+  signUpValidation,
+  logInValidation,
+  modifyPasswordValidation,
+  editNameValidation,
+};
