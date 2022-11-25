@@ -609,9 +609,10 @@ RESPONSE
    selectors: [
       {
          _id: STRING
-         text: STRING
+         name: STRING
          organization: STRING
          email: STRING
+         curriculum: STRING
       }
    ]
 }

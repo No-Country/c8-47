@@ -85,6 +85,8 @@ const deleteSelector = async (req, res, next) => {
   if (!isValidObjectId(selectorId))
     return res.status(422).json({ message: 'Ingrese un ID válido' });
 
+  const options = { new: true };
+
   try {
     const selectorDeleted = await Selector.findOneAndDelete({
       _id: selectorId,
@@ -97,7 +99,8 @@ const deleteSelector = async (req, res, next) => {
       {
         _id: selectorDeleted.curriculum,
       },
-      { selector: null }
+      { selector: null },
+      options
     );
 
     return res.status(200).json({
