@@ -9,6 +9,7 @@
 - [User register](#user-register)
 - [User log in](#user-log-in)
 - [Header IMPORTANT](#all-the-endpoints-below-needs-the-following-header)
+- [User](#user)
 - [Contact](#contact)
 - [Curriculum](#curriculum)
 - [Education](#education)
@@ -69,6 +70,144 @@ Authorization Bearer {TOKEN-RECEIVED-AT-LOGIN}
 
 ---
 
+## User
+
+`GET /user/data`
+
+```
+RESPONSE
+{
+   user_data: {
+      _id: STRING
+      email: STRING
+      first_name: STRING
+      last_name: STRING
+      role: STRING
+      education: [
+         {
+            _id_: STRING
+            title: STRING
+            institution: STRING
+            start_date: STRING
+            end_date: STRING
+            certification: BOOLEAN
+         }
+      ]
+      personal: [
+         {
+            _id: STRING
+            title: STRING
+            about: STRING
+         }
+      ]
+      contact: {
+         _id: STRING
+         email: STRING
+         web: STRING
+         socials: [ STRING ]
+         address: {
+            state: STRING
+            city: STRING
+            zip_code: STRING
+            street_name: STRING
+            street_number: STRING
+            door: STRING
+         }
+      }
+      experience:[
+         {
+            _id: STRING
+            title: STRING
+            organization: STRING
+            start_date: STRING
+            end_date: STRING
+            main_job: BOOLEAN
+            tasks: [ STRING ]
+         }
+      ]
+      curriculums: {
+         _id: STRING
+         data: STRING
+         status: STRING
+         deleted_at: NUMBER
+         selector: {
+            _id: STRING
+            organization: STRING
+            name: STRING
+            email: STRING
+         }
+      }
+      languages: [
+         {
+            _id: STRING
+            language: STRING
+            level: STRING
+         }
+      ]
+      presentations: [
+         {
+            _id: STRING
+            text: STRING
+         }
+      ]
+      skills: [
+         {
+            _id: STRING
+            name: STRING
+         }
+      ]
+      tags: [
+         {
+            _id: STRING
+            name: STRING
+            description: STRING
+         }
+      ]
+   }
+}
+```
+
+**Modify password**
+
+`PUT /user/password`
+
+```
+REQUEST
+{
+   password: STRING
+   new_password: STRING
+   confirm_password: STRING
+}
+
+RESPONSE
+{
+   message: STRING
+}
+```
+
+**Edit name**
+
+`PUT /user/name`
+
+```
+REQUEST
+{
+   first_name: STRING
+   last_name: STRING
+}
+
+RESPONSE
+{
+   message: STRING
+   user: {
+      first_name: STRING
+      last_name: STRING
+   }
+}
+```
+
+---
+
 ## Contact
 
 `GET /contact`
@@ -80,7 +219,7 @@ RESPONSE
       _id: STRING
       email: STRING
       web: STRING
-      socials: [STRING]
+      socials: [ STRING ]
       address: {
          state: STRING
          city: STRING
@@ -99,7 +238,7 @@ REQUEST
 {
    email: STRING
    web: STRING (optional)
-   socials: [STRING] (optional)
+   socials: [ STRING ] (optional)
    address: {
       state: STRING
       city: STRING (optional)
@@ -116,7 +255,7 @@ RESPONSE
       _id: STRING
       email: STRING
       web: STRING
-      socials: [STRING]
+      socials: [ STRING ]
       address: {
          state: STRING
          city: STRING
@@ -315,7 +454,7 @@ RESPONSE
          start_date: STRING
          end_date: STRING
          main_job: BOOLEAN
-         tasks: [STRING]
+         tasks: [ STRING ]
          user: STRING
       }
    ]
@@ -332,7 +471,7 @@ REQUEST
    start_date: STRING
    end_date: STRING
    main_job: BOOLEAN
-   tasks: [STRING]
+   tasks: [ STRING ]
 }
 
 RESPONSE
@@ -345,7 +484,7 @@ RESPONSE
       start_date: STRING
       end_date: STRING
       main_job: BOOLEAN
-      tasks: [STRING]
+      tasks: [ STRING ]
       user: STRING
    }
 }
@@ -361,7 +500,7 @@ REQUEST
    start_date: STRING
    end_date: STRING
    main_job: BOOLEAN
-   tasks: [STRING]
+   tasks: [ STRING ]
 }
 
 RESPONSE
@@ -374,7 +513,7 @@ RESPONSE
       start_date: STRING
       end_date: STRING
       main_job: BOOLEAN
-      tasks: [STRING]
+      tasks: [ STRING ]
       user: STRING
    }
 }

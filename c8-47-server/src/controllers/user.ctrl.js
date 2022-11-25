@@ -12,6 +12,7 @@ const getUserData = async (req, res, next) => {
       .populate({ path: 'experience', select: '-user' })
       .populate({
         path: 'curriculums',
+        select: '-user',
         populate: {
           path: 'selector',
           model: 'Selector',
@@ -60,7 +61,10 @@ const editName = async (req, res, next) => {
     );
 
     return res.json({
-      user: userEdited,
+      user: {
+        first_name: userEdited.first_name,
+        last_name: userEdited.last_name,
+      },
       message: 'Nombre modificado con éxito',
     });
   } catch (error) {
