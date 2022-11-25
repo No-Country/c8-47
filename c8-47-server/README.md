@@ -97,17 +97,15 @@ RESPONSE
 ```
 REQUEST
 {
-   contact: {
-      email: STRING
-      web: STRING (optional)
-      socials: [STRING] (optional)
-      address: {
-         state: STRING
-         city: STRING (optional)
-         zip_code: STRING (optional)
-         street_name: STRING (optional)
-         door: STRING (optional)
-      }
+   email: STRING
+   web: STRING (optional)
+   socials: [STRING] (optional)
+   address: {
+      state: STRING
+      city: STRING (optional)
+      zip_code: STRING (optional)
+      street_name: STRING (optional)
+      door: STRING (optional)
    }
 }
 
