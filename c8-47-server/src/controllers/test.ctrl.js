@@ -29,6 +29,7 @@ const userData = async (req, res, next) => {
           model: 'Selector',
         },
       }) */
+      .populate('skills')
       .populate('presentations')
       .populate('tags');
 

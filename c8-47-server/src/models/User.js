@@ -68,6 +68,12 @@ const UserSchema = new Schema(
         ref: 'Presentation',
       },
     ],
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill',
+      },
+    ],
     tags: [
       {
         type: Schema.Types.ObjectId,

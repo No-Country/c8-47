@@ -1,6 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 
 import Tag from '../models/Tag.js';
+import User from '../models/User.js';
 
 const getTags = async (req, res, next) => {
   const { user } = req;
@@ -29,6 +30,11 @@ const addTag = async (req, res, next) => {
     });
 
     await newTag.save();
+
+    const userFound = await User.findOne({ _id: user.id });
+
+    userFound.tags.push(newTag);
+    await userFound.save();
 
     return res.status(201).json({
       tag: newTag,
@@ -74,6 +80,7 @@ const editTag = async (req, res, next) => {
 
 const deleteTag = async (req, res, next) => {
   const { id: tagId } = req.query;
+  const { user } = req;
 
   if (!isValidObjectId(tagId))
     return res.status(422).json({ message: 'Ingrese un ID válido' });
@@ -85,6 +92,15 @@ const deleteTag = async (req, res, next) => {
 
     if (!tagDeleted)
       return res.status(404).json({ message: 'Tag no encontrado' });
+
+    const userFound = await User.findOne({ _id: user.id });
+
+    const newTagsArray = userFound.tags.filter(
+      (tag) => tag.toString() !== tagId
+    );
+
+    userFound.tags = newTagsArray;
+    await userFound.save();
 
     return res.status(200).json({
       message: 'Tag eliminado con éxito',
