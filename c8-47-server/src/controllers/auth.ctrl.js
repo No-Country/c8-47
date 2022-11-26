@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User.js';
@@ -8,13 +7,7 @@ import User from '../models/User.js';
 const { JWT_SECRET_CODE } = process.env;
 
 const signUp = async (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
-
-  const { email, password, first_name, last_name } = req.body;
+  const { email, new_password, first_name, last_name } = req.body;
 
   try {
     const userFound = await User.exists({ email });
@@ -23,7 +16,7 @@ const signUp = async (req, res, next) => {
 
     await User.create({
       email,
-      password,
+      new_password,
       first_name,
       last_name,
     });
@@ -35,12 +28,6 @@ const signUp = async (req, res, next) => {
 };
 
 const logIn = async (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
-
   const { email, password } = req.body;
 
   try {

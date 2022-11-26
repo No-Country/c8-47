@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import bcrypt from "bcryptjs";
+import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema(
   {
@@ -21,25 +21,74 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    images_urls: [String],
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: ['user', 'admin'],
+      default: 'user',
     },
 
     contact: {
       type: Schema.Types.ObjectId,
-      ref: "Contact",
+      ref: 'Contact',
     },
+    personal: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Personal',
+      },
+    ],
+    education: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Education',
+      },
+    ],
+    languages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Language',
+      },
+    ],
+    experience: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Job',
+      },
+    ],
+    curriculums: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Curriculum',
+      },
+    ],
+    presentations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Presentation',
+      },
+    ],
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill',
+      },
+    ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag',
+      },
+    ],
   },
   {
     versionKey: false,
   }
 );
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   const user = this;
-  if (!user.isModified("password")) return next();
+  if (!user.isModified('password')) return next();
 
   const hash = await bcrypt.hash(user.password, 10);
   user.password = hash;
@@ -53,4 +102,11 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
   return compare;
 };
 
-export default model("User", UserSchema);
+UserSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    // returnedObject.id = returnedObject._id;
+    delete returnedObject.password;
+  },
+});
+
+export default model('User', UserSchema);

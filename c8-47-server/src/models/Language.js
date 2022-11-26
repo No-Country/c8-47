@@ -1,16 +1,16 @@
 import { Schema, model } from 'mongoose';
 
-const PresentationSchema = new Schema(
+const LanguageSchema = new Schema(
   {
-    text: {
+    language: {
+      type: String,
+      required: true,
+    },
+    level: {
       type: String,
       required: true,
     },
 
-    tag: {
-      type: Schema.Types.ObjectId,
-      ref: 'Tag',
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -21,4 +21,4 @@ const PresentationSchema = new Schema(
   }
 );
 
-export default model('Presentation', PresentationSchema);
+export default model('Language', LanguageSchema);

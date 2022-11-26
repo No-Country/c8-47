@@ -1,8 +1,12 @@
 import { Schema, model } from 'mongoose';
 
-const PresentationSchema = new Schema(
+const PersonalSchema = new Schema(
   {
-    text: {
+    title: {
+      type: String,
+      required: true,
+    },
+    about: {
       type: String,
       required: true,
     },
@@ -21,4 +25,4 @@ const PresentationSchema = new Schema(
   }
 );
 
-export default model('Presentation', PresentationSchema);
+export default model('Personal', PersonalSchema);

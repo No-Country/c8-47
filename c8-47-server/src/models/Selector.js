@@ -1,14 +1,22 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const SelectorSchema = new Schema(
   {
-    name: {
+    organization: {
       type: String,
       required: true,
+    },
+    name: {
+      type: String,
     },
     email: {
       type: String,
       required: true,
+    },
+
+    curriculum: {
+      type: Schema.Types.ObjectId,
+      ref: 'Curriculum',
     },
   },
   {
@@ -16,4 +24,4 @@ const SelectorSchema = new Schema(
   }
 );
 
-export default model("Selector", SelectorSchema);
+export default model('Selector', SelectorSchema);

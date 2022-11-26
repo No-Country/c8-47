@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
 
-const PresentationSchema = new Schema(
+const SkillSchema = new Schema(
   {
-    text: {
+    name: {
       type: String,
       required: true,
     },
@@ -21,4 +21,4 @@ const PresentationSchema = new Schema(
   }
 );
 
-export default model('Presentation', PresentationSchema);
+export default model('Skill', SkillSchema);

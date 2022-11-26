@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+Aimport React, { useState } from 'react';
 import Logo from '../Assets/Images/Logo.png';
 import LogoNegativo from '../Assets/Images/Logo_negativo.png';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -6,12 +6,12 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { ButtonPurple } from './buttons/ButtonPurple';
 import { ButtonGray } from './buttons/ButtonGray';
-import {DarkMode} from "../Components/darkmode/DarkMode"
+import { DarkMode } from '../Components/darkmode/DarkMode';
 
-export const Header = () => {
+export const Header = ({ onClickRegister, onClickSignin }) => {
   const Links = [
     { name: 'Prueba Cevetae', link: '/' },
-    { name: 'Iniciar sesion', link: '/' },
+    // { name: 'Iniciar sesion', link: '/' },
   ];
 
   const linkRender = Links.map((link) => (
@@ -29,11 +29,13 @@ export const Header = () => {
     <div className=' bg-white  dark:bg-bgDarkMode shadow-md w-full fixed top-0 left-0 grid place-items-center md:block'>
       <div className='  dark:bg-bgDarkMode md:flex md:items-center md:justify-between bg-white py-4 md:px-10 px-7'>
         <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-textColor'>
-                  <img src={LogoNegativo} alt='Logo' className=' hidden dark:block w-36' />
-                  <img src={Logo} alt='Logo' className=' dark:hidden w-36' />
-        
+          <img
+            src={LogoNegativo}
+            alt='Logo'
+            className=' hidden dark:block w-36'
+          />
+          <img src={Logo} alt='Logo' className=' dark:hidden w-36' />
         </div>
-
 
         <div
           onClick={() => setOpen(!open)}
@@ -60,26 +62,20 @@ export const Header = () => {
             open ? 'left-21 ' : 'left-[-800px]'
           }`}
         >
-      <div className=' flex flex-col gap-y-7 md:block pt-5 md:pt-2'>
-
-       <span className=' md:hidden flex items-center gap-3 hover:bg-btnHoverG px-3 py-3 md:w-0 w-[90%] dark:hover:bg-bgDarkmodeHoverbtn'>
-          <BsFillHouseDoorFill /> Ir al inicio          
-        </span>
-        <div className=" md:hidden hover:bg-btnHoverG px-3 py-3 flex items-center md:w-0 w-[90%] dark:hover:bg-bgDarkmodeHoverbtn" >
-          <DarkMode />
-
-        </div>
-      </div>
-      <div className=' flex-col-reverse md:flex pt-16 md:pt-0 flex items-center justify-center md:flex-row gap-y-3'>
-          {linkRender}
-          <div className=' py-8 md:py-0 md:ml-4 '>
-          <ButtonPurple >Registrarse</ButtonPurple>
+          <div className=' flex flex-col gap-y-7 md:block pt-5 md:pt-2'>
+            <span className=' md:hidden flex items-center gap-3 hover:bg-btnHoverG px-3 py-3 md:w-0 w-[90%] dark:hover:bg-bgDarkmodeHoverbtn'>
+              <BsFillHouseDoorFill /> Ir al inicio
+            </span>
+            <div className=' md:hidden hover:bg-btnHoverG px-3 py-3 flex items-center md:w-0 w-[90%] dark:hover:bg-bgDarkmodeHoverbtn'>
+              <DarkMode />
+            </div>
           </div>
-
-      </div>
-          
-
-        
+          <div className=' flex-col-reverse md:flex pt-16 md:pt-0 flex items-center justify-center md:flex-row gap-y-3'>
+            {linkRender}
+            <div className=' py-8 md:py-0 md:ml-4 '>
+              <ButtonPurple>Registrarse</ButtonPurple>
+            </div>
+          </div>
         </ul>
       </div>
     </div>
