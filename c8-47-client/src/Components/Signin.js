@@ -31,9 +31,9 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
   }, [isVisible]);
   if (!isVisible) return null;
   return (
-    <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
-      <div className='grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] h-fit shadow-lg shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
-        <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
+    <div className='fixed md:inset-0 top-[80px] bottom-[0] left-[0] right-[0] md:bg-black bg-[#FFFFFF] md:bg-opacity-25 md:backdrop-blur-sm md:flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
+      <div className='m-[0] grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] h-fit md:shadow-lg md:shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
+        <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[24px] mb-[24px] h-[100%]'>
           <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
             <Input
               name={'Email'}

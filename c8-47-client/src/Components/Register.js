@@ -35,9 +35,9 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
   if (!isVisible) return null;
   return (
     <>
-      <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
-        <div className='dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] mt-[4.5%] mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
-          <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
+      <div className='fixed md:inset-0 top-[80px] md:bg-black bg-[#FFFFFF] dark:bg-bgDarkMode md:bg-opacity-25 md:backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
+        <div className='m-[0px] dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] md:mt-[4.5%] md:mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
+          <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[24px] mb-[80px] md:mb-[24px] h-[100%]'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  '>
               <Input
                 name={'Nombres'}
