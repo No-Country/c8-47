@@ -5,16 +5,20 @@ import { ButtonRoundedPurple } from '../buttons/ButtonRoundedPurple';
 
 export const Feature = (props) => {
   return (
-    <div className=' dark:text-white font-Mon md:justify-items-stretch md:place-items-gap-x-32 md:grid-cols-2 md:grid-rows-2 grid gap-5 gap-x-32 place-items-center	w-full pb-36'>
-      <ButtonRoundedPurple button={props.button} />
+    <div className=' container'>
+      <div className='  md:grid-rows-2 md:grid-cols-2 dark:text-white font-Mon grid  w-full py-20 md:gap-y-0 gap-y-10 justify-items-stretch'>
+        <div className=' justify-self-center justify-items-center md:justify-self-start md:place-self-center '>
+          <ButtonRoundedPurple button={props.button} />
+        </div>
 
-      <div className=' dark:text-black row-span-2 flex flex-col justify-center items-center h-72 w-3/4 bg-slate-200 mt-6 '>
-        {props.gif}
+        <p className='justify-self-center justify-items-center md:col-end-2  md:justify-self-start w-3/4 md:w-80	 '>
+          {props.paragraph}
+        </p>
+
+        <div className=' md:col-end-3 justify-self-center dark:text-black flex fljustify-items-stretchex-col justify-center items-center h-72 w-3/4 bg-slate-200  '>
+          {props.gif}
+        </div>
       </div>
-
-      <p className='md:w-2/4 md:justify-self-center w-3/4 text-center md:text-left	 '>
-        {props.paragraph}
-      </p>
     </div>
   );
 };

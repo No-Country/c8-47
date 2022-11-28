@@ -44,10 +44,40 @@ const UserSchema = new Schema(
         ref: 'Education',
       },
     ],
+    languages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Language',
+      },
+    ],
     experience: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Job',
+      },
+    ],
+    curriculums: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Curriculum',
+      },
+    ],
+    presentations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Presentation',
+      },
+    ],
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill',
+      },
+    ],
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag',
       },
     ],
   },
@@ -71,5 +101,12 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 
   return compare;
 };
+
+UserSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    // returnedObject.id = returnedObject._id;
+    delete returnedObject.password;
+  },
+});
 
 export default model('User', UserSchema);

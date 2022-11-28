@@ -31,5 +31,7 @@ export const FeatureList = () => {
     />
   ));
 
-  return <div className=''>{feature}</div>;
+  return (
+    <div className=' grid place-items-center container mx-auto '>{feature}</div>
+  );
 };

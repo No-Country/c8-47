@@ -142,7 +142,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
                 <button
                   type='submit'
-                  className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                  className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
                 >
                   Regístrate
                 </button>
@@ -153,7 +153,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                 ¿Ya tienes cuenta?{' '}
                 <button
                   onClick={() => onSwitch()}
-                  className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800]   text-primario hover:text-primarioH'
+                  className='dark:text-borderDarkmode dark:hover:text-textHoverDarkmode font-[800]   text-primario hover:text-primarioH'
                 >
                   Inicia sesión
                 </button>
@@ -162,7 +162,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                 Al registrarme declaro que he leído y aceptado los{' '}
                 <Link
                   to='/'
-                  className='dark:hover:text-bgPushDarkMode underline hover:text-primarioH'
+                  className='dark:hover:text-textPressDarkmode underline hover:text-primarioH'
                 >
                   Términos y Condiciones de Cevetae.
                 </Link>

@@ -74,7 +74,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
             <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
               <Link
                 to='/resetPassword'
-                className='underline hover:text-primarioH dark:hover:text-bgPushDarkMode'
+                className='underline hover:text-primarioH dark:hover:text-textPressDarkmode'
               >
                 ¿Has olvidado tu contraseña?
               </Link>
@@ -82,7 +82,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
             <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
               <button
                 type='submit'
-                className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode bg- w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode bg- w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
               >
                 Iniciar Sesión
               </button>
@@ -93,7 +93,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
               ¿No tienes cuenta?{' '}
               <button
                 onClick={() => onSwitch()}
-                className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800] text-primario hover:text-primarioH'
+                className='dark:text-borderDarkmode dark:hover:text-textHoverDarkmode font-[800] text-primario hover:text-primarioH'
               >
                 Regístrate
               </button>

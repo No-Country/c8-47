@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import User from '../models/User.js';
 import Job from '../models/Job.js';
 
@@ -39,7 +41,7 @@ const addJob = async (req, res, next) => {
 
     return res.status(201).json({
       job: newJob,
-      message: 'Job agregada con éxito',
+      message: 'Experiencia agregada con éxito',
     });
   } catch (error) {
     next(error);
@@ -47,14 +49,17 @@ const addJob = async (req, res, next) => {
 };
 
 const editJob = async (req, res, next) => {
-  const { id, title, organization, start_date, end_date, tasks } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { title, organization, start_date, end_date, tasks } = req.body;
+  const { id: jobId } = req.query;
+
+  if (!isValidObjectId(jobId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
   try {
     const jobEdited = await Job.findOneAndUpdate(
-      { _id: id },
+      { _id: jobId },
       {
         title,
         organization,
@@ -66,11 +71,11 @@ const editJob = async (req, res, next) => {
     );
 
     if (!jobEdited)
-      return res.status(404).json({ message: 'Job no encontrado' });
+      return res.status(404).json({ message: 'Experiencia no encontrada' });
 
     return res.status(201).json({
       job: jobEdited,
-      message: 'Job modificada con éxito',
+      message: 'Experiencia modificada con éxito',
     });
   } catch (error) {
     next(error);
@@ -79,14 +84,16 @@ const editJob = async (req, res, next) => {
 
 const deleteJob = async (req, res, next) => {
   const { user } = req;
-  const { id: jobId } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { id: jobId } = req.query;
+
+  if (!isValidObjectId(jobId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const jobDeleted = await Job.findOneAndDelete({ _id: jobId });
 
     if (!jobDeleted)
-      return res.status(404).json({ message: 'Job no encontrado' });
+      return res.status(404).json({ message: 'Experiencia no encontrada' });
 
     const userFound = await User.findOne({ user: user.id });
 
@@ -98,7 +105,7 @@ const deleteJob = async (req, res, next) => {
     await userFound.save();
 
     return res.status(200).json({
-      message: 'Job eliminada con éxito',
+      message: 'Experiencia eliminada con éxito',
     });
   } catch (error) {
     next(error);
