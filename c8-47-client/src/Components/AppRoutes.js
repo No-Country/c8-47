@@ -3,11 +3,12 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../Pages/Landing';
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
+import Home from '../Pages/Home';
+
 import Terms from '../Pages/Terms';
 import Dashboard from '../Pages/Dashboard';
 import Profile from '../Pages/Profile';
 import Admin from '../Pages/Admin';
-
 import { routes } from '../Config/routes';
 
 const AppRoutes = () => {
@@ -18,16 +19,6 @@ const AppRoutes = () => {
     <Routes>
       <Route exact path={routes.home} element={<Landing />} />
 
-      <Route
-        exact
-        path={routes.login}
-        element={!userLoged ? <Login /> : <Navigate to={routes.home} />}
-      />
-      <Route
-        exact
-        path={routes.signup}
-        element={!userLoged ? <Signup /> : <Navigate to={routes.home} />}
-      />
       <Route path={routes.terms} element={<Terms />} />
       <Route
         path={routes.user}

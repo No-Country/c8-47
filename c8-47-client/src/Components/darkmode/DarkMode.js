@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import { FiSun } from 'react-icons/fi';
-import { FaRegMoon } from 'react-icons/fa';
+import { IoMdMoon } from 'react-icons/io';
 
 export const DarkMode = () => {
     const [theme, setTheme] = useState("light");
@@ -21,12 +21,12 @@ export const DarkMode = () => {
   return (
     
         <button onClick={handlerTheme}>     
-            <span className="dark:hidden flex flex-row items-center gap-x-3" >
-                <FaRegMoon/> Dark mode
+            <span className="dark:hidden flex flex-row items-center gap-x-3 text-sm" >
+                <IoMdMoon className='  text-bold text-xl'/> Modo oscuro
             </span>
 
-            <span className=" hidden dark:flex flex-row items-center gap-x-3">                
-                <FiSun/> Light Mode
+            <span className=" hidden dark:flex flex-row items-center gap-x-3 text-sm">                
+                <FiSun className=' text-xl'/> Modo claro
             </span>       
          </button>
     

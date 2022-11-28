@@ -84,6 +84,7 @@ const addressValidation = [
     .toLowerCase()
     .escape(),
 
+  //!VOLVER A VER cambiar street_number a tipo NUMBER
   check('address.street_number')
     .optional({ checkFalsy: true })
     .isString()

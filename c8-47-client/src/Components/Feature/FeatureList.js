@@ -28,7 +28,7 @@ export const FeatureList = () => {
         key={i} /> )
 
   return (
-    <div className=''>
+    <div className=' grid place-items-center container mx-auto '>
         {feature}     
     </div>
   )

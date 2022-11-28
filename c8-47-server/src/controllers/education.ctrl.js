@@ -1,3 +1,5 @@
+import { isValidObjectId } from 'mongoose';
+
 import Education from '../models/Education.js';
 import User from '../models/User.js';
 
@@ -48,14 +50,17 @@ const addEducation = async (req, res, next) => {
 };
 
 const editEducation = async (req, res, next) => {
-  const { id, title, institution, start_date, end_date, comment } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { title, institution, start_date, end_date, comment } = req.body;
+  const { id: educationId } = req.query;
+
+  if (!isValidObjectId(educationId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   const options = { new: true };
 
   try {
     const educationEdited = await Education.findOneAndUpdate(
-      { _id: id },
+      { _id: educationId },
       {
         title,
         institution,
@@ -82,11 +87,15 @@ const editEducation = async (req, res, next) => {
 
 const deleteEducation = async (req, res, next) => {
   const { user } = req;
-  const { id } = req.body;
-  //!VOLVER A VER preguntar si envian id por query
+  const { id: educationId } = req.query;
+
+  if (!isValidObjectId(educationId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
-    const educationDeleted = await Education.findOneAndDelete({ _id: id });
+    const educationDeleted = await Education.findOneAndDelete({
+      _id: educationId,
+    });
 
     if (!educationDeleted)
       return res.status(404).json({ message: 'Educación no encontrada' });
@@ -94,7 +103,7 @@ const deleteEducation = async (req, res, next) => {
     const userFound = await User.findOne({ _id: user.id });
 
     const newEducationArray = userFound.education.filter(
-      (edu) => edu.toString() !== id
+      (edu) => edu.toString() !== educationId
     );
 
     userFound.education = newEducationArray;
