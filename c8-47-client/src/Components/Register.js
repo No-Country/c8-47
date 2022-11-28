@@ -107,7 +107,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
               <Input
                 name={'Contraseña'}
                 type={'text'}
-                register={register('password', {
+                register={register('new_password', {
                   required: {
                     value: true,
                     message: 'El campo contraseña es requerido.',
