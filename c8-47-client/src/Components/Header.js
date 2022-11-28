@@ -5,8 +5,14 @@ import { FaRegWindowClose } from 'react-icons/fa';
 import { FaList } from 'react-icons/fa';
 import { ButtonPurple } from './buttons/ButtonPurple';
 import { ButtonGray } from './buttons/ButtonGray';
+import { useLocation } from 'react-router-dom'
+import { routes } from '../Config/routes'
 
 export const Header = () => {
+  const { pathname } = useLocation()
+
+  if (pathname === `/${routes.dashboard}`) return null;
+
   const Links = [
     { name: 'Prueba Cevetae', link: '/' },
     { name: 'Iniciar sesion', link: '/' },

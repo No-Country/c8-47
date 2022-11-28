@@ -9,7 +9,7 @@ import AppRoutes from './Components/AppRoutes';
 
 function App() {
   return (
-    <div className='App bg-white dark:bg-bgDarkMode'>
+    <div className='App bg-white dark:bg-bgDarkMode h-screen flex flex-col'>
       <BrowserRouter>
         <Header />
         {/* <Banner /> */}
@@ -23,4 +23,3 @@ function App() {
 }
 
 export default App;
-

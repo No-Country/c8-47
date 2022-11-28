@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../Pages/Landing';
-import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
 import Terms from '../Pages/Terms';
@@ -39,6 +38,7 @@ const AppRoutes = () => {
           element={userLoged ? <Profile /> : <Navigate to={routes.login} />}
         />
       </Route>
+      <Route path={routes.dashboard} element={<Dashboard />}></Route>
       <Route
         path={routes.admin}
         element={
