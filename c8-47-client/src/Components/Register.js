@@ -35,9 +35,9 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
   if (!isVisible) return null;
   return (
     <>
-      <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
-        <div className='dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] mt-[4.5%] mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
-          <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
+      <div className='fixed md:inset-0 top-[80px] md:bg-black bg-[#FFFFFF] dark:bg-bgDarkMode md:bg-opacity-25 md:backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
+        <div className='m-[0px] dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] md:mt-[4.5%] md:mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
+          <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[24px] mb-[80px] md:mb-[24px] h-[100%]'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  '>
               <Input
                 name={'Nombres'}
@@ -107,7 +107,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
               <Input
                 name={'Contraseña'}
                 type={'text'}
-                register={register('password', {
+                register={register('new_password', {
                   required: {
                     value: true,
                     message: 'El campo contraseña es requerido.',
@@ -142,7 +142,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
                 <button
                   type='submit'
-                  className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                  className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
                 >
                   Regístrate
                 </button>
@@ -153,7 +153,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                 ¿Ya tienes cuenta?{' '}
                 <button
                   onClick={() => onSwitch()}
-                  className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800]   text-primario hover:text-primarioH'
+                  className='dark:text-borderDarkmode dark:hover:text-textHoverDarkmode font-[800]   text-primario hover:text-primarioH'
                 >
                   Inicia sesión
                 </button>
@@ -162,7 +162,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                 Al registrarme declaro que he leído y aceptado los{' '}
                 <Link
                   to='/'
-                  className='dark:hover:text-bgPushDarkMode underline hover:text-primarioH'
+                  className='dark:hover:text-textPressDarkmode underline hover:text-primarioH'
                 >
                   Términos y Condiciones de Cevetae.
                 </Link>

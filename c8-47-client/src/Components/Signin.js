@@ -31,9 +31,9 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
   }, [isVisible]);
   if (!isVisible) return null;
   return (
-    <div className='fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
-      <div className='grid grid-cols-1 md:grid-cols-2 mr-[15%] ml-[15%] h-fit shadow-lg shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
-        <div className='mr-14 ml-14 mt-[24px] mb-[24px] h-[100%]'>
+    <div className='fixed md:inset-0 top-[80px] bottom-[0] left-[0] right-[0] md:bg-black bg-[#FFFFFF] md:bg-opacity-25 md:backdrop-blur-sm md:flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
+      <div className='m-[0] grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] h-fit md:shadow-lg md:shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
+        <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[24px] mb-[24px] h-[100%]'>
           <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
             <Input
               name={'Email'}
@@ -74,7 +74,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
             <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
               <Link
                 to='/resetPassword'
-                className='underline hover:text-primarioH dark:hover:text-bgPushDarkMode'
+                className='underline hover:text-primarioH dark:hover:text-textPressDarkmode'
               >
                 ¿Has olvidado tu contraseña?
               </Link>
@@ -82,7 +82,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
             <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
               <button
                 type='submit'
-                className='dark:bg-borderDarkMode dark:hover:bg-bgHoverDarkMode dark:text-bgDarkMode dark:focus:bg-bgPushDarkMode bg- w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+                className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode bg- w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
               >
                 Iniciar Sesión
               </button>
@@ -93,7 +93,7 @@ const Signin = ({ isVisible, onClose, onSwitch }) => {
               ¿No tienes cuenta?{' '}
               <button
                 onClick={() => onSwitch()}
-                className='dark:text-borderDarkMode dark:hover:text-bgPushDarkMode font-[800] text-primario hover:text-primarioH'
+                className='dark:text-borderDarkmode dark:hover:text-textHoverDarkmode font-[800] text-primario hover:text-primarioH'
               >
                 Regístrate
               </button>

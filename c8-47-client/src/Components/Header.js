@@ -9,6 +9,7 @@ import { ButtonGray } from './buttons/ButtonGray';
 import { useLocation } from 'react-router-dom';
 import { routes } from '../Config/routes';
 import { DarkMode } from '../Components/darkmode/DarkMode';
+import { NavLink } from 'react-router-dom';
 
 export const Header = ({ onClickRegister, onClickSignin }) => {
   const { pathname } = useLocation();
@@ -21,8 +22,9 @@ export const Header = ({ onClickRegister, onClickSignin }) => {
   ];
 
   const linkRender = Links.map((link) => (
-    <li key={link.name} className='md:ml-4 text-lg md:my-0 my-7 '>
+    <li key={link.name} className='md:ml-4 md:my-0 my-7 '>
       {/* <a
+
         href={link.link}
         //className='font-Mon text-textColor border-transparent	transition-all duration-500 py-2 px-3 md:px-3 lg:px6 rounded hover:border-textColor focus:bg-btnHoverG focus:border-btnHoverG hover:border border disabled:text-btnDisable'
       > */}
@@ -83,6 +85,16 @@ export const Header = ({ onClickRegister, onClickSignin }) => {
             <li className='md:ml-4 text-lg md:my-0 my-7  '>
               <ButtonGray onClick={onClickSignin}>Iniciar Sesión</ButtonGray>
             </li>
+           <div className='py-8 md:py-0 md:ml-4 '>
+              <NavLink to='/'>
+                <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px] hover:border-textColor hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
+                  Prueba Cevetae
+                </button>
+              </NavLink>
+            </div>
+            <div className='py-8 md:py-0 md:ml-4 '>
+              <ButtonGray onClick={onClickSignin}>Iniciar Sesión</ButtonGray>
+            </div>
             <div className=' py-8 md:py-0 md:ml-4 '>
               <ButtonPurple onClick={onClickRegister}>Registrarse</ButtonPurple>
             </div>
