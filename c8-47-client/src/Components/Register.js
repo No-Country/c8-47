@@ -189,7 +189,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
     return (
       <>
         {viewButtons && (
-          <div className='fixed inset-0 bg-[#FFFFFF] top-[80px] flex flex-col justify-center md:hidden pr-7 pl-7 gap-[23px]'>
+          <div className='fixed inset-0 bg-[#FFFFFF] dark:bg-bgDarkMode top-[80px] flex flex-col justify-center md:hidden pr-7 pl-7 gap-[23px]'>
             <button
               onClick={() => onView()}
               className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'

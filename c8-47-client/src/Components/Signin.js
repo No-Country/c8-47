@@ -32,7 +32,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
 
   const mainView = () => {
     return (
-      <div className='fixed md:inset-0 top-[80px] bottom-[0] left-[0] right-[0] md:bg-black bg-[#FFFFFF] md:bg-opacity-25 md:backdrop-blur-sm  md:flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
+      <div className='fixed md:inset-0 top-[80px] bottom-[0] left-[0] right-[0] md:bg-black bg-[#FFFFFF] dark:bg-bgDarkMode md:bg-opacity-25 md:backdrop-blur-sm  md:flex justify-center items-center h-[100%] w-[100%] overflow-y-auto '>
         <div className='m-[0]  grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] h-fit md:shadow-lg md:shadow-gray-600 sm:max-w-[900px]  bg-[#FFFFFF] rounded-[10px] dark:bg-bgDarkMode'>
           <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[30%]  md:mt-[24px] md:mb-[24px] h-[100%]'>
             <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
@@ -126,7 +126,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
     return (
       <>
         {viewButtons && (
-          <div className='fixed inset-0 bg-[#FFFFFF] top-[80px] flex flex-col justify-center md:hidden pr-7 pl-7 gap-[23px]'>
+          <div className='fixed inset-0 bg-[#FFFFFF] dark:bg-bgDarkMode top-[80px] flex flex-col justify-center md:hidden pr-7 pl-7 gap-[23px]'>
             <button
               onClick={() => onView()}
               className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
