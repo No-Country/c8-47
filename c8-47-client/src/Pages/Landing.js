@@ -3,10 +3,10 @@ import { Banner } from '../Components/Banner/Banner';
 import { FeatureList } from '../Components/Feature/FeatureList';
 import { Paragraph } from '../Components/Feature/Paragraph';
 
-export default function Landing() {
+export default function Landing({ onView }) {
   return (
     <>
-      <Banner />
+      <Banner onView={onView} />
       <FeatureList />
       <Paragraph />
     </>

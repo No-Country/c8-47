@@ -11,13 +11,13 @@ import Profile from '../Pages/Profile';
 import Admin from '../Pages/Admin';
 import { routes } from '../Config/routes';
 
-const AppRoutes = () => {
+const AppRoutes = ({ onView }) => {
   const userLoged = false;
   const isAdmin = true;
 
   return (
     <Routes>
-      <Route exact path={routes.home} element={<Landing />} />
+      <Route exact path={routes.home} element={<Landing onView={onView} />} />
 
       <Route path={routes.terms} element={<Terms />} />
       <Route
