@@ -12,7 +12,7 @@ function App() {
   const [showModalRegister, setShowModalRegister] = useState(false);
   const [showModalSignin, setShowModalSignin] = useState(false);
   return (
-    <div className='App bg-white dark:bg-bgDarkMode '>
+    <div className='App bg-white dark:bg-bgDarkMode h-screen flex flex-col'>
       <BrowserRouter>
         <Header
           onClickRegister={() => setShowModalRegister(true)}
