@@ -9,7 +9,13 @@ import { ButtonGray } from './buttons/ButtonGray';
 import { DarkMode } from '../Components/darkmode/DarkMode';
 import { NavLink } from 'react-router-dom';
 
-export const Header = ({ onClickRegister, onClickSignin }) => {
+export const Header = ({
+  onClickRegister,
+  onClickSignin,
+  onClose,
+
+  actionRegister,
+}) => {
   const Links = [
     { name: 'Prueba Cevetae', link: '/' },
     // { name: 'Iniciar sesion', link: '/' },
@@ -41,9 +47,9 @@ export const Header = ({ onClickRegister, onClickSignin }) => {
         </div>
         <div className='menuBurger absolute left-10 top-3 md:static	'>
           <div
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen(true)}
             className={
-              (open ? 'hidden' : '') +
+              (open || actionRegister ? 'hidden' : '') +
               ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
             }
           >
@@ -51,9 +57,12 @@ export const Header = ({ onClickRegister, onClickSignin }) => {
           </div>
 
           <div
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              setOpen(false);
+              onClose();
+            }}
             className={
-              (open ? '' : 'hidden') +
+              (open || actionRegister ? '' : 'hidden') +
               ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
             }
           >
@@ -79,7 +88,7 @@ export const Header = ({ onClickRegister, onClickSignin }) => {
 
             <div className='py-8 md:py-0 md:ml-4 '>
               <NavLink to='/'>
-                <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px] hover:border-textColor hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
+                <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px]  hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
                   Prueba Cevetae
                 </button>
               </NavLink>

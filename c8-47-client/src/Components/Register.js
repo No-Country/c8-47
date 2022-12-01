@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -7,7 +7,11 @@ import Input from './input/Input';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
-const Register = ({ isVisible, onClose, onSwitch }) => {
+import useWindowSize from './Hooks/WindowSize';
+
+const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
+  const size = useWindowSize();
+
   const {
     register,
     watch,
@@ -29,16 +33,12 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
     }
   };
 
-  useEffect(() => {
-    reset();
-  }, [isVisible]);
-  if (!isVisible) return null;
-  return (
-    <>
-      <div className='fixed md:inset-0 top-[80px] md:bg-black bg-[#FFFFFF] dark:bg-bgDarkMode md:bg-opacity-25 md:backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
-        <div className='m-[0px] dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] md:mt-[4.5%] md:mb-[4.5%]  h-fit shadow-lg shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
-          <div className='mr-7 ml-7 md:mr-14 md:ml-14 mt-[24px] mb-[80px] md:mb-[24px] h-[100%]'>
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  '>
+  const mainView = () => {
+    return (
+      <div className='fixed md:inset-0 top-[80px]  md:bg-black bg-[#FFFFFF] dark:bg-bgDarkMode md:bg-opacity-25 md:backdrop-blur-sm   h-[100%] w-[100%] overflow-y-auto  '>
+        <div className='m-[0px]  dark:bg-bgDarkMode grid grid-cols-1 md:grid-cols-2 md:mr-[15%] md:ml-[15%] md:mt-[4.5%] md:mb-[4.5%]  h-fit md:shadow-lg md:shadow-gray-600 sm:max-w-[700px] bg-[#FFFFFF] rounded-[10px]'>
+          <div className='mr-7 ml-7 md:mr-14 md:ml-14 md:mt-[24px] mt-[20%] mb-[10%]  md:mb-[24px] h-[100%]'>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
               <Input
                 name={'Nombres'}
                 type={'text'}
@@ -118,7 +118,7 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                       'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
                   },
                 })}
-                error={errors.password}
+                error={errors.new_password}
               />
               <Input
                 name={'Confirma la contraseña'}
@@ -128,14 +128,9 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                     value: true,
                     message: 'Confirme la contraseña',
                   },
-                  validate: {
-                    value: (val) => {
-                      if (watch('password') != val) {
-                        return 'Your passwords do not match';
-                      }
-                    },
-                    message: 'Las contraseñas no coinciden',
-                  },
+                  validate: (val) =>
+                    val === watch('new_password') ||
+                    'Las contraseñas no coinciden.',
                 })}
                 error={errors.confirm_password}
               />
@@ -146,8 +141,12 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
                 >
                   Regístrate
                 </button>
-                <ButtonLinkedin name={'Registrarme con LinkedIn'} />
-                <ButtonGoogle name={'Registrarme con Google'} />
+                <div className='hidden md:block'>
+                  <ButtonGoogle name={'Registrarme con Google'} />
+                </div>
+                <div className='hidden md:block'>
+                  <ButtonLinkedin name={'Registrarme con LinkedIn'} />
+                </div>
               </div>
               <span className='dark:text-[#FFFFFF] font-Mon text-center text-[14px] mb-[10px]'>
                 ¿Ya tienes cuenta?{' '}
@@ -184,8 +183,38 @@ const Register = ({ isVisible, onClose, onSwitch }) => {
           </div>
         </div>
       </div>
-    </>
-  );
+    );
+  };
+  const responsiveView = () => {
+    return (
+      <>
+        {viewButtons && (
+          <div className='fixed inset-0 bg-[#FFFFFF] top-[80px] flex flex-col justify-center md:hidden pr-7 pl-7 gap-[23px]'>
+            <button
+              onClick={() => onView()}
+              className='dark:bg-borderDarkmode dark:hover:bg-textHoverDarkmode dark:text-bgDarkMode dark:focus:bg-textPressDarkmode w-[100%]  h-[60px] font-Mon text-lg font-bold bg-primario text-white py-2 px-6 rounded-[10px]  hover:bg-primarioH duration-500 focus:bg-primarioP	disabled:bg-primarioD'
+            >
+              Registrarme con email
+            </button>
+            <ButtonGoogle name={'Registrarme con Google'} />
+            <ButtonLinkedin name={'Registrarme con LinkedIn'} />
+          </div>
+        )}
+        {!viewButtons && mainView()}
+      </>
+    );
+  };
+
+  useEffect(() => {
+    reset();
+  }, [isVisible]);
+
+  if (!isVisible) return null;
+  if (isVisible && size.width <= 800) {
+    return <>{responsiveView()}</>;
+  }
+
+  return <>{mainView()}</>;
 };
 
 export default Register;
