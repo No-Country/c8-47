@@ -15,7 +15,7 @@ function App() {
   const [viewButtonsLogin, setViewButtonsLogin] = useState(true);
   const [actionRegister, setActionRegister] = useState(false);
   return (
-    <div className='App bg-white dark:bg-bgDarkMode overflow-x-hidden'>
+    <div className='App bg-white dark:bg-bgDarkMode  h-screen flex flex-col overflow-x-hidden'>
       <BrowserRouter>
         <Header
           onClickRegister={() => setShowModalRegister(true)}

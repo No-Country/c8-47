@@ -4,8 +4,14 @@ import LogoNegativo from '../Assets/Images/Logo_negativo.png';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { DarkMode } from './darkmode/DarkMode';
+import { useLocation } from 'react-router-dom';
+import { routes } from '../Config/routes';
 
 export const Footer = () => {
+  const { pathname } = useLocation();
+
+  if (pathname === `/${routes.dashboard}`) return null;
+
   return (
     <footer className=' font-Mon dark:text-white  flex flex-col md:flex-row justify-around item-center my-12 w-full h-72 md:h-36 dark:bg-bgDarkMode mb-0 pb-10 p-5'>
       <div className=' flex flex-col'>
