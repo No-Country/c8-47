@@ -16,7 +16,7 @@ const signUp = async (req, res, next) => {
 
     await User.create({
       email,
-      new_password,
+      password: new_password,
       first_name,
       last_name,
     });

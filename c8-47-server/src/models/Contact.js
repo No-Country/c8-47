@@ -3,6 +3,7 @@ import { Schema, model } from 'mongoose';
 const ContactSchema = new Schema(
   {
     address: {
+      //! VOLVER A VER agregar pais
       state: {
         type: String,
       },
@@ -24,13 +25,13 @@ const ContactSchema = new Schema(
     },
 
     email: {
-      type: String,
+      type: String, //! VOLVER A VER agregar required?
     },
     phone: {
       type: String,
     },
     web: {
-      type: String,
+      type: String, //! VOLVER A VER quitar campo?
     },
     socials: [String],
 
