@@ -7,7 +7,7 @@ import User from '../models/User.js';
 const { JWT_SECRET_CODE } = process.env;
 
 const signUp = async (req, res, next) => {
-  const { email, new_password, first_name, last_name } = req.body;
+  const { email, password, first_name, last_name } = req.body;
 
   try {
     const userFound = await User.exists({ email });
@@ -16,12 +16,18 @@ const signUp = async (req, res, next) => {
 
     await User.create({
       email,
-      new_password,
+      password,
       first_name,
       last_name,
     });
 
-    return res.status(201).json({ message: 'Cuenta creada con éxito' });
+    const payload = { email, id: userFound._id };
+
+    const token = jwt.sign({ payload }, JWT_SECRET_CODE, {
+      expiresIn: 60 * 60 * 24 * 30,
+    });
+
+    return res.status(201).json({ token, message: 'Cuenta creada con éxito' });
   } catch (error) {
     next(error);
   }

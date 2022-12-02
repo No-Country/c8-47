@@ -21,7 +21,7 @@ const currentPasswordValidation = check('password')
   .withMessage('La contraseña acepta como máximo 64 caracteres')
   .escape();
 
-const newPasswordValidation = check('new_password')
+const newPasswordValidation = check('password')
   .trim()
   .notEmpty()
   .withMessage('Ingresa tu contraseña')
