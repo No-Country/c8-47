@@ -24,6 +24,9 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
         form
       );
       console.log(data);
+
+      localStorage.setItem('cevitaeToken', data.token);
+
       reset();
     } catch (err) {
       console.log(err);
