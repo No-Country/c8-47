@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../Pages/Landing';
 import Login from '../Pages/Login';
@@ -10,23 +10,24 @@ import Dashboard from '../Pages/Dashboard';
 import Profile from '../Pages/Profile';
 import Admin from '../Pages/Admin';
 import { routes } from '../Config/routes';
+import { AuthContext } from '../Context/AuthContext';
 
 const AppRoutes = ({ onView }) => {
-  const userLoged = false;
+  const { user } = useContext(AuthContext);
   const isAdmin = true;
 
   return (
     <Routes>
-      <Route exact path={routes.home} element={<Landing onView={onView} />} />
+      <Route exact path={routes.home} element={user ? <Home/> : <Landing onView={onView} />} />
 
       <Route path={routes.terms} element={<Terms />} />
       <Route
         path={routes.user}
-        element={userLoged ? <Dashboard /> : <Navigate to={routes.login} />}
+        element={user ? <Dashboard /> : <Navigate to={routes.login} />}
       >
         <Route
           path={routes.profile}
-          element={userLoged ? <Profile /> : <Navigate to={routes.login} />}
+          element={user ? <Profile /> : <Navigate to={routes.login} />}
         />
       </Route>
       <Route path={routes.dashboard} element={<Dashboard />}></Route>
@@ -36,7 +37,7 @@ const AppRoutes = ({ onView }) => {
           isAdmin ? (
             <Admin />
           ) : (
-            <Navigate to={userLoged ? routes.home : routes.login} />
+            <Navigate to={user ? routes.home : routes.login} />
           )
         }
       />
