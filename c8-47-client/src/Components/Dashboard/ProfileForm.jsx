@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import customAxios from './Config/interceptors';
+import customAxios from '../../Helpers/customAxios';
 
 function ProfileForm() {
   const {
@@ -27,7 +27,7 @@ function ProfileForm() {
   return (
     <div>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Perfil</h1>
+        {/* <h1>Perfil</h1> */}
 
         <h2>Nombre</h2>
 

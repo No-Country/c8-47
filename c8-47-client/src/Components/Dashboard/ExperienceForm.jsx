@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
-import customAxios from './Config/interceptors';
+// import customAxios from './Config/interceptors';
+import customAxios from '../../Helpers/customAxios';
 
 function ExperienceForm() {
   const [tasksQuantity, setTasksQuantity] = useState(1);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
+import Forms from './Forms';
 import Icon from './Icon';
-import Input from './Input';
+// import Input from './Input';
 
 const Navbar = () => {
   const items = {
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   const [selected, setSelected] = useState(items[0]);
-  const [name, setName] = useState('');
+  // const [name, setName] = useState('');
 
   return (
     <div className='h-screen w-fit rounded-r-3xl shadow-2xl flex'>
@@ -60,7 +60,8 @@ const Navbar = () => {
                 {items[e]}
               </h2>
             </div>
-            <Input name={'name'} value={name} key={e} setter={setName} />
+            <Forms name={e} />
+            {/* <Input name={'name'} value={name} key={e} setter={setName} /> */}
           </div>
         ))}
       </div>
