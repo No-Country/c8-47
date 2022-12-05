@@ -13,16 +13,7 @@ const AddressSchema = new Schema(
     city: {
       type: String,
     },
-    zip_code: {
-      type: String,
-    },
-    street_name: {
-      type: String,
-    },
-    street_number: {
-      type: String,
-    },
-    door: {
+    address: {
       type: String,
     },
 

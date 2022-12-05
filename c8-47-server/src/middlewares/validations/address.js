@@ -40,50 +40,15 @@ const cityValidation = check('city')
   .toLowerCase()
   .escape();
 
-const zipCodeValidation = check('zip_code')
+const ubicationValidation = check('address')
   .optional({ checkFalsy: true })
   .isString()
-  .withMessage('Ingresa un Código Postal válido')
-  .trim()
-  .isLength({ max: 12 })
-  .withMessage('El campo Código Postal debe tener como máximo 12 caracteres')
-  .matches(/^[0-9]+$/)
-  .withMessage('El campo Código Postal solo acepta números')
-  .escape();
-
-const streetNameValidation = check('street_name')
-  .optional({ checkFalsy: true })
-  .isString()
-  .withMessage('Ingresa una Calle válida')
+  .withMessage('Ingresa una Dirección válido')
   .trim()
   .isLength({ max: 24 })
-  .withMessage('El campo Calle debe tener como máximo 24 caracteres')
+  .withMessage('El campo Dirección debe tener como máximo 24 caracteres')
   .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
-  .withMessage('El campo Calle solo acepta letras y números')
-  .toLowerCase()
-  .escape();
-
-const streetNumberValidation = check('street_number')
-  .optional({ checkFalsy: true })
-  .isString()
-  .withMessage('Ingresa un Número válido')
-  .trim()
-  .isLength({ max: 8 })
-  .withMessage('El campo Número debe tener como máximo 8 caracteres')
-  .matches(/^[0-9]+$/)
-  .withMessage('El campo Número solo acepta números')
-  .toLowerCase()
-  .escape();
-
-const doorValidation = check('door')
-  .optional({ checkFalsy: true })
-  .isString()
-  .withMessage('Ingresa un Departamento válido')
-  .trim()
-  .isLength({ max: 8 })
-  .withMessage('El campo Departamento debe tener como máximo 8 caracteres')
-  .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/)
-  .withMessage('El campo Departamento solo acepta letras y números')
+  .withMessage('El campo Dirección solo acepta letras y números')
   .toLowerCase()
   .escape();
 
@@ -91,10 +56,7 @@ const addressValidation = [
   countryValidation,
   stateValidation,
   cityValidation,
-  zipCodeValidation,
-  streetNameValidation,
-  streetNumberValidation,
-  doorValidation,
+  ubicationValidation,
   checkValidations,
 ];
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileForm from './ProfileForm';
-import ContactForm from './ContactForm';
+import AddressForm from './AddressForm';
 import SocialForm from './SocialForm';
 import ExperienceForm from './ExperienceForm';
 import EducationForm from './EducationForm';
@@ -12,7 +12,7 @@ const Forms = ({ name }) => {
     case 'profile':
       return <ProfileForm />;
     case 'location':
-      return <ContactForm />;
+      return <AddressForm />;
     case 'socials':
       return <SocialForm />;
     case 'work':
