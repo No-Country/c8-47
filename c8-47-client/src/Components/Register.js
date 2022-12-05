@@ -10,6 +10,8 @@ import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
 
 const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const size = useWindowSize();
 
   const {
@@ -19,6 +21,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
@@ -106,7 +109,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
               />
               <Input
                 name={'Contraseña'}
-                type={'text'}
+                type={`${!showPassword ? 'password' : 'text'}`}
                 register={register('new_password', {
                   required: {
                     value: true,
@@ -120,9 +123,13 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                 })}
                 error={errors.new_password}
               />
+              <div onClick={() => setShowPassword(!showPassword)}>
+                MOSTRAR/OCULTAR
+              </div>
+
               <Input
                 name={'Confirma la contraseña'}
-                type={'text'}
+                type={`${!showConfirmPassword ? 'password' : 'text'}`}
                 register={register('confirm_password', {
                   required: {
                     value: true,
@@ -134,6 +141,10 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                 })}
                 error={errors.confirm_password}
               />
+              <div onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                MOSTRAR/OCULTAR
+              </div>
+
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
                 <button
                   type='submit'

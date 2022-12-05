@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,13 +10,16 @@ import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
 
 const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const size = useWindowSize();
+
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
@@ -60,7 +63,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
               />
               <Input
                 name={'Contraseña'}
-                type={'text'}
+                type={`${!showPassword ? 'password' : 'text'}`}
                 register={register('password', {
                   required: {
                     value: true,
@@ -74,6 +77,9 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                 })}
                 error={errors.password}
               />
+              <div onClick={() => setShowPassword(!showPassword)}>
+                MOSTRAR/OCULTAR
+              </div>
 
               <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
                 <Link
