@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Logo from '../Assets/Images/Logo.png';
 import LogoNegativo from '../Assets/Images/Logo_negativo.png';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -10,15 +10,16 @@ import { useLocation } from 'react-router-dom';
 import { routes } from '../Config/routes';
 import { DarkMode } from '../Components/darkmode/DarkMode';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 export const Header = ({
   onClickRegister,
   onClickSignin,
   onClose,
-
   actionRegister,
 }) => {
   const { pathname } = useLocation();
+  const { user, dispatch } = useContext(AuthContext);
 
   if (pathname === `/${routes.dashboard}`) return null;
 
@@ -26,6 +27,11 @@ export const Header = ({
     { name: 'Prueba Cevetae', link: '/' },
     // { name: 'Iniciar sesion', link: '/' },
   ];
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    dispatch('LOGOUT');
+  };
 
   const linkRender = Links.map((link) => (
     <li key={link.name} className='md:ml-4 md:my-0 my-7 '>
@@ -91,20 +97,31 @@ export const Header = ({
           </div>
           <div className=' flex-col-reverse md:flex pt-16 md:pt-0 flex items-center justify-center md:flex-row gap-y-3'>
             {/* {linkRender} */}
-
-            <div className='py-8 md:py-0 md:ml-4 '>
-              <NavLink to='/'>
-                <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px]  hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
-                  Prueba Cevetae
-                </button>
-              </NavLink>
-            </div>
-            <div className='py-8 md:py-0 md:ml-4 '>
-              <ButtonGray onClick={onClickSignin}>Iniciar Sesión</ButtonGray>
-            </div>
-            <div className=' py-8 md:py-0 md:ml-4 '>
-              <ButtonPurple onClick={onClickRegister}>Registrarse</ButtonPurple>
-            </div>
+            {user ? (
+              <div className=' py-8 md:py-0 md:ml-4 '>
+                <ButtonPurple onClick={logout}>Avatar</ButtonPurple>
+              </div>
+            ) : (
+              <>
+                <div className='py-8 md:py-0 md:ml-4 '>
+                  <NavLink to='/'>
+                    <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px]  hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
+                      Prueba Cevetae
+                    </button>
+                  </NavLink>
+                </div>
+                <div className='py-8 md:py-0 md:ml-4 '>
+                  <ButtonGray onClick={onClickSignin}>
+                    Iniciar Sesión
+                  </ButtonGray>
+                </div>
+                <div className=' py-8 md:py-0 md:ml-4 '>
+                  <ButtonPurple onClick={onClickRegister}>
+                    Registrarse
+                  </ButtonPurple>
+                </div>
+              </>
+            )}
           </div>
         </ul>
       </div>

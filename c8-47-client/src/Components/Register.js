@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,11 +10,13 @@ import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
+import { AuthContext } from '../Context/AuthContext';
 
 const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const size = useWindowSize();
+  const { dispatch } = useContext(AuthContext);
 
   const {
     register,
@@ -25,12 +27,14 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   } = useForm();
 
   const onSubmit = async (form) => {
+    console.log(form);
     try {
       const { data } = await axios.post(
         'http://localhost:4000/auth/signup',
         form
       );
-      console.log(data);
+      localStorage.setItem('user', data.token);
+      dispatch({ type: 'LOGIN' });
 
       reset();
     } catch (err) {

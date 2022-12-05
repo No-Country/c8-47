@@ -1,4 +1,3 @@
-import User from '../models/User.js';
 import Contact from '../models/Contact.js';
 
 const getContact = async (req, res, next) => {
@@ -25,12 +24,6 @@ const editContact = async (req, res, next) => {
     const contactEdited = await Contact.findOneAndUpdate(
       { user: user.id },
       { email, phone },
-      options
-    );
-
-    await User.findOneAndUpdate(
-      { _id: user.id },
-      { contact: contactEdited._id },
       options
     );
 
