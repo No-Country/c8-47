@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
+import Input from '../input/Input';
 // import customAxios from './Config/interceptors';
 import customAxios from '../../Helpers/customAxios';
 
@@ -29,51 +29,37 @@ function ContactForm() {
     <div>
       <form onSubmit={handleSubmit(submitForm)}>
         <h1>Contacto</h1>
-
-        <h2>Email</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('email', {
-            required: true,
-            pattern: /^[\w-.]+@([\w-])+[.\w-]*$/i,
-            maxLength: 64,
+        <Input
+          name={'Email'}
+          type={'text'}
+          register={register('email', {
+            required: { value: true, message: 'Ingresa tu email.' },
+            pattern: {
+              value: /^[\w-.]+@([\w-])+[.\w-]*$/i,
+              message: 'Ingresa un email válido',
+            },
+            maxLength: {
+              value: 64,
+              message: 'El campo Email acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.email}
         />
-
-        {errors.email?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu email</p>
-        )}
-        {errors.email?.type === 'pattern' && (
-          <p className='g-error-input'>Ingresa un email válido</p>
-        )}
-        {errors.email?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El email acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Teléfono</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('phone', {
-            pattern: /^[+]?[0-9]*$/,
-            minLength: 8,
+        <Input
+          name={'Teléfono'}
+          type={'text'}
+          register={register('phone', {
+            pattern: {
+              value: /^[+]?[0-9]*$/,
+              message: 'El campo Teléfono solo acepta números.',
+            },
+            minLength: {
+              value: 8,
+              message: 'El campo Teléfono debe tener al menos 8 caracteres.',
+            },
           })}
+          error={errors.phone}
         />
-
-        {errors.phone?.type === 'pattern' && (
-          <p className='g-error-input'>El campo Teléfono solo acepta números</p>
-        )}
-        {errors.phone?.type === 'minLength' && (
-          <p className='g-error-input'>
-            El campo Teléfono debe tener al menos 8 caracteres
-          </p>
-        )}
-
         <h2>Dirección</h2>
 
         <input

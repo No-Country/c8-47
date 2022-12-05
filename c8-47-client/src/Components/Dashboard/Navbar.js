@@ -60,7 +60,10 @@ const Navbar = () => {
                 {items[e]}
               </h2>
             </div>
-            <Forms name={e} />
+            <div>
+              <Forms name={e} />
+            </div>
+
             {/* <Input name={'name'} value={name} key={e} setter={setName} /> */}
           </div>
         ))}
