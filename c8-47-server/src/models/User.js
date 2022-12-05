@@ -28,6 +28,10 @@ const UserSchema = new Schema(
       default: 'user',
     },
 
+    address: {
+      type: Schema.Types.ObjectId,
+      ref: 'Address',
+    },
     contact: {
       type: Schema.Types.ObjectId,
       ref: 'Contact',
