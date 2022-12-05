@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
+
 import login from '../Assets/Images/login.jpg';
 import Input from './input/Input';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
@@ -107,42 +109,53 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                 })}
                 error={errors.email}
               />
-              <Input
-                name={'Contraseña'}
-                type={`${!showPassword ? 'password' : 'text'}`}
-                register={register('new_password', {
-                  required: {
-                    value: true,
-                    message: 'El campo contraseña es requerido.',
-                  },
-                  pattern: {
-                    value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-                    message:
-                      'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
-                  },
-                })}
-                error={errors.new_password}
-              />
-              <div onClick={() => setShowPassword(!showPassword)}>
-                MOSTRAR/OCULTAR
+
+              <div>
+                <Input
+                  name={'Contraseña'}
+                  type={`${!showPassword ? 'password' : 'text'}`}
+                  register={register('new_password', {
+                    required: {
+                      value: true,
+                      message: 'El campo contraseña es requerido.',
+                    },
+                    pattern: {
+                      value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                      message:
+                        'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
+                    },
+                  })}
+                  error={errors.new_password}
+                />
+                <div onClick={() => setShowPassword(!showPassword)}>
+                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
               </div>
 
-              <Input
-                name={'Confirma la contraseña'}
-                type={`${!showConfirmPassword ? 'password' : 'text'}`}
-                register={register('confirm_password', {
-                  required: {
-                    value: true,
-                    message: 'Confirme la contraseña',
-                  },
-                  validate: (val) =>
-                    val === watch('new_password') ||
-                    'Las contraseñas no coinciden.',
-                })}
-                error={errors.confirm_password}
-              />
-              <div onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                MOSTRAR/OCULTAR
+              <div>
+                <Input
+                  name={'Confirma la contraseña'}
+                  type={`${!showConfirmPassword ? 'password' : 'text'}`}
+                  register={register('confirm_password', {
+                    required: {
+                      value: true,
+                      message: 'Confirme la contraseña',
+                    },
+                    validate: (val) =>
+                      val === watch('new_password') ||
+                      'Las contraseñas no coinciden.',
+                  })}
+                  error={errors.confirm_password}
+                />
+                <div
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {!showConfirmPassword ? (
+                    <AiFillEye />
+                  ) : (
+                    <AiFillEyeInvisible />
+                  )}
+                </div>
               </div>
 
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>

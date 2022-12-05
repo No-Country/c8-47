@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
+
 import Input from './input/Input';
 import login from '../Assets/Images/login.jpg';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
@@ -61,24 +63,27 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                 })}
                 error={errors.email}
               />
-              <Input
-                name={'Contraseña'}
-                type={`${!showPassword ? 'password' : 'text'}`}
-                register={register('password', {
-                  required: {
-                    value: true,
-                    message: 'El campo contraseña es requerido.',
-                  },
-                  pattern: {
-                    value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-                    message:
-                      'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
-                  },
-                })}
-                error={errors.password}
-              />
-              <div onClick={() => setShowPassword(!showPassword)}>
-                MOSTRAR/OCULTAR
+
+              <div>
+                <Input
+                  name={'Contraseña'}
+                  type={`${!showPassword ? 'password' : 'text'}`}
+                  register={register('password', {
+                    required: {
+                      value: true,
+                      message: 'El campo contraseña es requerido.',
+                    },
+                    pattern: {
+                      value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                      message:
+                        'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
+                    },
+                  })}
+                  error={errors.password}
+                />
+                <div onClick={() => setShowPassword(!showPassword)}>
+                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
               </div>
 
               <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
