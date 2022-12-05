@@ -49,3 +49,6 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+::-ms-reveal {
+  display: none;
+}
