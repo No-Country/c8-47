@@ -31,6 +31,7 @@ JWT_SECRET_CODE to sign tokens
 - [Presentation](#presentation)
 - [Selector](#selector)
 - [Skill](#skill)
+- [Social](#social)
 
 ---
 
@@ -230,15 +231,8 @@ RESPONSE
    contact: {
       _id: STRING
       email: STRING
-      web: STRING
+      phone: STRING
       socials: [ STRING ]
-      address: {
-         state: STRING
-         city: STRING
-         zip_code: STRING
-         street_name: STRING
-         door: STRING
-      }
    }
 }
 ```
@@ -249,15 +243,7 @@ RESPONSE
 REQUEST
 {
    email: STRING
-   web: STRING (optional)
-   socials: [ STRING ] (optional)
-   address: {
-      state: STRING
-      city: STRING (optional)
-      zip_code: STRING (optional)
-      street_name: STRING (optional)
-      door: STRING (optional)
-   }
+   phone: STRING (optional)
 }
 
 RESPONSE
@@ -266,15 +252,9 @@ RESPONSE
    contact: {
       _id: STRING
       email: STRING
-      web: STRING
+      phone: STRING
       socials: [ STRING ]
-      address: {
-         state: STRING
-         city: STRING
-         zip_code: STRING
-         street_name: STRING
-         door: STRING
-      }
+      user: STRING
    }
 }
 ```
@@ -920,5 +900,29 @@ RESPONSE
 RESPONSE
 {
    message: STRING
+}
+```
+
+---
+
+## Social
+
+`POST /social`
+
+```
+REQUEST
+{
+   socials: [ STRING ]
+}
+
+RESPONSE
+{
+   message: STRING
+   contact: {
+      _id: STRING
+      email: STRING
+      socials: [ STRING ]
+      user: STRING
+   }
 }
 ```
