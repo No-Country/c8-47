@@ -20,13 +20,17 @@ const getPersonals = async (req, res, next) => {
 
 const addPersonal = async (req, res, next) => {
   const { user } = req;
-  const { title, about } = req.body;
+  const { title, about, tag: tagId } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newPersonal = new Personal({
       title,
       about,
       user: user.id,
+      tag: tagId,
     });
 
     await newPersonal.save();

@@ -20,12 +20,16 @@ const getPresentations = async (req, res, next) => {
 
 const addPresentation = async (req, res, next) => {
   const { user } = req;
-  const { text } = req.body;
+  const { text, tag: tagId } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newPresentation = new Presentation({
       text,
       user: user.id,
+      tag: tagId,
     });
 
     await newPresentation.save();

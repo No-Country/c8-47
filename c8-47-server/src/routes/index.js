@@ -15,12 +15,14 @@ import selectorRouter from './selector.router.js';
 import presentationRouter from './presentation.router.js';
 import skillRouter from './skill.router.js';
 import tagRouter from './tag.router.js';
+import addressRouter from './address.router.js';
 
 const router = Router();
 
 router.use('/auth', authRouter);
 router.use('/user', verifyToken, userRouter);
 
+router.use('/address', verifyToken, addressRouter);
 router.use('/contact', verifyToken, contactRouter);
 router.use('/curriculum', verifyToken, curriculumRouter);
 router.use('/education', verifyToken, educationRouter);
