@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Logo from '../Assets/Images/Logo.png';
 import LogoNegativo from '../Assets/Images/Logo_negativo.png';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -15,7 +15,6 @@ export const Header = ({
   onClickRegister,
   onClickSignin,
   onClose,
-
   actionRegister,
 }) => {
   const { pathname } = useLocation();

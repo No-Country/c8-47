@@ -43,7 +43,7 @@ const confirmPasswordValidation = check('confirm_password')
   .withMessage('Repite tu contraseña')
   .escape()
   .custom((value, { req }) => {
-    if (value !== req.body.new_password) {
+    if (value !== req.body.password) {
       throw new Error('Las contraseñas no coinciden');
     } else {
       return value;

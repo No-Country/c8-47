@@ -12,16 +12,18 @@ const signUp = async (req, res, next) => {
   try {
     const userFound = await User.exists({ email });
     if (userFound)
-      return res.status(200).json({ message: 'Email ya registrado' });
+      return res.status(400).json({ message: 'Email ya registrado' });
 
-    await User.create({
+    const { _doc: newUser } = await User.create({
       email,
       password,
       first_name,
       last_name,
     });
 
-    const payload = { email, id: userFound._id };
+    console.log(newUser);
+
+    const payload = { email, id: newUser._id };
 
     const token = jwt.sign({ payload }, JWT_SECRET_CODE, {
       expiresIn: 60 * 60 * 24 * 30,

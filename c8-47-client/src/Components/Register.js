@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -8,9 +8,11 @@ import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
+import { AuthContext } from '../Context/AuthContext';
 
 const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   const size = useWindowSize();
+  const { dispatch } = useContext(AuthContext);
 
   const {
     register,
@@ -20,12 +22,14 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
     handleSubmit,
   } = useForm();
   const onSubmit = async (form) => {
+    console.log(form);
     try {
       const { data } = await axios.post(
         'http://localhost:4000/auth/signup',
         form
       );
-      console.log(data);
+      localStorage.setItem('user', data.token);
+      dispatch({ type: 'LOGIN' });
 
       reset();
     } catch (err) {
@@ -107,7 +111,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
               <Input
                 name={'Contraseña'}
                 type={'text'}
-                register={register('new_password', {
+                register={register('password', {
                   required: {
                     value: true,
                     message: 'El campo contraseña es requerido.',
@@ -118,7 +122,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                       'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
                   },
                 })}
-                error={errors.new_password}
+                error={errors.password}
               />
               <Input
                 name={'Confirma la contraseña'}
@@ -129,7 +133,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                     message: 'Confirme la contraseña',
                   },
                   validate: (val) =>
-                    val === watch('new_password') ||
+                    val === watch('password') ||
                     'Las contraseñas no coinciden.',
                 })}
                 error={errors.confirm_password}
