@@ -2,34 +2,10 @@ import { Schema, model } from 'mongoose';
 
 const ContactSchema = new Schema(
   {
-    address: {
-      state: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
-      zip_code: {
-        type: String,
-      },
-      street_name: {
-        type: String,
-      },
-      street_number: {
-        type: String,
-      },
-      door: {
-        type: String,
-      },
-    },
-
     email: {
-      type: String,
+      type: String, //! VOLVER A VER agregar required?
     },
     phone: {
-      type: String,
-    },
-    web: {
       type: String,
     },
     socials: [String],

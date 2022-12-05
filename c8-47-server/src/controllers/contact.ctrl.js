@@ -17,14 +17,14 @@ const getContact = async (req, res, next) => {
 
 const editContact = async (req, res, next) => {
   const { user } = req;
-  const { address, email, phone, web, socials } = req.body;
+  const { email, phone } = req.body;
 
   const options = { upsert: true, new: true };
 
   try {
     const contactEdited = await Contact.findOneAndUpdate(
       { user: user.id },
-      { address, email, phone, web, socials },
+      { email, phone },
       options
     );
 

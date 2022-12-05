@@ -20,7 +20,17 @@ const getEducation = async (req, res, next) => {
 
 const addEducation = async (req, res, next) => {
   const { user } = req;
-  const { title, institution, start_date, end_date, comment } = req.body;
+  const {
+    title,
+    institution,
+    start_date,
+    end_date,
+    comment,
+    tag: tagId,
+  } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newEducation = new Education({
@@ -30,7 +40,8 @@ const addEducation = async (req, res, next) => {
       end_date,
       comment,
       user: user.id,
-      certification: false, //!VOLVER A VER cambiar nombre certification
+      certification: false,
+      tag: tagId,
     });
 
     await newEducation.save();

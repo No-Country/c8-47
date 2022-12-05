@@ -28,14 +28,18 @@ const UserSchema = new Schema(
       default: 'user',
     },
 
+    address: {
+      type: Schema.Types.ObjectId,
+      ref: 'Address',
+    },
     contact: {
       type: Schema.Types.ObjectId,
       ref: 'Contact',
     },
-    personal: [
+    curriculums: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Personal',
+        ref: 'Curriculum',
       },
     ],
     education: [
@@ -44,22 +48,22 @@ const UserSchema = new Schema(
         ref: 'Education',
       },
     ],
-    languages: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Language',
-      },
-    ],
     experience: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Job',
       },
     ],
-    curriculums: [
+    languages: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Curriculum',
+        ref: 'Language',
+      },
+    ],
+    personal: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Personal',
       },
     ],
     presentations: [

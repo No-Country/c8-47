@@ -23,13 +23,17 @@ const getCurriculums = async (req, res, next) => {
 
 const addCurriculum = async (req, res, next) => {
   const { user } = req;
-  const { data } = req.body;
+  const { data, tag: tagId } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newCurriculum = new Curriculum({
       data,
       status: 'generated',
       user: user.id,
+      tag: tagId,
     });
 
     await newCurriculum.save();
