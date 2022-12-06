@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-
+import Input from '../input/Input';
+import { ButtonPurple } from '../buttons/ButtonPurple';
 // import customAxios from './Config/interceptors';
 
 import customAxios from '../../Helpers/customAxios';
@@ -71,89 +72,61 @@ function ExperienceForm() {
   };
 
   return (
-    <div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Experiencia</h1>
-
-        <h2>Título</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('title', {
-            required: true,
-            maxLength: 64,
+        <Input
+          name={'Título'}
+          type={'text'}
+          register={register('title', {
+            required: { value: true, message: 'Ingresa tu Título.' },
+            maxLength: {
+              value: 64,
+              message: 'El campo Título acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.title}
         />
-
-        {errors.title?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu título</p>
-        )}
-        {errors.title?.type === 'pattern' && (
-          <p className='g-error-input'>
-            El título acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Organización</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('organization', {
-            required: true,
-            maxLength: 64,
+        <Input
+          name={'Organización'}
+          type={'text'}
+          register={register('organization', {
+            required: { value: true, message: 'Ingresa la Organización.' },
+            maxLength: {
+              value: 64,
+              message:
+                'El campo Organización acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.organization}
         />
-
-        {errors.organization?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la Organización</p>
-        )}
-        {errors.organization?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Organización acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Fecha de inicio</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('start_date', {
-            required: true,
-            maxLength: 10,
+        <Input
+          name={'Fecha de inicio'}
+          type={'text'}
+          register={register('start_date', {
+            required: { value: true, message: 'Ingresa la fecha de inicio.' },
+            maxLength: {
+              value: 10,
+              message: 'La fecha de inicio acepta como máximo 10 caracteres.',
+            },
           })}
+          error={errors.start_date}
         />
-
-        {errors.start_date?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la fecha de inicio</p>
-        )}
-        {errors.start_date?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            La fecha de inicio acepta como máximo 10 caracteres
-          </p>
-        )}
-
-        <h2>Fecha de finalización</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('end_date', {
-            required: true,
-            maxLength: 10,
+        <Input
+          name={'Fecha de finalización'}
+          type={'text'}
+          register={register('end_date', {
+            required: {
+              value: true,
+              message: 'Ingresa la fecha de finalización.',
+            },
+            maxLength: {
+              value: 10,
+              message:
+                'La fecha de finalización acepta como máximo 10 caracteres.',
+            },
           })}
+          error={errors.end_date}
         />
-
-        {errors.end_date?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la fecha de finalización</p>
-        )}
-        {errors.end_date?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            La fecha de finalización acepta como máximo 10 caracteres
-          </p>
-        )}
 
         <h2>Tareas</h2>
 
@@ -183,7 +156,9 @@ function ExperienceForm() {
           Agregar tarea
         </button>
 
-        <button type='submit'>Submit</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );

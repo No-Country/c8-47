@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { ButtonPurple } from '../buttons/ButtonPurple';
 import Input from '../input/Input';
 
 import customAxios from '../../Helpers/customAxios';
@@ -27,7 +27,7 @@ function ProfileForm() {
   };
 
   return (
-    <div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
         {/* <h1>Perfil</h1> */}
         <Input
@@ -54,8 +54,9 @@ function ProfileForm() {
           })}
           error={errors.last_name}
         />
-
-        <button type='submit'>Guardar</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );
