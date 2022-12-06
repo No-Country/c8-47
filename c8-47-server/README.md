@@ -609,32 +609,6 @@ RESPONSE
 }
 ```
 
-`PUT /personal?id={PERSONAL_ID}`
-
-```
-REQUEST
-{
-   name: STRING
-   birth: STRING (optional)
-   email: STRING
-   phone: STRING (optional)
-}
-
-RESPONSE
-{
-   message: STRING
-   personal: {
-      _id: STRING
-      name: STRING
-      birth: STRING
-      email: STRING
-      phone: STRING
-      socials: [ STRING ]
-      user: STRING
-   }
-}
-```
-
 ---
 
 ## Presentation

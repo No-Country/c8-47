@@ -12,7 +12,6 @@ const PresentationSchema = new Schema(
     },
     text: {
       type: String,
-      required: true,
     },
 
     tag: {
