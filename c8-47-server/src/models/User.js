@@ -32,10 +32,6 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Address',
     },
-    contact: {
-      type: Schema.Types.ObjectId,
-      ref: 'Contact',
-    },
     curriculums: [
       {
         type: Schema.Types.ObjectId,

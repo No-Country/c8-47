@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import customAxios from '../../Helpers/customAxios';
 
-function ContactForm() {
+function AddressForm() {
   const {
     register,
     formState: { errors },
@@ -126,4 +126,4 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+export default AddressForm;

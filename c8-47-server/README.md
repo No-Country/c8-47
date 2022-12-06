@@ -22,7 +22,6 @@ JWT_SECRET_CODE to sign tokens
 - [User log in](#user-log-in)
 - [Header IMPORTANT](#all-the-endpoints-below-needs-the-following-header)
 - [User](#user)
-- [Contact](#contact)
 - [Curriculum](#curriculum)
 - [Education](#education)
 - [Job](#job)
@@ -215,46 +214,6 @@ RESPONSE
    user: {
       first_name: STRING
       last_name: STRING
-   }
-}
-```
-
----
-
-## Contact
-
-`GET /contact`
-
-```
-RESPONSE
-{
-   contact: {
-      _id: STRING
-      email: STRING
-      phone: STRING
-      socials: [ STRING ]
-   }
-}
-```
-
-`POST /contact`
-
-```
-REQUEST
-{
-   email: STRING
-   phone: STRING (optional)
-}
-
-RESPONSE
-{
-   message: STRING
-   contact: {
-      _id: STRING
-      email: STRING
-      phone: STRING
-      socials: [ STRING ]
-      user: STRING
    }
 }
 ```

@@ -55,9 +55,9 @@ const phoneValidation = check('phone')
 const aboutValidation = check('about')
   .trim()
   .notEmpty()
-  .withMessage('Ingresa el apartado "Acerca de mi"')
+  .withMessage('Completa el campo Acerca de mi')
   .isLength({ max: 512 })
-  .withMessage('La campo "Acerca de mi" acepta como máximo 512 caracteres')
+  .withMessage('El campo "Acerca de mi" acepta como máximo 512 caracteres')
   .escape(); */
 
 const personalValidation = [
