@@ -20,12 +20,8 @@ const getPersonal = async (req, res, next) => {
 
 const addPersonal = async (req, res, next) => {
   const { user } = req;
-  /* const { title, about, tag: tagId } = req.body; */
   const { name, birth, email, phone } = req.body;
 
-  /*   if (!isValidObjectId(tagId))
-    return res.status(422).json({ message: 'Ingrese un ID válido' });
- */
   try {
     const newPersonal = new Personal({
       name,
@@ -33,7 +29,6 @@ const addPersonal = async (req, res, next) => {
       email,
       phone,
       user: user.id,
-      // tag: tagId,
     });
 
     await newPersonal.save();
@@ -53,7 +48,6 @@ const addPersonal = async (req, res, next) => {
 };
 
 const editPersonal = async (req, res, next) => {
-  // const { title, about } = req.body;
   const { name, birth, email, phone } = req.body;
   const { id: personalId } = req.query;
 

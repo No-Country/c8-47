@@ -19,15 +19,6 @@ const PersonalSchema = new Schema(
     },
     socials: [String],
 
-    /*     title: {
-      type: String,
-      required: true,
-    },
-    about: {
-      type: String,
-      required: true,
-    }, */
-
     tag: {
       type: Schema.Types.ObjectId,
       ref: 'Tag',

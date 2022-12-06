@@ -44,29 +44,11 @@ const phoneValidation = check('phone')
   .withMessage('El campo Teléfono solo acepta números')
   .escape();
 
-/* const titleValidation = check('title')
-  .trim()
-  .notEmpty()
-  .withMessage('Ingresa la cabecera')
-  .isLength({ max: 64 })
-  .withMessage('La cabecera acepta como máximo 64 caracteres')
-  .escape();
-
-const aboutValidation = check('about')
-  .trim()
-  .notEmpty()
-  .withMessage('Completa el campo Acerca de mi')
-  .isLength({ max: 512 })
-  .withMessage('El campo "Acerca de mi" acepta como máximo 512 caracteres')
-  .escape(); */
-
 const personalValidation = [
   nameValidation,
   birthValidation,
   emailValidation,
   phoneValidation,
-  /*   titleValidation,
-  aboutValidation, */
   checkValidations,
 ];
 
