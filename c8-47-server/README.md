@@ -858,19 +858,25 @@ RESPONSE
 ```
 REQUEST
 {
-   name: STRING
-   tag: STRING
+   skills: [
+      {
+         name: STRING
+         tag: STRING
+      }
+   ]
 }
 
 RESPONSE
 {
    message: STRING
-   skill: {
-      _id: STRING
-      name: STRING
-      tag: STRING
-      user: STRING
-   }
+   skills: [
+      {
+         _id: STRING
+         name: STRING
+         tag: STRING
+         user: STRING
+      }
+   ]
 }
 ```
 
