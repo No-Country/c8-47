@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import ContactForm from './ContactForm';
 
 import Icon from './Icon';
-import Input from './Input';
+import ProfileForm from './ProfileForm';
 
 const Navbar = () => {
   const items = {
@@ -17,7 +18,6 @@ const Navbar = () => {
   };
 
   const [selected, setSelected] = useState(items[0]);
-  const [name, setName] = useState('');
 
   return (
     <div className='h-screen w-fit rounded-r-3xl shadow-2xl flex'>
@@ -44,27 +44,28 @@ const Navbar = () => {
         </ul>
       </div>
       <div className='h-screen w-96 overflow-y-scroll py-16 scroll-smooth px-2'>
-        {Object.keys(items).map((e) => (
-          <div
-            key={e}
-            id={e}
-            className={`${
-              selected === e ? 'bg-white' : 'bg-white'
-            } flex justify-center items-center h-96 flex-col`}
-          >
-            <div className='flex text-2xl justify-start w-full'>
+        {/* {Object.keys(items).map((e) => ( */}
+        {/* <div
+          key={e}
+          id={e}
+          className={`${
+            selected === e ? 'bg-white' : 'bg-white'
+          } flex justify-center items-center h-96 flex-col`}
+        > */}
+        {/* <div className='flex text-2xl justify-start w-full'>
               <span className='p-2 flex items-center justify-center'>
                 <Icon name={e} />
               </span>
               <h2 className='text-2xl text-left flex items-center justify-center'>
                 {items[e]}
               </h2>
-            </div>
-            <Input name={'name'} value={name} key={e} setter={setName} />
-          </div>
-        ))}
+            </div> */}
+        <ProfileForm />
+        <ContactForm />
       </div>
+      {/* ))} */}
     </div>
+    // </div>
   );
 };
 

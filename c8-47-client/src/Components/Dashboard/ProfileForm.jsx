@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import Icon from './Icon';
+
 import customAxios from '../../Helpers/customAxios';
 
 function ProfileForm() {
@@ -25,14 +27,22 @@ function ProfileForm() {
   };
 
   return (
-    <div>
+    <div id='profile'>
+      <div className='flex text-2xl justify-start w-full'>
+        <span className='p-2 flex items-center justify-center'>
+          <Icon name={'profile'} />
+        </span>
+        <h2 className='text-2xl text-left flex items-center justify-center'>
+          Perfil
+        </h2>
+      </div>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Perfil</h1>
-
-        <h2>Nombre</h2>
+        <label htmlFor='name'>Nombre</label>
 
         <input
           type='text'
+          id='name'
+          name='name'
           autoComplete='off'
           {...register('first_name', {
             required: true,
@@ -49,10 +59,12 @@ function ProfileForm() {
           </p>
         )}
 
-        <h2>Apellido</h2>
+        <label htmlFor='lastName'>Apellido</label>
 
         <input
           type='text'
+          name='lastName'
+          id='lastName'
           autoComplete='off'
           {...register('last_name', {
             required: true,
