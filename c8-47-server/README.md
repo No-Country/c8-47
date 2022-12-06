@@ -1,6 +1,18 @@
 # C8-47-SERVER
 
-`npm start` to run app on port 4000
+`npm start` or `npm run dev` to run app on port 4000
+
+---
+
+# ENVIRONMENT VARIABLES
+
+`.env`
+
+```
+MONGO_DB_URI to connect to MongoDB
+MONGO_DB_URI_TEST in case you want to test in a test environment
+JWT_SECRET_CODE to sign tokens
+```
 
 ---
 
@@ -19,6 +31,7 @@
 - [Presentation](#presentation)
 - [Selector](#selector)
 - [Skill](#skill)
+- [Social](#social)
 
 ---
 
@@ -218,15 +231,8 @@ RESPONSE
    contact: {
       _id: STRING
       email: STRING
-      web: STRING
+      phone: STRING
       socials: [ STRING ]
-      address: {
-         state: STRING
-         city: STRING
-         zip_code: STRING
-         street_name: STRING
-         door: STRING
-      }
    }
 }
 ```
@@ -237,15 +243,7 @@ RESPONSE
 REQUEST
 {
    email: STRING
-   web: STRING (optional)
-   socials: [ STRING ] (optional)
-   address: {
-      state: STRING
-      city: STRING (optional)
-      zip_code: STRING (optional)
-      street_name: STRING (optional)
-      door: STRING (optional)
-   }
+   phone: STRING (optional)
 }
 
 RESPONSE
@@ -254,15 +252,9 @@ RESPONSE
    contact: {
       _id: STRING
       email: STRING
-      web: STRING
+      phone: STRING
       socials: [ STRING ]
-      address: {
-         state: STRING
-         city: STRING
-         zip_code: STRING
-         street_name: STRING
-         door: STRING
-      }
+      user: STRING
    }
 }
 ```
@@ -282,6 +274,7 @@ RESPONSE
          deleted_at: NUMBER
          data: STRING
          status: STRING
+         tag: STRING
          user: STRING
          selector: {
             _id: STRING
@@ -300,6 +293,7 @@ RESPONSE
 REQUEST
 {
    data: STRING
+   tag: STRING
 }
 
 RESPONSE
@@ -310,6 +304,7 @@ RESPONSE
       deleted_at: NUMBER
       data: STRING
       status: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -331,6 +326,7 @@ RESPONSE
       deleted_at: NUMBER
       data: STRING
       status: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -363,6 +359,7 @@ RESPONSE
          end_date: STRING
          comment: STRING
          certification: BOOLEAN
+         tag: STRING
          user: STRING
       }
    ]
@@ -380,6 +377,7 @@ REQUEST
    end_date: STRING
    comment: STRING (optional)
    certification: BOOLEAN
+   tag: STRING
    user: STRING
 }
 
@@ -394,6 +392,7 @@ RESPONSE
       end_date: STRING
       comment: STRING
       certification: BOOLEAN
+      tag: STRING
       user: STRING
    ]
 }
@@ -423,6 +422,7 @@ RESPONSE
       end_date: STRING
       comment: STRING
       certification: BOOLEAN
+      tag: STRING
       user: STRING
    ]
 }
@@ -455,6 +455,7 @@ RESPONSE
          end_date: STRING
          main_job: BOOLEAN
          tasks: [ STRING ]
+         tag: STRING
          user: STRING
       }
    ]
@@ -472,6 +473,7 @@ REQUEST
    end_date: STRING
    main_job: BOOLEAN
    tasks: [ STRING ]
+   tag: STRING
 }
 
 RESPONSE
@@ -485,6 +487,7 @@ RESPONSE
       end_date: STRING
       main_job: BOOLEAN
       tasks: [ STRING ]
+      tag: STRING
       user: STRING
    }
 }
@@ -514,6 +517,7 @@ RESPONSE
       end_date: STRING
       main_job: BOOLEAN
       tasks: [ STRING ]
+      tag: STRING
       user: STRING
    }
 }
@@ -613,6 +617,7 @@ RESPONSE
          _id: STRING
          title: STRING
          about: STRING
+         tag: STRING
          user: STRING
       }
    ]
@@ -626,6 +631,7 @@ REQUEST
 {
    title: STRING
    about: STRING
+   tag: STRING
 }
 
 RESPONSE
@@ -635,6 +641,7 @@ RESPONSE
       _id: STRING
       title: STRING
       about: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -656,6 +663,7 @@ RESPONSE
       _id: STRING
       title: STRING
       about: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -683,6 +691,7 @@ RESPONSE
       {
          _id: STRING
          text: STRING
+         tag: STRING
          user: STRING
       }
    ]
@@ -695,6 +704,7 @@ RESPONSE
 REQUEST
 {
    text: STRING
+   tag: STRING
 }
 
 RESPONSE
@@ -703,6 +713,7 @@ RESPONSE
    presentations: {
       _id: STRING
       text: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -722,6 +733,7 @@ RESPONSE
    presentations: {
       _id: STRING
       text: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -834,6 +846,7 @@ RESPONSE
       {
          _id: STRING
          name: STRING
+         tag: STRING
          user: STRING
       }
    ]
@@ -846,6 +859,7 @@ RESPONSE
 REQUEST
 {
    name: STRING
+   tag: STRING
 }
 
 RESPONSE
@@ -854,6 +868,7 @@ RESPONSE
    skill: {
       _id: STRING
       name: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -873,6 +888,7 @@ RESPONSE
    skill: {
       _id: STRING
       name: STRING
+      tag: STRING
       user: STRING
    }
 }
@@ -884,5 +900,29 @@ RESPONSE
 RESPONSE
 {
    message: STRING
+}
+```
+
+---
+
+## Social
+
+`POST /social`
+
+```
+REQUEST
+{
+   socials: [ STRING ]
+}
+
+RESPONSE
+{
+   message: STRING
+   contact: {
+      _id: STRING
+      email: STRING
+      socials: [ STRING ]
+      user: STRING
+   }
 }
 ```

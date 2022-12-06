@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
+
 import login from '../Assets/Images/login.jpg';
 import Input from './input/Input';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
+import { AuthContext } from '../Context/AuthContext';
 
 const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const size = useWindowSize();
+  const { dispatch } = useContext(AuthContext);
 
   const {
     register,
@@ -19,13 +25,16 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = async (form) => {
+    console.log(form);
     try {
       const { data } = await axios.post(
         'http://localhost:4000/auth/signup',
         form
       );
-      console.log(data);
+      localStorage.setItem('user', data.token);
+      dispatch({ type: 'LOGIN' });
 
       reset();
     } catch (err) {
@@ -104,36 +113,55 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                 })}
                 error={errors.email}
               />
-              <Input
-                name={'Contraseña'}
-                type={'text'}
-                register={register('new_password', {
-                  required: {
-                    value: true,
-                    message: 'El campo contraseña es requerido.',
-                  },
-                  pattern: {
-                    value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-                    message:
-                      'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
-                  },
-                })}
-                error={errors.new_password}
-              />
-              <Input
-                name={'Confirma la contraseña'}
-                type={'text'}
-                register={register('confirm_password', {
-                  required: {
-                    value: true,
-                    message: 'Confirme la contraseña',
-                  },
-                  validate: (val) =>
-                    val === watch('new_password') ||
-                    'Las contraseñas no coinciden.',
-                })}
-                error={errors.confirm_password}
-              />
+
+              <div>
+                <Input
+                  name={'Contraseña'}
+                  type={`${!showPassword ? 'password' : 'text'}`}
+                  register={register('new_password', {
+                    required: {
+                      value: true,
+                      message: 'El campo contraseña es requerido.',
+                    },
+                    pattern: {
+                      value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                      message:
+                        'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
+                    },
+                  })}
+                  error={errors.new_password}
+                />
+                <div onClick={() => setShowPassword(!showPassword)}>
+                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
+              </div>
+
+              <div>
+                <Input
+                  name={'Confirma la contraseña'}
+                  type={`${!showConfirmPassword ? 'password' : 'text'}`}
+                  register={register('confirm_password', {
+                    required: {
+                      value: true,
+                      message: 'Confirme la contraseña',
+                    },
+                    validate: (val) =>
+                      val === watch('new_password') ||
+                      'Las contraseñas no coinciden.',
+                  })}
+                  error={errors.confirm_password}
+                />
+                <div
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {!showConfirmPassword ? (
+                    <AiFillEye />
+                  ) : (
+                    <AiFillEyeInvisible />
+                  )}
+                </div>
+              </div>
+
               <div className='flex flex-col gap-[17px] mb-[18px] mt-[10px]'>
                 <button
                   type='submit'

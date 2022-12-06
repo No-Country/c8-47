@@ -20,7 +20,17 @@ const getJobs = async (req, res, next) => {
 
 const addJob = async (req, res, next) => {
   const { user } = req;
-  const { title, organization, start_date, end_date, tasks } = req.body;
+  const {
+    title,
+    organization,
+    start_date,
+    end_date,
+    tasks,
+    tag: tagId,
+  } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newJob = new Job({
@@ -31,6 +41,7 @@ const addJob = async (req, res, next) => {
       tasks,
       main_job: true,
       user: user.id,
+      tag: tagId,
     });
 
     const userFound = await User.findOne({ _id: user.id });

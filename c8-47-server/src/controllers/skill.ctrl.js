@@ -20,12 +20,16 @@ const getSkills = async (req, res, next) => {
 
 const addSkill = async (req, res, next) => {
   const { user } = req;
-  const { name } = req.body;
+  const { name, tag: tagId } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newSkill = new Skill({
       name,
       user: user.id,
+      tag: tagId,
     });
 
     await newSkill.save();

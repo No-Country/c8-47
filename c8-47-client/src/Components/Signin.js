@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
+
 import Input from './input/Input';
 import login from '../Assets/Images/login.jpg';
 import ButtonLinkedin from './buttons/ButtonLinkedin';
@@ -10,13 +12,16 @@ import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
 
 const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const size = useWindowSize();
+
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = async (form) => {
     try {
       const { data } = await axios.post(
@@ -24,6 +29,9 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
         form
       );
       console.log(data);
+
+      localStorage.setItem('cevitaeToken', data.token);
+
       reset();
     } catch (err) {
       console.log(err);
@@ -55,22 +63,28 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                 })}
                 error={errors.email}
               />
-              <Input
-                name={'Contraseña'}
-                type={'text'}
-                register={register('password', {
-                  required: {
-                    value: true,
-                    message: 'El campo contraseña es requerido.',
-                  },
-                  pattern: {
-                    value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-                    message:
-                      'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
-                  },
-                })}
-                error={errors.password}
-              />
+
+              <div>
+                <Input
+                  name={'Contraseña'}
+                  type={`${!showPassword ? 'password' : 'text'}`}
+                  register={register('password', {
+                    required: {
+                      value: true,
+                      message: 'El campo contraseña es requerido.',
+                    },
+                    pattern: {
+                      value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                      message:
+                        'La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula y un número.',
+                    },
+                  })}
+                  error={errors.password}
+                />
+                <div onClick={() => setShowPassword(!showPassword)}>
+                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
+              </div>
 
               <span className='dark:text-[#FFFFFF] font-Mon  text-[14px] mb-[10px]'>
                 <Link

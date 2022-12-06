@@ -1,7 +1,6 @@
 import { isValidObjectId } from 'mongoose';
 
 import Education from '../models/Education.js';
-import User from '../models/User.js';
 
 const getEducation = async (req, res, next) => {
   const { user } = req;
@@ -20,7 +19,17 @@ const getEducation = async (req, res, next) => {
 
 const addEducation = async (req, res, next) => {
   const { user } = req;
-  const { title, institution, start_date, end_date, comment } = req.body;
+  const {
+    title,
+    institution,
+    start_date,
+    end_date,
+    comment,
+    tag: tagId,
+  } = req.body;
+
+  if (!isValidObjectId(tagId))
+    return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newEducation = new Education({
@@ -30,15 +39,11 @@ const addEducation = async (req, res, next) => {
       end_date,
       comment,
       user: user.id,
-      certification: false, //!VOLVER A VER cambiar nombre certification
+      certification: false,
+      tag: tagId,
     });
 
     await newEducation.save();
-
-    const userFound = await User.findOne({ _id: user.id });
-
-    userFound.education.push(newEducation._id);
-    await userFound.save();
 
     return res.status(201).json({
       education: newEducation,
@@ -86,7 +91,6 @@ const editEducation = async (req, res, next) => {
 };
 
 const deleteEducation = async (req, res, next) => {
-  const { user } = req;
   const { id: educationId } = req.query;
 
   if (!isValidObjectId(educationId))
@@ -99,15 +103,6 @@ const deleteEducation = async (req, res, next) => {
 
     if (!educationDeleted)
       return res.status(404).json({ message: 'Educación no encontrada' });
-
-    const userFound = await User.findOne({ _id: user.id });
-
-    const newEducationArray = userFound.education.filter(
-      (edu) => edu.toString() !== educationId
-    );
-
-    userFound.education = newEducationArray;
-    await userFound.save();
 
     return res.status(200).json({
       message: 'Educación eliminada con éxito',

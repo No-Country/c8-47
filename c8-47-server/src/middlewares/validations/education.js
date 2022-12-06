@@ -22,16 +22,16 @@ const startDateValidation = check('start_date')
   .trim()
   .notEmpty()
   .withMessage('Ingresa la fecha de inicio')
-  .isLength({ max: 8 })
-  .withMessage('La fecha de inicio acepta como máximo 8 caracteres')
+  .isLength({ max: 10 })
+  .withMessage('La fecha de inicio acepta como máximo 10 caracteres')
   .escape();
 
 const endDateValidation = check('end_date')
   .trim()
   .notEmpty()
   .withMessage('Ingresa la fecha de finalización')
-  .isLength({ max: 8 })
-  .withMessage('La fecha de finalización acepta como máximo 8 caracteres')
+  .isLength({ max: 10 })
+  .withMessage('La fecha de finalización acepta como máximo 10 caracteres')
   .escape();
 
 const commentValidation = check('comment')
