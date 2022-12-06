@@ -647,6 +647,8 @@ RESPONSE
    presentations: [
       {
          _id: STRING
+         title: STRING
+         about: STRING
          text: STRING
          tag: STRING
          user: STRING
@@ -660,7 +662,9 @@ RESPONSE
 ```
 REQUEST
 {
-   text: STRING
+   title: STRING
+   about: STRING
+   text: STRING (optional)
    tag: STRING
 }
 
@@ -669,6 +673,8 @@ RESPONSE
    message: STRING
    presentations: {
       _id: STRING
+      title: STRING
+      about: STRING
       text: STRING
       tag: STRING
       user: STRING
@@ -681,7 +687,9 @@ RESPONSE
 ```
 REQUEST
 {
-   text: STRING
+   title: STRING
+   about: STRING
+   text: STRING (optional)
 }
 
 RESPONSE
@@ -689,6 +697,8 @@ RESPONSE
    message: STRING
    presentations: {
       _id: STRING
+      title: STRING
+      about: STRING
       text: STRING
       tag: STRING
       user: STRING
