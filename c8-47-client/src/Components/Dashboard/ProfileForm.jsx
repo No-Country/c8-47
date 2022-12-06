@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import customAxios from '../../Helpers/customAxios';
 
-function ProfileForm() {
+function PersonalForm() {
   const {
     register,
     formState: { errors },
@@ -19,9 +19,25 @@ function ProfileForm() {
   }, []);
 
   const submitForm = async (formData) => {
-    const { data } = await customAxios.put('/user/name', formData);
-    console.log(data);
-    // Actualmente se envía aparte el nombre de usuario
+    const { name, email, birth, phone, title, about } = formData;
+
+    const tag = '638eaa38b0943362ab526985';
+
+    const dataToPersonal = { name, email, birth, phone, tag };
+    const dataToPresentation = { title, about, tag };
+
+    // !VOLVER A VER unificar en una request
+    const { data: personalData } = await customAxios.post(
+      '/personal',
+      dataToPersonal
+    );
+    const { data: presentationData } = await customAxios.post(
+      '/presentation',
+      dataToPresentation
+    );
+
+    console.log(personalData);
+    console.log(presentationData);
   };
 
   return (
@@ -34,38 +50,128 @@ function ProfileForm() {
         <input
           type='text'
           autoComplete='off'
-          {...register('first_name', {
+          {...register('name', {
             required: true,
+            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
             maxLength: 64,
+            minLength: 2,
           })}
         />
 
-        {errors.first_name?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu Nombre</p>
+        {errors.name?.type === 'required' && (
+          <p className='g-error-input'>Ingresa tu nombre</p>
         )}
-        {errors.first_name?.type === 'maxLength' && (
+        {errors.name?.type === 'pattern' && (
+          <p className='g-error-input'>Ingresa un nombre válido</p>
+        )}
+        {errors.name?.type === 'maxLength' && (
           <p className='g-error-input'>
-            El campo Nombre acepta como máximo 64 caracteres
+            El nombre acepta como máximo 64 caracteres
+          </p>
+        )}
+        {errors.name?.type === 'minLength' && (
+          <p className='g-error-input'>
+            El nombre debe tener al menos 2 caracteres
           </p>
         )}
 
-        <h2>Apellido</h2>
+        <h2>Fecha de nacimiento</h2>
 
         <input
           type='text'
           autoComplete='off'
-          {...register('last_name', {
+          {...register('birth', {
+            maxLength: 10,
+          })}
+        />
+
+        {errors.birth?.type === 'maxLength' && (
+          <p className='g-error-input'>
+            El fecha de nacimiento acepta como máximo 10 caracteres
+          </p>
+        )}
+
+        <h2>Email</h2>
+
+        <input
+          type='text'
+          autoComplete='off'
+          {...register('email', {
+            required: true,
+            pattern: /^[\w-.]+@([\w-])+[.\w-]*$/i,
+            maxLength: 64,
+          })}
+        />
+
+        {errors.email?.type === 'required' && (
+          <p className='g-error-input'>Ingresa tu email</p>
+        )}
+        {errors.email?.type === 'pattern' && (
+          <p className='g-error-input'>Ingresa un email válido</p>
+        )}
+        {errors.email?.type === 'maxLength' && (
+          <p className='g-error-input'>
+            El email acepta como máximo 64 caracteres
+          </p>
+        )}
+
+        <h2>Teléfono</h2>
+
+        <input
+          type='text'
+          autoComplete='off'
+          {...register('phone', {
+            pattern: /^[+]?[0-9]*$/,
+            minLength: 8,
+          })}
+        />
+
+        {errors.phone?.type === 'pattern' && (
+          <p className='g-error-input'>El campo Teléfono solo acepta números</p>
+        )}
+        {errors.phone?.type === 'minLength' && (
+          <p className='g-error-input'>
+            El campo Teléfono debe tener al menos 8 caracteres
+          </p>
+        )}
+
+        <h2>Título</h2>
+
+        <input
+          type='text'
+          autoComplete='off'
+          {...register('title', {
             required: true,
             maxLength: 64,
           })}
         />
 
-        {errors.last_name?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu Apellido</p>
+        {errors.title?.type === 'required' && (
+          <p className='g-error-input'>Ingresa la cabecera</p>
         )}
-        {errors.last_name?.type === 'maxLength' && (
+        {errors.title?.type === 'maxLength' && (
           <p className='g-error-input'>
-            El campo Apellido acepta como máximo 64 caracteres
+            La cabecera acepta como máximo 64 caracteres
+          </p>
+        )}
+
+        <h2>Acerca de mi</h2>
+
+        <input
+          type='text'
+          autoComplete='off'
+          {...register('title', {
+            required: true,
+            maxLength: 512,
+          })}
+        />
+
+        {errors.title?.type === 'required' && (
+          <p className='g-error-input'>Completa el campo Acerca de mi</p>
+        )}
+        {errors.title?.type === 'maxLength' && (
+          <p className='g-error-input'>
+            El campo Acerca de mi acepta como máximo 512 caracteres
           </p>
         )}
 
@@ -75,4 +181,4 @@ function ProfileForm() {
   );
 }
 
-export default ProfileForm;
+export default PersonalForm;
