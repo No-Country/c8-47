@@ -21,16 +21,16 @@ function PersonalForm() {
   const submitForm = async (formData) => {
     const { name, email, birth, phone, title, about } = formData;
 
-    const tag = '638eaa38b0943362ab526985';
-
-    const dataToPersonal = { name, email, birth, phone, tag };
-    const dataToPresentation = { title, about, tag };
+    const dataToPersonal = { name, email, birth, phone };
+    const dataToPresentation = { title, about };
 
     // !VOLVER A VER unificar en una request
     const { data: personalData } = await customAxios.post(
       '/personal',
       dataToPersonal
     );
+
+    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
     const { data: presentationData } = await customAxios.post(
       '/presentation',
       dataToPresentation
