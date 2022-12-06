@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { ButtonPurple } from '../buttons/ButtonPurple';
+import Input from '../input/Input';
 
 import Icon from './Icon';
 
@@ -27,61 +29,36 @@ function ProfileForm() {
   };
 
   return (
-    <div id='profile'>
-      <div className='flex text-2xl justify-start w-full'>
-        <span className='p-2 flex items-center justify-center'>
-          <Icon name={'profile'} />
-        </span>
-        <h2 className='text-2xl text-left flex items-center justify-center'>
-          Perfil
-        </h2>
-      </div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <label htmlFor='name'>Nombre</label>
-
-        <input
-          type='text'
-          id='name'
-          name='name'
-          autoComplete='off'
-          {...register('first_name', {
-            required: true,
-            maxLength: 64,
+        {/* <h1>Perfil</h1> */}
+        <Input
+          name={'Nombre'}
+          type={'text'}
+          register={register('first_name', {
+            required: { value: true, message: 'Ingresa tu nombre.' },
+            maxLength: {
+              value: 64,
+              message: 'El campo Nombre acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.first_name}
         />
-
-        {errors.first_name?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu Nombre</p>
-        )}
-        {errors.first_name?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Nombre acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <label htmlFor='lastName'>Apellido</label>
-
-        <input
-          type='text'
-          name='lastName'
-          id='lastName'
-          autoComplete='off'
-          {...register('last_name', {
-            required: true,
-            maxLength: 64,
+        <Input
+          name={'Apellido'}
+          type={'text'}
+          register={register('last_name', {
+            required: { value: true, message: 'Ingresa tu apellido.' },
+            maxLength: {
+              value: 64,
+              message: 'El campo Apellido acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.last_name}
         />
-
-        {errors.last_name?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu Apellido</p>
-        )}
-        {errors.last_name?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Apellido acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <button type='submit'>Submit</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );

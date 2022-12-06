@@ -64,7 +64,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                 error={errors.email}
               />
 
-              <div>
+              <div className='relative'>
                 <Input
                   name={'Contraseña'}
                   type={`${!showPassword ? 'password' : 'text'}`}
@@ -81,8 +81,17 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                   })}
                   error={errors.password}
                 />
-                <div onClick={() => setShowPassword(!showPassword)}>
-                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                <div
+                  className='absolute top-[2.1rem] right-[0.8rem]'
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {!showPassword ? (
+                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
+                  ) : (
+                    <AiFillEyeInvisible
+                      style={{ width: '2rem', height: '2rem' }}
+                    />
+                  )}
                 </div>
               </div>
 
