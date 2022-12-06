@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../input/Input';
 import customAxios from '../../Helpers/customAxios';
 import { ButtonPurple } from '../buttons/ButtonPurple';
-function ContactForm() {
+function AddressForm() {
   const {
     register,
     formState: { errors },
@@ -96,4 +96,4 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+export default AddressForm;

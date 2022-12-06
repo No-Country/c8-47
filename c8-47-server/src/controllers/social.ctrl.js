@@ -1,34 +1,34 @@
-import Contact from '../models/Contact.js';
+import Personal from '../models/Personal.js';
 
 const addSocial = async (req, res, next) => {
   const { user } = req;
   const { socials } = req.body;
 
   try {
-    const contactFound = await Contact.findOne({
+    const personalFound = await Personal.findOne({
       user: user.id,
     });
 
-    if (!contactFound) {
-      const newContact = new Contact({
+    if (!personalFound) {
+      const newPersonal = new Personal({
         socials,
         user: user.id,
       });
 
-      await newContact.save();
+      await newPersonal.save();
 
       return res.status(201).json({
-        contact: newContact,
-        message: 'Contacto agregado con éxito',
+        personal: newPersonal,
+        message: 'Información personal agregada con éxito',
       });
     }
 
-    contactFound.socials = socials;
-    contactFound.save();
+    personalFound.socials = socials;
+    personalFound.save();
 
     return res.status(201).json({
-      contact: contactFound,
-      message: 'Contacto modificado con éxito',
+      personal: personalFound,
+      message: 'Información personal modificada con éxito',
     });
   } catch (error) {
     next(error);

@@ -22,7 +22,6 @@ JWT_SECRET_CODE to sign tokens
 - [User log in](#user-log-in)
 - [Header IMPORTANT](#all-the-endpoints-below-needs-the-following-header)
 - [User](#user)
-- [Contact](#contact)
 - [Curriculum](#curriculum)
 - [Education](#education)
 - [Job](#job)
@@ -215,46 +214,6 @@ RESPONSE
    user: {
       first_name: STRING
       last_name: STRING
-   }
-}
-```
-
----
-
-## Contact
-
-`GET /contact`
-
-```
-RESPONSE
-{
-   contact: {
-      _id: STRING
-      email: STRING
-      phone: STRING
-      socials: [ STRING ]
-   }
-}
-```
-
-`POST /contact`
-
-```
-REQUEST
-{
-   email: STRING
-   phone: STRING (optional)
-}
-
-RESPONSE
-{
-   message: STRING
-   contact: {
-      _id: STRING
-      email: STRING
-      phone: STRING
-      socials: [ STRING ]
-      user: STRING
    }
 }
 ```
@@ -612,15 +571,15 @@ RESPONSE
 ```
 RESPONSE
 {
-   personals: [
-      {
-         _id: STRING
-         title: STRING
-         about: STRING
-         tag: STRING
-         user: STRING
-      }
-   ]
+   personal: {
+      _id: STRING
+      name: STRING
+      birth: STRING
+      email: STRING
+      phone: STRING
+      socials: [ STRING ]
+      user: STRING
+   }
 }
 ```
 
@@ -629,9 +588,10 @@ RESPONSE
 ```
 REQUEST
 {
-   title: STRING
-   about: STRING
-   tag: STRING
+   name: STRING
+   birth: STRING (optional)
+   email: STRING
+   phone: STRING (optional)
 }
 
 RESPONSE
@@ -639,42 +599,13 @@ RESPONSE
    message: STRING
    personal: {
       _id: STRING
-      title: STRING
-      about: STRING
-      tag: STRING
+      name: STRING
+      birth: STRING
+      email: STRING
+      phone: STRING
+      socials: [ STRING ]
       user: STRING
    }
-}
-```
-
-`PUT /personal?id={PERSONAL_ID}`
-
-```
-REQUEST
-{
-   title: STRING
-   about: STRING
-}
-
-RESPONSE
-{
-   message: STRING
-   personal: {
-      _id: STRING
-      title: STRING
-      about: STRING
-      tag: STRING
-      user: STRING
-   }
-}
-```
-
-`DELETE /personal?id={PERSONAL_ID}`
-
-```
-RESPONSE
-{
-   message: STRING
 }
 ```
 
@@ -690,6 +621,8 @@ RESPONSE
    presentations: [
       {
          _id: STRING
+         title: STRING
+         about: STRING
          text: STRING
          tag: STRING
          user: STRING
@@ -703,7 +636,9 @@ RESPONSE
 ```
 REQUEST
 {
-   text: STRING
+   title: STRING
+   about: STRING
+   text: STRING (optional)
    tag: STRING
 }
 
@@ -712,6 +647,8 @@ RESPONSE
    message: STRING
    presentations: {
       _id: STRING
+      title: STRING
+      about: STRING
       text: STRING
       tag: STRING
       user: STRING
@@ -724,7 +661,9 @@ RESPONSE
 ```
 REQUEST
 {
-   text: STRING
+   title: STRING
+   about: STRING
+   text: STRING (optional)
 }
 
 RESPONSE
@@ -732,6 +671,8 @@ RESPONSE
    message: STRING
    presentations: {
       _id: STRING
+      title: STRING
+      about: STRING
       text: STRING
       tag: STRING
       user: STRING
@@ -858,19 +799,25 @@ RESPONSE
 ```
 REQUEST
 {
-   name: STRING
-   tag: STRING
+   skills: [
+      {
+         name: STRING
+         tag: STRING
+      }
+   ]
 }
 
 RESPONSE
 {
    message: STRING
-   skill: {
-      _id: STRING
-      name: STRING
-      tag: STRING
-      user: STRING
-   }
+   skills: [
+      {
+         _id: STRING
+         name: STRING
+         tag: STRING
+         user: STRING
+      }
+   ]
 }
 ```
 
@@ -918,9 +865,12 @@ REQUEST
 RESPONSE
 {
    message: STRING
-   contact: {
+   personal: {
       _id: STRING
+      name: STRING
+      birth: STRING
       email: STRING
+      phone: STRING
       socials: [ STRING ]
       user: STRING
    }

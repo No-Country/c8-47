@@ -2,9 +2,16 @@ import { Schema, model } from 'mongoose';
 
 const PresentationSchema = new Schema(
   {
-    text: {
+    title: {
       type: String,
       required: true,
+    },
+    about: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
     },
 
     tag: {

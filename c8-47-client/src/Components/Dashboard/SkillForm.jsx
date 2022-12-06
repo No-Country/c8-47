@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
-// import customAxios from '../../Helpers/customAxios';
+import customAxios from '../../Helpers/customAxios';
 
 function SkillForm() {
   const [skillsQuantity, setSkillsQuantity] = useState(1);
@@ -13,7 +13,7 @@ function SkillForm() {
     control,
   } = useForm({
     defaultValues: {
-      skills: [{ value: '' }],
+      skills: [{ name: '' }],
     },
   });
 
@@ -30,7 +30,7 @@ function SkillForm() {
   const handleAddSkill = () => {
     const skill = document.getElementById(`skill_${skillsQuantity - 1}`);
 
-    if (skill.value !== '') {
+    if (skill.name !== '') {
       appendSkill();
       setSkillsQuantity(skillsQuantity + 1);
     }
@@ -52,20 +52,16 @@ function SkillForm() {
   }, []);
 
   const submitForm = async (formData) => {
-    if (formData.skills.length >= 0) {
-      const skillsArray = [];
-
-      for (const { value } of formData.skills) {
-        if (value) skillsArray.push(value);
+    for (let i = 0; i < formData.skills.length; i++) {
+      if (formData.skills[i].name === '') {
+        formData.skills.splice(i, 1);
       }
-
-      formData.skills = skillsArray;
     }
 
-    console.log(formData);
+    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
+    const { data } = await customAxios.post('/skill', formData);
 
-    // const { data } = await customAxios.post("/skill", formData);
-    // Es necesario tocar la api para que funcione esta request
+    console.log(data);
   };
 
   return (
@@ -80,7 +76,7 @@ function SkillForm() {
                 type='text'
                 autoComplete='off'
                 id={`skill_${i}`}
-                {...register(`skills.${i}.value`, {
+                {...register(`skills.${i}.name`, {
                   maxLength: 32,
                 })}
               />
@@ -88,7 +84,7 @@ function SkillForm() {
               {skillsQuantity > 1 && (
                 <span onClick={() => handleRemoveSkill(i)}>remover</span>
               )}
-              {errors.skills?.[i]?.value.type === 'maxLength' && (
+              {errors.skills?.[i]?.name.type === 'maxLength' && (
                 <p>El Skill acepta como máximo 32 caracteres</p>
               )}
             </div>

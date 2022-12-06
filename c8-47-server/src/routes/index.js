@@ -5,7 +5,6 @@ import { verifyToken } from '../middlewares/verifyAuth.js';
 import testRouter from './test.router.js';
 import authRouter from './auth.router.js';
 import userRouter from './user.router.js';
-import contactRouter from './contact.router.js';
 import personalRouter from './personal.router.js';
 import educationRouter from './education.router.js';
 import languageRouter from './language.router.js';
@@ -24,7 +23,6 @@ router.use('/auth', authRouter);
 router.use('/user', verifyToken, userRouter);
 
 router.use('/address', verifyToken, addressRouter);
-router.use('/contact', verifyToken, contactRouter);
 router.use('/curriculum', verifyToken, curriculumRouter);
 router.use('/education', verifyToken, educationRouter);
 router.use('/job', verifyToken, jobRouter);
