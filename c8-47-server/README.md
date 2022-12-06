@@ -612,15 +612,15 @@ RESPONSE
 ```
 RESPONSE
 {
-   personals: [
-      {
-         _id: STRING
-         title: STRING
-         about: STRING
-         tag: STRING
-         user: STRING
-      }
-   ]
+   personal: {
+      _id: STRING
+      name: STRING
+      birth: STRING
+      email: STRING
+      phone: STRING
+      socials: [ STRING ]
+      user: STRING
+   }
 }
 ```
 
@@ -629,9 +629,10 @@ RESPONSE
 ```
 REQUEST
 {
-   title: STRING
-   about: STRING
-   tag: STRING
+   name: STRING
+   birth: STRING (optional)
+   email: STRING
+   phone: STRING (optional)
 }
 
 RESPONSE
@@ -639,9 +640,11 @@ RESPONSE
    message: STRING
    personal: {
       _id: STRING
-      title: STRING
-      about: STRING
-      tag: STRING
+      name: STRING
+      birth: STRING
+      email: STRING
+      phone: STRING
+      socials: [ STRING ]
       user: STRING
    }
 }
@@ -652,8 +655,10 @@ RESPONSE
 ```
 REQUEST
 {
-   title: STRING
-   about: STRING
+   name: STRING
+   birth: STRING (optional)
+   email: STRING
+   phone: STRING (optional)
 }
 
 RESPONSE
@@ -661,20 +666,13 @@ RESPONSE
    message: STRING
    personal: {
       _id: STRING
-      title: STRING
-      about: STRING
-      tag: STRING
+      name: STRING
+      birth: STRING
+      email: STRING
+      phone: STRING
+      socials: [ STRING ]
       user: STRING
    }
-}
-```
-
-`DELETE /personal?id={PERSONAL_ID}`
-
-```
-RESPONSE
-{
-   message: STRING
 }
 ```
 

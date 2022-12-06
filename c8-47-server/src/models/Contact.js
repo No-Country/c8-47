@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const ContactSchema = new Schema(
   {
     email: {
-      type: String, //! VOLVER A VER agregar required?
+      type: String,
     },
     phone: {
       type: String,

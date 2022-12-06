@@ -64,6 +64,7 @@ function ExperienceForm() {
 
     formData.main_job = true;
 
+    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
     const { data } = await customAxios.post('/job', formData);
     console.log(data);
   };
