@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
-// import customAxios from '../../Helpers/customAxios';
+import customAxios from '../../Helpers/customAxios';
 
 function SocialForm() {
   const [socialsQuantity, setSocialsQuantity] = useState(1);
@@ -62,9 +62,8 @@ function SocialForm() {
       formData.socials = socialsArray;
     }
 
-    /* const { data } = await customAxios.post("/social");
-    console.log(data); */
-    // Es necesario agregar una ruta /social en api, actualmente las redes sociales se procesan junto con los datos de contacto
+    const { data } = await customAxios.post('/social', formData);
+    console.log(data);
   };
 
   return (

@@ -16,6 +16,7 @@ import presentationRouter from './presentation.router.js';
 import skillRouter from './skill.router.js';
 import tagRouter from './tag.router.js';
 import addressRouter from './address.router.js';
+import socialRouter from './social.router.js';
 
 const router = Router();
 
@@ -32,6 +33,7 @@ router.use('/personal', verifyToken, personalRouter);
 router.use('/presentation', verifyToken, presentationRouter);
 router.use('/selector', verifyToken, selectorRouter);
 router.use('/skill', verifyToken, skillRouter);
+router.use('/social', verifyToken, socialRouter);
 router.use('/tag', verifyToken, tagRouter);
 
 router.use('/test', testRouter);

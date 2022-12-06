@@ -14,6 +14,7 @@ function App() {
   const [viewButtonsRegister, setViewButtonsRegister] = useState(true);
   const [viewButtonsLogin, setViewButtonsLogin] = useState(true);
   const [actionRegister, setActionRegister] = useState(false);
+
   return (
     <div className='App bg-white dark:bg-bgDarkMode  h-screen flex flex-col overflow-x-hidden'>
       <BrowserRouter>
