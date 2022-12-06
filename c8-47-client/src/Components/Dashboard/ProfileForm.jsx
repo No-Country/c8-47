@@ -137,16 +137,16 @@ function PersonalForm() {
         <input
           type='text'
           autoComplete='off'
-          {...register('title', {
+          {...register('about', {
             required: true,
             maxLength: 512,
           })}
         />
 
-        {errors.title?.type === 'required' && (
+        {errors.about?.type === 'required' && (
           <p className='g-error-input'>Completa el campo Acerca de mi</p>
         )}
-        {errors.title?.type === 'maxLength' && (
+        {errors.about?.type === 'maxLength' && (
           <p className='g-error-input'>
             El campo Acerca de mi acepta como máximo 512 caracteres
           </p>
