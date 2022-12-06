@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { ButtonPurple } from '../buttons/ButtonPurple';
+import Input from '../input/Input';
 
 import customAxios from '../../Helpers/customAxios';
 
@@ -41,119 +43,94 @@ function PersonalForm() {
   };
 
   return (
-    <div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
         <h1>Perfil</h1>
 
-        <h2>Nombre</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('name', {
-            required: true,
-            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
-            maxLength: 64,
-            minLength: 2,
+        <Input
+          name={'Nombre'}
+          type={'text'}
+          register={register('name', {
+            required: { value: true, message: 'Ingresa tu nombre.' },
+            pattern: {
+              value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
+              message: 'Ingresa un nombre válido.',
+            },
+            minLength: {
+              value: 2,
+              message: 'Debe tener al menos 2 caracteres.',
+            },
+            maxLength: {
+              value: 64,
+              message: 'No debe exceder los 64 caracteres.',
+            },
           })}
+          error={errors.name}
         />
 
-        {errors.name?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu nombre</p>
-        )}
-        {errors.name?.type === 'pattern' && (
-          <p className='g-error-input'>Ingresa un nombre válido</p>
-        )}
-        {errors.name?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El nombre acepta como máximo 64 caracteres
-          </p>
-        )}
-        {errors.name?.type === 'minLength' && (
-          <p className='g-error-input'>
-            El nombre debe tener al menos 2 caracteres
-          </p>
-        )}
-
-        <h2>Fecha de nacimiento</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('birth', {
-            maxLength: 10,
+        <Input
+          name={'Fecha de nacimiento'}
+          type={'text'}
+          register={register('birth', {
+            maxLength: {
+              value: 10,
+              message: 'No debe exceder los 10 caracteres.',
+            },
           })}
+          error={errors.birth}
         />
 
-        {errors.birth?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El fecha de nacimiento acepta como máximo 10 caracteres
-          </p>
-        )}
-
-        <h2>Email</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('email', {
-            required: true,
-            pattern: /^[\w-.]+@([\w-])+[.\w-]*$/i,
-            maxLength: 64,
+        <Input
+          name={'Email'}
+          type={'text'}
+          register={register('email', {
+            required: {
+              value: true,
+              message: 'El campo email es requerido.',
+            },
+            pattern: {
+              value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+              message: 'Ingrese un email válido.',
+            },
+            maxLength: {
+              value: 64,
+              message: 'No debe exceder los 64 caracteres.',
+            },
           })}
+          error={errors.email}
         />
 
-        {errors.email?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu email</p>
-        )}
-        {errors.email?.type === 'pattern' && (
-          <p className='g-error-input'>Ingresa un email válido</p>
-        )}
-        {errors.email?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El email acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Teléfono</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('phone', {
-            pattern: /^[+]?[0-9]*$/,
-            minLength: 8,
+        <Input
+          name={'Teléfono'}
+          type={'text'}
+          register={register('phone', {
+            pattern: {
+              value: /^[+]?[0-9]*$/,
+              message: 'El campo Teléfono solo acepta números.',
+            },
+            minLength: {
+              value: 8,
+              message: 'El campo Teléfono debe tener al menos 8 caracteres.',
+            },
           })}
+          error={errors.phone}
         />
 
-        {errors.phone?.type === 'pattern' && (
-          <p className='g-error-input'>El campo Teléfono solo acepta números</p>
-        )}
-        {errors.phone?.type === 'minLength' && (
-          <p className='g-error-input'>
-            El campo Teléfono debe tener al menos 8 caracteres
-          </p>
-        )}
-
-        <h2>Título</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('title', {
-            required: true,
-            maxLength: 64,
+        <Input
+          name={'Título'}
+          type={'text'}
+          register={register('title', {
+            required: {
+              value: true,
+              message: 'El campo título es requerido.',
+            },
+            minLength: {
+              value: 64,
+              message: 'El campo título debe tener al menos 64 caracteres.',
+            },
           })}
+          error={errors.title}
         />
-
-        {errors.title?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la cabecera</p>
-        )}
-        {errors.title?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            La cabecera acepta como máximo 64 caracteres
-          </p>
-        )}
 
         <h2>Acerca de mi</h2>
 
@@ -175,7 +152,9 @@ function PersonalForm() {
           </p>
         )}
 
-        <button type='submit'>Submit</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );

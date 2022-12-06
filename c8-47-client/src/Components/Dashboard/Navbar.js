@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
+import Forms from './Forms';
 import Icon from './Icon';
-import Input from './Input';
+// import Input from './Input';
 
 const Navbar = () => {
   const items = {
@@ -17,10 +17,10 @@ const Navbar = () => {
   };
 
   const [selected, setSelected] = useState(items[0]);
-  const [name, setName] = useState('');
+  // const [name, setName] = useState('');
 
   return (
-    <div className='h-screen w-fit rounded-r-3xl shadow-2xl flex'>
+    <div className='h-screen md:w-fit w-full rounded-r-3xl shadow-2xl flex'>
       <div className='h-screen w-16 rounded-r-full shadow-lg overflow-hidden'>
         <ul className='h-full flex flex-col justify-evenly items-stretch rounded-r-full py-8 bg-primarioP'>
           {Object.keys(items).map((e) => (
@@ -43,7 +43,7 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-      <div className='h-screen w-96 overflow-y-scroll py-16 scroll-smooth px-2'>
+      <div className='h-screen md:w-96 w-full  overflow-y-scroll py-16 scroll-smooth px-2'>
         {Object.keys(items).map((e) => (
           <div
             key={e}
@@ -60,7 +60,10 @@ const Navbar = () => {
                 {items[e]}
               </h2>
             </div>
-            <Input name={'name'} value={name} key={e} setter={setName} />
+
+            <Forms name={e} />
+
+            {/* <Input name={'name'} value={name} key={e} setter={setName} /> */}
           </div>
         ))}
       </div>

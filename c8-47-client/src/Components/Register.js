@@ -114,7 +114,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                 error={errors.email}
               />
 
-              <div>
+              <div className='relative'>
                 <Input
                   name={'Contraseña'}
                   type={`${!showPassword ? 'password' : 'text'}`}
@@ -131,12 +131,21 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                   })}
                   error={errors.new_password}
                 />
-                <div onClick={() => setShowPassword(!showPassword)}>
-                  {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute top-[2.1rem] right-[0.8rem]'
+                >
+                  {!showPassword ? (
+                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
+                  ) : (
+                    <AiFillEyeInvisible
+                      style={{ width: '2rem', height: '2rem' }}
+                    />
+                  )}
                 </div>
               </div>
 
-              <div>
+              <div className='relative'>
                 <Input
                   name={'Confirma la contraseña'}
                   type={`${!showConfirmPassword ? 'password' : 'text'}`}
@@ -152,12 +161,15 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                   error={errors.confirm_password}
                 />
                 <div
+                  className='absolute top-[2.1rem] right-[0.8rem]'
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {!showConfirmPassword ? (
-                    <AiFillEye />
+                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
                   ) : (
-                    <AiFillEyeInvisible />
+                    <AiFillEyeInvisible
+                      style={{ width: '2rem', height: '2rem' }}
+                    />
                   )}
                 </div>
               </div>

@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import Input from '../input/Input';
+import { ButtonPurple } from '../buttons/ButtonPurple';
+// import customAxios from './Config/interceptors';
 
 import customAxios from '../../Helpers/customAxios';
 
@@ -27,107 +30,75 @@ function EducationForm() {
   };
 
   return (
-    <div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Educación</h1>
-
-        <h2>Título</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('title', {
-            required: true,
-            maxLength: 64,
+        <Input
+          name={'Título'}
+          type={'text'}
+          register={register('title', {
+            required: { value: true, message: 'Ingresa tu Título.' },
+            maxLength: {
+              value: 64,
+              message: 'El campo Título acepta como máximo 64 caracteres.',
+            },
           })}
+          error={errors.title}
+        />
+        <Input
+          name={'Institución'}
+          type={'text'}
+          register={register('institution', {
+            required: { value: true, message: 'Ingresa tu Institución.' },
+            maxLength: {
+              value: 64,
+              message: 'El campo Institución acepta como máximo 64 caracteres.',
+            },
+          })}
+          error={errors.institution}
+        />
+        <Input
+          name={'Fecha de inicio'}
+          type={'text'}
+          register={register('start_date', {
+            required: { value: true, message: 'Ingresa la fecha de inicio.' },
+            maxLength: {
+              value: 10,
+              message: 'La fecha de inicio acepta como máximo 10 caracteres.',
+            },
+          })}
+          error={errors.start_date}
+        />
+        <Input
+          name={'Fecha de finalización'}
+          type={'text'}
+          register={register('end_date', {
+            required: {
+              value: true,
+              message: 'Ingresa la fecha de finalización.',
+            },
+            maxLength: {
+              value: 10,
+              message:
+                'La fecha de finalización acepta como máximo 10 caracteres.',
+            },
+          })}
+          error={errors.end_date}
+        />
+        <Input
+          name={'Comentario'}
+          type={'text'}
+          register={register('comment', {
+            maxLength: {
+              value: 256,
+              message: 'El comentario acepta como máximo 256 caracteres.',
+            },
+          })}
+          error={errors.comment}
         />
 
-        {errors.title?.type === 'required' && (
-          <p className='g-error-input'>Ingresa tu título</p>
-        )}
-        {errors.title?.type === 'pattern' && (
-          <p className='g-error-input'>
-            El título acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Institución</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('institution', {
-            required: true,
-            maxLength: 64,
-          })}
-        />
-
-        {errors.institution?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la Institución</p>
-        )}
-        {errors.institution?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Institución acepta como máximo 64 caracteres
-          </p>
-        )}
-
-        <h2>Fecha de inicio</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('start_date', {
-            required: true,
-            maxLength: 10,
-          })}
-        />
-
-        {errors.start_date?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la fecha de inicio</p>
-        )}
-        {errors.start_date?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            La fecha de inicio acepta como máximo 10 caracteres
-          </p>
-        )}
-
-        <h2>Fecha de finalización</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('end_date', {
-            required: true,
-            maxLength: 10,
-          })}
-        />
-
-        {errors.end_date?.type === 'required' && (
-          <p className='g-error-input'>Ingresa la fecha de finalización</p>
-        )}
-        {errors.end_date?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            La fecha de finalización acepta como máximo 10 caracteres
-          </p>
-        )}
-
-        <h2>Comentario</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('comment', {
-            maxLength: 256,
-          })}
-        />
-
-        {errors.comment?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El comentario acepta como máximo 256 caracteres
-          </p>
-        )}
-
-        <button type='submit'>Submit</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );

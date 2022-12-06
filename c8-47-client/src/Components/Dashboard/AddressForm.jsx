@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
+import Input from '../input/Input';
 import customAxios from '../../Helpers/customAxios';
-
+import { ButtonPurple } from '../buttons/ButtonPurple';
 function AddressForm() {
   const {
     register,
@@ -24,103 +24,73 @@ function AddressForm() {
   };
 
   return (
-    <div>
+    <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Ubicación</h1>
-
-        <h2>País</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('country', {
-            required: true,
-            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
-            maxLength: 24,
+        <Input
+          name={'País'}
+          type={'text'}
+          register={register('country', {
+            required: { value: true, message: 'Ingresa el País.' },
+            pattern: {
+              value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
+              message: 'El campo País solo acepta letras.',
+            },
+            maxLength: {
+              value: 24,
+              message: 'El campo País acepta como máximo 24 caracteres.',
+            },
           })}
+          error={errors.country}
         />
-
-        {errors.country?.type === 'required' && (
-          <p className='g-error-input'>Ingresa el País</p>
-        )}
-        {errors.country?.type === 'pattern' && (
-          <p className='g-error-input'>El campo País solo acepta letras</p>
-        )}
-        {errors.country?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo País acepta como máximo 24 caracteres
-          </p>
-        )}
-
-        <h2>Estado</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('state', {
-            required: true,
-            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
-            maxLength: 24,
+        <Input
+          name={'Provincia/ Estado/ Región'}
+          type={'text'}
+          register={register('state', {
+            required: { value: true, message: 'Ingresa el Estado.' },
+            pattern: {
+              value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
+              message: 'El campo Estado solo acepta letras.',
+            },
+            maxLength: {
+              value: 24,
+              message: 'El campo Estado acepta como máximo 24 caracteres.',
+            },
           })}
+          error={errors.state}
         />
-
-        {errors.state?.type === 'required' && (
-          <p className='g-error-input'>Ingresa el Estado</p>
-        )}
-        {errors.state?.type === 'pattern' && (
-          <p className='g-error-input'>El campo Estado solo acepta letras</p>
-        )}
-        {errors.state?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Estado acepta como máximo 24 caracteres
-          </p>
-        )}
-
-        <h2>Ciudad</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('city', {
-            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/,
-            maxLength: 24,
+        <Input
+          name={'Ciudad'}
+          type={'text'}
+          register={register('city', {
+            pattern: {
+              value: /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/,
+              message: 'El campo Ciudad solo acepta letras y números.',
+            },
+            maxLength: {
+              value: 24,
+              message: 'El campo Ciudad acepta como máximo 24 caracteres.',
+            },
           })}
+          error={errors.city}
         />
-
-        {errors.city?.type === 'pattern' && (
-          <p className='g-error-input'>
-            El campo Ciudad solo acepta letras y números
-          </p>
-        )}
-        {errors.city?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Ciudad acepta como máximo 24 caracteres
-          </p>
-        )}
-
-        <h2>Dirección</h2>
-
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('address', {
-            pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/,
-            maxLength: 24,
+        <Input
+          name={'Dirección'}
+          type={'text'}
+          register={register('address', {
+            pattern: {
+              value: /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ]+$/,
+              message: 'El campo Dirección solo acepta letras y números.',
+            },
+            maxLength: {
+              value: 24,
+              message: 'El campo Dirección acepta como máximo 24 caracteres.',
+            },
           })}
+          error={errors.address}
         />
-
-        {errors.address?.type === 'pattern' && (
-          <p className='g-error-input'>
-            El campo Dirección solo acepta letras y números
-          </p>
-        )}
-        {errors.address?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Dirección acepta como máximo 24 caracteres
-          </p>
-        )}
-
-        <button type='submit'>Submit</button>
+        <div className='flex items-center justify-center '>
+          <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
+        </div>
       </form>
     </div>
   );
