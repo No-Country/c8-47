@@ -6,7 +6,6 @@ const getUserData = async (req, res, next) => {
   try {
     const userFound = await User.findOne({ _id: user.id })
       .populate({ path: 'address', select: '-user' })
-      .populate({ path: 'contact', select: '-user' })
       .populate({ path: 'personal', select: '-user' })
       .populate({ path: 'education', select: '-user' })
       .populate({ path: 'languages', select: '-user' })

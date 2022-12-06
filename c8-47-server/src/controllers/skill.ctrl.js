@@ -20,28 +20,30 @@ const getSkills = async (req, res, next) => {
 
 const addSkill = async (req, res, next) => {
   const { user } = req;
-  const { name, tag: tagId } = req.body;
+  const { skills, tag: tagId } = req.body;
 
   if (!isValidObjectId(tagId))
     return res.status(422).json({ message: 'Ingrese un ID válido' });
 
-  try {
-    const newSkill = new Skill({
-      name,
-      user: user.id,
-      tag: tagId,
-    });
+  for (const skill of skills) {
+    skill.user = user.id;
+    skill.tag = tagId;
+  }
 
-    await newSkill.save();
+  try {
+    const newSkills = await Skill.create(skills);
 
     const userFound = await User.findOne({ _id: user.id });
 
-    userFound.skills.push(newSkill);
+    for (const skill of newSkills) {
+      userFound.skills.push(skill._id);
+    }
+
     await userFound.save();
 
     return res.status(201).json({
-      skill: newSkill,
-      message: 'Skill agregada con éxito',
+      skills: newSkills,
+      message: 'Habilidades agregadas con éxito',
     });
   } catch (error) {
     next(error);

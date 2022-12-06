@@ -20,13 +20,15 @@ const getPresentations = async (req, res, next) => {
 
 const addPresentation = async (req, res, next) => {
   const { user } = req;
-  const { text, tag: tagId } = req.body;
+  const { title, about, text, tag: tagId } = req.body;
 
   if (!isValidObjectId(tagId))
     return res.status(422).json({ message: 'Ingrese un ID válido' });
 
   try {
     const newPresentation = new Presentation({
+      title,
+      about,
       text,
       user: user.id,
       tag: tagId,
@@ -49,7 +51,7 @@ const addPresentation = async (req, res, next) => {
 };
 
 const editPresentation = async (req, res, next) => {
-  const { text } = req.body;
+  const { title, about, text } = req.body;
   const { id: presentationId } = req.query;
 
   if (!isValidObjectId(presentationId))
@@ -60,7 +62,7 @@ const editPresentation = async (req, res, next) => {
   try {
     const presentationEdited = await Presentation.findOneAndUpdate(
       { _id: presentationId },
-      { text },
+      { title, about, text },
       options
     );
 

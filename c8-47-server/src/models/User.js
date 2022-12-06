@@ -32,10 +32,6 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Address',
     },
-    contact: {
-      type: Schema.Types.ObjectId,
-      ref: 'Contact',
-    },
     curriculums: [
       {
         type: Schema.Types.ObjectId,
@@ -60,12 +56,10 @@ const UserSchema = new Schema(
         ref: 'Language',
       },
     ],
-    personal: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Personal',
-      },
-    ],
+    personal: {
+      type: Schema.Types.ObjectId,
+      ref: 'Personal',
+    },
     presentations: [
       {
         type: Schema.Types.ObjectId,

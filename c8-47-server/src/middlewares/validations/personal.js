@@ -2,22 +2,54 @@ import { check } from 'express-validator';
 
 import { checkValidations } from './checkValidations.js';
 
-const titleValidation = check('title')
+const nameValidation = check('name')
+  .isString()
+  .withMessage('Ingresa un nombre válido')
   .trim()
   .notEmpty()
-  .withMessage('Ingresa la cabezera')
+  .withMessage('Ingresa un nombre válido')
+  .isLength({ min: 2 })
+  .withMessage('El campo Nombre debe tener al menos 2 caracteres')
   .isLength({ max: 64 })
-  .withMessage('El título acepta como máximo 64 caracteres')
+  .withMessage('El campo Nombre debe tener como máximo 64 caracteres')
+  .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/)
+  .withMessage('El campo Nombre solo acepta letras')
+  .toLowerCase()
   .escape();
 
-const aboutValidation = check('about')
+const birthValidation = check('birth')
+  .trim()
+  .optional({ checkFalsy: true })
+  .isLength({ max: 10 })
+  .withMessage('La fecha de nacimiento acepta como máximo 10 caracteres')
+  .escape();
+
+const emailValidation = check('email')
   .trim()
   .notEmpty()
-  .withMessage('Ingresa el apartado "Sobre mi"')
-  .isLength({ max: 512 })
-  .withMessage('La campo "Sobre mi" acepta como máximo 512 caracteres')
+  .withMessage('Ingresa tu email')
+  .isEmail()
+  .withMessage('Ingresa un email válido')
+  .toLowerCase()
+  .isLength({ max: 64 })
+  .withMessage('El email debe tener como máximo 64 caracteres')
   .escape();
 
-const personalValidation = [titleValidation, aboutValidation, checkValidations];
+const phoneValidation = check('phone')
+  .trim()
+  .optional({ checkFalsy: true })
+  .isLength({ min: 8 })
+  .withMessage('El campo Teléfono debe tener al menos 8 caracteres')
+  .matches(/^[+]?[0-9]*$/)
+  .withMessage('El campo Teléfono solo acepta números')
+  .escape();
+
+const personalValidation = [
+  nameValidation,
+  birthValidation,
+  emailValidation,
+  phoneValidation,
+  checkValidations,
+];
 
 export { personalValidation };

@@ -2,14 +2,22 @@ import { Schema, model } from 'mongoose';
 
 const PersonalSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    about: {
+    birth: {
+      type: String,
+    },
+    email: {
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+      required: true,
+    },
+    socials: [String],
 
     tag: {
       type: Schema.Types.ObjectId,

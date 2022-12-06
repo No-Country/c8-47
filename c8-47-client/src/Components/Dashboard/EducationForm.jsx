@@ -24,6 +24,7 @@ function EducationForm() {
   const submitForm = async (formData) => {
     formData.certification = true;
 
+    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
     const { data } = await customAxios.post('/education', formData);
     console.log(data);
   };
