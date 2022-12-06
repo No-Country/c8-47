@@ -922,9 +922,12 @@ REQUEST
 RESPONSE
 {
    message: STRING
-   contact: {
+   personal: {
       _id: STRING
+      name: STRING
+      birth: STRING
       email: STRING
+      phone: STRING
       socials: [ STRING ]
       user: STRING
    }
