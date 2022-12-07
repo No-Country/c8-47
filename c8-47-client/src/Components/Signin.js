@@ -45,6 +45,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
       dispatchData({ type: 'SETDATA', payload: user_data });
 
       reset();
+      onClose();
     } catch (err) {
       console.log(err);
     }

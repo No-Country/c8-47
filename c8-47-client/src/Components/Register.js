@@ -47,6 +47,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
       dispatchData({ type: 'SETDATA', payload: user_data });
 
       reset();
+      onClose();
     } catch (err) {
       console.log(err);
     }
