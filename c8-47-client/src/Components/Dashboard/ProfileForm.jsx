@@ -45,8 +45,6 @@ function PersonalForm() {
   return (
     <div className='w-[95%]'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h1>Perfil</h1>
-
         <Input
           name={'Nombre'}
           type={'text'}
@@ -131,26 +129,34 @@ function PersonalForm() {
           })}
           error={errors.title}
         />
+        <div className='h-[160px] flex flex-col'>
+          <label className='dark:text-[#FFFFFF] font-Mon text-[16px] ml-[4px]'>
+            Acerca de mí
+          </label>
 
-        <h2>Acerca de mi</h2>
+          <textarea
+            className={`dark:bg-bgDarkMode dark:text-[#FFFFFF] dark:hover:bg-[#353535] h-[100px]  font-Mon  text-lg text text-textColor pt-[9px] pb-[9px] pl-[12px] pr-[12px] mt-[1px] mb-[1px] leading-none rounded-[10px] outline-0 ${
+              errors.about
+                ? 'border border-errorColor dark:border-[#FF6161]'
+                : 'border border-textColor dark:border-[#FFFFFF]'
+            }`}
+            {...register('about', {
+              required: true,
+              maxLength: 512,
+            })}
+          />
 
-        <input
-          type='text'
-          autoComplete='off'
-          {...register('about', {
-            required: true,
-            maxLength: 512,
-          })}
-        />
-
-        {errors.about?.type === 'required' && (
-          <p className='g-error-input'>Completa el campo Acerca de mi</p>
-        )}
-        {errors.about?.type === 'maxLength' && (
-          <p className='g-error-input'>
-            El campo Acerca de mi acepta como máximo 512 caracteres
-          </p>
-        )}
+          {errors.about?.type === 'required' && (
+            <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
+              Completa el campo Acerca de mi
+            </span>
+          )}
+          {errors.about?.type === 'maxLength' && (
+            <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
+              El campo Acerca de mi acepta como máximo 512 caracteres
+            </span>
+          )}
+        </div>
 
         <div className='flex items-center justify-center '>
           <ButtonPurple type={'submit'}>Guardar</ButtonPurple>

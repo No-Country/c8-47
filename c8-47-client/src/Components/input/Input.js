@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ name, type, register, error }) => {
+const Input = ({ name, type, register, error, placeholder }) => {
   return (
     <div className='h-[100px] flex flex-col'>
       <label className='dark:text-[#FFFFFF] font-Mon text-[16px] ml-[4px]'>
@@ -8,6 +8,7 @@ const Input = ({ name, type, register, error }) => {
       </label>
       <input
         type={type}
+        placeholder={placeholder}
         {...register}
         className={`dark:bg-bgDarkMode dark:text-[#FFFFFF] dark:hover:bg-[#353535] h-[48px]  font-Mon  text-lg text text-textColor pt-[9px] pb-[9px] pl-[12px] pr-[12px] mt-[1px] mb-[1px] rounded-[10px] outline-0 ${
           error

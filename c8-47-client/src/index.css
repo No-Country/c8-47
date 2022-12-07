@@ -52,3 +52,6 @@ body {
 ::-ms-reveal {
   display: none;
 }
+textarea{
+  resize: none;
+}
