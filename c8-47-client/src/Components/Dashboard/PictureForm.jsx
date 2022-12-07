@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
+import customAxios from '../../Helpers/customAxios';
 import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
+import { uploadFile } from '../../Utils/S3';
 
 import './PictureForm.css';
 
@@ -46,16 +48,15 @@ const PictureForm = () => {
     setAvatarError(null);
 
     try {
-      const formData = new FormData();
-      formData.append('file', newAvatar);
+      const { Location: imageUrl } = await uploadFile(newAvatar);
 
-      console.log('newAvatar', newAvatar);
-      console.log('formData', formData);
+      setAvatarUrl(imageUrl);
 
-      //! VOLVER A VER
-      // Subir formData o newAvatar?
-      // Acá cuando la imagen se sube con éxito setear la url que devuelve a avatarUrl, y además
-      // enviar la url a customAxios.post('/user/image', image_url)
+      const { data } = await customAxios.post('/user/image', {
+        image_url: imageUrl,
+      });
+
+      console.log(data);
     } catch (error) {
       setAvatarUrl(null);
       console.log(error);

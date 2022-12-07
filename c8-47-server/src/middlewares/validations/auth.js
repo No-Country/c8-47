@@ -87,8 +87,7 @@ const imageValidation = check('image_url')
   .notEmpty()
   .withMessage('Ingresa una URL válida')
   .isLength({ max: 512 })
-  .withMessage('La URL debe tener como máximo 512 caracteres')
-  .escape();
+  .withMessage('La URL debe tener como máximo 512 caracteres');
 
 const signUpValidation = [
   emailValidation,
