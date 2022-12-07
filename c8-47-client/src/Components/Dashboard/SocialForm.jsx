@@ -7,6 +7,7 @@ import customAxios from '../../Helpers/customAxios';
 
 function SocialForm() {
   const [socialsQuantity, setSocialsQuantity] = useState(1);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const {
     state: {
@@ -21,6 +22,7 @@ function SocialForm() {
     formState: { errors },
     handleSubmit,
     control,
+    watch,
   } = useForm({
     defaultValues: {
       socials: socials.map((s) => ({ value: s })),
@@ -52,6 +54,16 @@ function SocialForm() {
       setSocialsQuantity(socialsQuantity - 1);
     }
   };
+
+  useEffect(() => {
+    const checkValues = watch('socials').every(({ value }) => value === '');
+
+    if (checkValues) {
+      setSubmitDisabled(true);
+    } else {
+      setSubmitDisabled(false);
+    }
+  }, [watch({ nest: true })]);
 
   const submitForm = async (formData) => {
     if (formData.socials.length >= 0) {
@@ -103,7 +115,9 @@ function SocialForm() {
           Agregar social
         </button>
 
-        <button type='submit'>Submit</button>
+        <button type='submit' disabled={submitDisabled}>
+          Submit
+        </button>
       </form>
     </div>
   );

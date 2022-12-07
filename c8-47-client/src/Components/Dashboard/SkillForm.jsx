@@ -5,12 +5,14 @@ import customAxios from '../../Helpers/customAxios';
 
 function SkillForm() {
   const [skillsQuantity, setSkillsQuantity] = useState(1);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
+    watch,
   } = useForm({
     defaultValues: {
       skills: [{ name: '' }],
@@ -43,10 +45,21 @@ function SkillForm() {
     }
   };
 
+  useEffect(() => {
+    const checkNamesValues = watch('skills').every(({ name }) => name === '');
+
+    if (checkNamesValues) {
+      setSubmitDisabled(true);
+    } else {
+      setSubmitDisabled(false);
+    }
+  }, [watch({ nest: true })]);
+
   const submitForm = async (formData) => {
     for (let i = 0; i < formData.skills.length; i++) {
       if (formData.skills[i].name === '') {
         formData.skills.splice(i, 1);
+        i--;
       }
     }
 
@@ -56,9 +69,14 @@ function SkillForm() {
     console.log(data);
   };
 
+  const customSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit((formData) => submitForm(formData))(e);
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form onSubmit={customSubmit}>
         <h1>Skills</h1>
 
         {React.Children.toArray(
@@ -87,7 +105,9 @@ function SkillForm() {
           Agregar skill
         </button>
 
-        <button type='submit'>Submit</button>
+        <button type='submit' disabled={submitDisabled}>
+          Submit
+        </button>
       </form>
     </div>
   );

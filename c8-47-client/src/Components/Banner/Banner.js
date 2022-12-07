@@ -1,5 +1,6 @@
 import React from 'react';
 import { ButtonPurple } from '../buttons/ButtonPurple';
+import bannerImg from "../../Assets/Images/Ilus_principal.svg"
 
 export const Banner = ({ onView }) => {
   return (
@@ -7,8 +8,8 @@ export const Banner = ({ onView }) => {
       <h1 className=' font-Mon font-semibold text-2xl md:text-3xl '>
         A que nos postulamos hoy?
       </h1>
-      <div className=' dark:text-black flex flex-col justify-center items-center h-72 w-4/5 md:w-2/4 bg-slate-200  '>
-        Onboarding GIF
+      <div className=' dark:text-black flex flex-col justify-center items-center h-72 w-4/5 md:w-2/4   '>
+        <img src={bannerImg} alt="banner" />
       </div>
       <div className=' md:hidden'>
         <ButtonPurple onClick={onView}>Registrate </ButtonPurple>
