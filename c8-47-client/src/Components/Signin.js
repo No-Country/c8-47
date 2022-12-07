@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,10 +10,14 @@ import ButtonLinkedin from './buttons/ButtonLinkedin';
 import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
+import { AuthContext } from '../Context/AuthContext';
+import { DataContext } from '../Context/DataContext';
 
 const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
   const [showPassword, setShowPassword] = useState(false);
   const size = useWindowSize();
+  const { dispatch } = useContext(AuthContext);
+  const { dispatch: dispatchData } = useContext(DataContext);
 
   const {
     register,
@@ -28,9 +32,17 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
         'http://localhost:4000/auth/login',
         form
       );
-      console.log(data);
 
       localStorage.setItem('cevitaeToken', data.token);
+
+      const {
+        data: { user_data },
+      } = await axios.get('http://localhost:4000/user/data', {
+        headers: { Authorization: `Bearer ${data.token}` },
+      });
+
+      dispatch({ type: 'LOGIN', payload: { user: data.token } });
+      dispatchData({ type: 'SETDATA', payload: user_data });
 
       reset();
     } catch (err) {
