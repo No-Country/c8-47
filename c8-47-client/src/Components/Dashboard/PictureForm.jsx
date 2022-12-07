@@ -48,14 +48,8 @@ const PictureForm = () => {
     setAvatarError(null);
 
     try {
-      const formData = new FormData();
-      formData.append('file', newAvatar);
+      const { Location: imageUrl } = await uploadFile(newAvatar);
 
-      console.log('newAvatar', newAvatar);
-      console.log('formData', formData);
-
-      // Subir formData o newAvatar?
-      const imageUrl = await uploadFile(newAvatar);
       setAvatarUrl(imageUrl);
 
       const { data } = await customAxios.post('/user/image', {
