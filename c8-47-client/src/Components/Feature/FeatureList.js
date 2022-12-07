@@ -1,5 +1,8 @@
 import React from 'react';
 import { Feature } from './Feature';
+import ingresa from "../../Assets/Images/Ilus_ingresa.svg"
+import genera from "../../Assets/Images/Ilus_genera.svg"
+import blanca from "../../Assets/Images/Ilus_blanca.svg"
 
 export const FeatureList = () => {
   const featureList = [
@@ -7,19 +10,19 @@ export const FeatureList = () => {
       button: 'Ingresa tus datos',
       paragraph: `Crea tu perfil e ingresa tus datos por una única vez,
         nos encargaremos de recordarlos para que no tengas que volver a repetir el proceso.`,
-      gif: 'GIF',
+      gif: ingresa,
     },
     {
       button: 'Aplica las etiquetas',
       paragraph: `Crea tu perfil e ingresa tus datos por una única vez,
         nos encargaremos de recordarlos para que no tengas que volver a repetir el proceso.`,
-      gif: 'GIF',
+      gif: blanca,
     },
     {
       button: 'Genera tu CV',
       paragraph: `Crea tu perfil e ingresa tus datos por una única vez,
         nos encargaremos de recordarlos para que no tengas que volver a repetir el proceso.`,
-      gif: 'GIF',
+      gif: genera,
     },
   ];
   const feature = featureList.map((feat, i) => (
