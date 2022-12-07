@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../Pages/Landing';
-import Login from '../Pages/Login';
-import Signup from '../Pages/Signup';
 import Home from '../Pages/Home';
 
 import Terms from '../Pages/Terms';
@@ -18,7 +16,11 @@ const AppRoutes = ({ onView }) => {
 
   return (
     <Routes>
-      <Route exact path={routes.home} element={user ? <Home/> : <Landing onView={onView} />} />
+      <Route
+        exact
+        path={routes.home}
+        element={user ? <Home /> : <Landing onView={onView} />}
+      />
 
       <Route path={routes.terms} element={<Terms />} />
       <Route

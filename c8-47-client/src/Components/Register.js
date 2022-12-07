@@ -33,8 +33,8 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
         'http://localhost:4000/auth/signup',
         form
       );
-      localStorage.setItem('user', data.token);
-      dispatch({ type: 'LOGIN' });
+      localStorage.setItem('cevitaeToken', data.token);
+      dispatch({ type: 'LOGIN', payload: { user: data.token } });
 
       reset();
     } catch (err) {
