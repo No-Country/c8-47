@@ -80,6 +80,16 @@ const lastNameValidation = check('last_name')
   .toLowerCase()
   .escape();
 
+const imageValidation = check('image_url')
+  .isString()
+  .withMessage('Ingresa una URL válida')
+  .trim()
+  .notEmpty()
+  .withMessage('Ingresa una URL válida')
+  .isLength({ max: 512 })
+  .withMessage('La URL debe tener como máximo 512 caracteres')
+  .escape();
+
 const signUpValidation = [
   emailValidation,
   newPasswordValidation,
@@ -108,9 +118,12 @@ const editNameValidation = [
   checkValidations,
 ];
 
+const imageUrlValidation = [imageValidation, checkValidations];
+
 export {
   signUpValidation,
   logInValidation,
   modifyPasswordValidation,
   editNameValidation,
+  imageUrlValidation,
 };
