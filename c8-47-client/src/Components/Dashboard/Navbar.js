@@ -13,7 +13,7 @@ const Navbar = () => {
     education: 'Educación',
     certificates: 'Certificaciones',
     skills: 'Habilidades',
-    languages: 'Iidiomas',
+    languages: 'Idiomas',
   };
 
   const [selected, setSelected] = useState(items[0]);
