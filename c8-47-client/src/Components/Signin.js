@@ -42,7 +42,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
       });
 
       dispatch({ type: 'LOGIN', payload: { user: data.token } });
-      dispatchData({ type: 'SETDATA', payload: { data: user_data } });
+      dispatchData({ type: 'SETDATA', payload: user_data });
 
       reset();
     } catch (err) {

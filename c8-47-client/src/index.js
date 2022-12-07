@@ -9,15 +9,15 @@ import { DataContextProvider } from './Context/DataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthContextProvider>
-      <TagContextProvider>
-        <DataContextProvider>
-          <App />
-        </DataContextProvider>
-      </TagContextProvider>
-    </AuthContextProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <AuthContextProvider>
+    <TagContextProvider>
+      <DataContextProvider>
+        <App />
+      </DataContextProvider>
+    </TagContextProvider>
+  </AuthContextProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

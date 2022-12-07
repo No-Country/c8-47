@@ -11,12 +11,14 @@ import ButtonGoogle from './buttons/ButtonGoogle';
 import { MdClose } from 'react-icons/md';
 import useWindowSize from './Hooks/WindowSize';
 import { AuthContext } from '../Context/AuthContext';
+import { DataContext } from '../Context/DataContext';
 
 const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const size = useWindowSize();
   const { dispatch } = useContext(AuthContext);
+  const { dispatch: dispatchData } = useContext(DataContext);
 
   const {
     register,
@@ -34,7 +36,15 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
         form
       );
       localStorage.setItem('cevitaeToken', data.token);
+
+      const {
+        data: { user_data },
+      } = await axios.get('http://localhost:4000/user/data', {
+        headers: { Authorization: `Bearer ${data.token}` },
+      });
+
       dispatch({ type: 'LOGIN', payload: { user: data.token } });
+      dispatchData({ type: 'SETDATA', payload: user_data });
 
       reset();
     } catch (err) {

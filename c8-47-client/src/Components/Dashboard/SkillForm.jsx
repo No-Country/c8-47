@@ -43,14 +43,6 @@ function SkillForm() {
     }
   };
 
-  // !VOLVER A VER eliminar useeffect
-  useEffect(() => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiZmVyLmV6ZS5yYW1AZ21haWwuY29tIiwiaWQiOiI2MzcxMmMxMTUzYjNjMmZiNTEwYjdjNWYifSwiaWF0IjoxNjcwMDIyNDAxLCJleHAiOjE2NzI2MTQ0MDF9.yOKSiW55hC9752ucryXLdTMy2WKIXPK-A9m4f8qwo4c';
-
-    localStorage.setItem('cevitaeToken', token);
-  }, []);
-
   const submitForm = async (formData) => {
     for (let i = 0; i < formData.skills.length; i++) {
       if (formData.skills[i].name === '') {

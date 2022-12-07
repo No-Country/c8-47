@@ -1,18 +1,32 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 import Input from '../input/Input';
 
-import Icon from './Icon';
-
 import customAxios from '../../Helpers/customAxios';
+import { DataContext } from '../../Context/DataContext';
 
 function PersonalForm() {
+  const {
+    state: {
+      data: { personal },
+    },
+  } = useContext(DataContext);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: personal?.name,
+      birth: personal?.birth,
+      email: personal?.email,
+      phone: personal?.phone,
+      title: '',
+      about: '',
+    },
+  });
 
   const submitForm = async (formData) => {
     const { name, email, birth, phone, title, about } = formData;
@@ -119,7 +133,7 @@ function PersonalForm() {
               message: 'El campo título es requerido.',
             },
             minLength: {
-              value: 64,
+              value: 4,
               message: 'El campo título debe tener al menos 64 caracteres.',
             },
           })}
@@ -131,16 +145,16 @@ function PersonalForm() {
         <input
           type='text'
           autoComplete='off'
-          {...register('title', {
+          {...register('about', {
             required: true,
             maxLength: 512,
           })}
         />
 
-        {errors.title?.type === 'required' && (
+        {errors.about?.type === 'required' && (
           <p className='g-error-input'>Completa el campo Acerca de mi</p>
         )}
-        {errors.title?.type === 'maxLength' && (
+        {errors.about?.type === 'maxLength' && (
           <p className='g-error-input'>
             El campo Acerca de mi acepta como máximo 512 caracteres
           </p>
