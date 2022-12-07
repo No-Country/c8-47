@@ -1,0 +1,54 @@
+.g-hidden-placeholder {
+   visibility: hidden;
+   font-size: 0.8rem;
+}
+
+.g-error-input {
+   text-align: left;
+   color: red;
+   font-weight: 300;
+   font-size: 0.8rem;
+}
+
+.profile-avatar-input {
+   display: none;
+}
+
+.profile-avatar-container-label {
+   height: 100px;
+   width: 100px;
+   border-radius: 50%;
+   overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.profile-avatar-container-label svg {
+   transform: scale(2);
+}
+
+.profile-avatar-container-label img {
+   height: 100%;
+   width: 100%;
+}
+
+.cho-svg {
+   transform: scale(.8);
+}
+
+.profile-avatar-background {
+   display: none;
+}
+
+.profile-avatar-container-label:hover .profile-avatar-background {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
+   height: 100px;
+   width: 100px;
+   background: rgba(255, 0, 0, 0.612);
+   position: absolute;
+   cursor: pointer;
+}
