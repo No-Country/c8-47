@@ -31,7 +31,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   } = useForm();
 
   const onSubmit = async (form) => {
-    console.log(form);
+    console.log(REACT_APP_API_URL);
     try {
       const { data } = await axios.post(
         'https://cevetae-api.vercel.app/auth/signup',
