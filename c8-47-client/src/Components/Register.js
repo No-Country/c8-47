@@ -67,7 +67,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                     message: 'El campo nombres es requerido.',
                   },
                   pattern: {
-                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
                     message: 'Ingresa un nombre válido.',
                   },
                   minLength: {
@@ -90,7 +90,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                     message: 'El campo apellidos es requerido.',
                   },
                   pattern: {
-                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
                     message: 'Ingrese un apellido válido.',
                   },
                   minLength: {
