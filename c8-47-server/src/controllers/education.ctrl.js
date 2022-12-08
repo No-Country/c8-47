@@ -1,6 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 
 import Education from '../models/Education.js';
+import User from '../models/User.js';
 
 const getEducation = async (req, res, next) => {
   const { user } = req;
@@ -25,6 +26,7 @@ const addEducation = async (req, res, next) => {
     start_date,
     end_date,
     comment,
+    certification,
     tag: tagId,
   } = req.body;
 
@@ -38,12 +40,16 @@ const addEducation = async (req, res, next) => {
       start_date,
       end_date,
       comment,
+      certification,
       user: user.id,
-      certification: false,
       tag: tagId,
     });
 
+    const userFound = await User.findOne({ _id: user.id });
+    userFound.education.push(newEducation._id);
+
     await newEducation.save();
+    await userFound.save();
 
     return res.status(201).json({
       education: newEducation,
