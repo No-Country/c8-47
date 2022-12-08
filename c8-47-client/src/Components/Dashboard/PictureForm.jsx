@@ -5,7 +5,7 @@ import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
 import { uploadFile } from '../../Utils/S3';
 import { FaUserAlt } from 'react-icons/fa';
 import './PictureForm.css';
-
+import { BsFillCameraFill } from 'react-icons/bs';
 const PictureForm = () => {
   const [newAvatar, setNewAvatar] = useState(null);
   const [avatarFlag, setAvatarFlag] = useState(false);
@@ -92,10 +92,17 @@ const PictureForm = () => {
                   alt='Foto de perfil'
                 />
               ) : (
-                <FaUserAlt style={{ color: '#3D3D3D' }} />
+                <div className='iconAvatar'>
+                  <FaUserAlt style={{ color: '#3D3D3D' }} />
+                </div>
               )}
 
-              <span className='profile-avatar-background'>Cambiar foto</span>
+              <span className='profile-avatar-background'>
+                <BsFillCameraFill
+                  style={{ marginBottom: '0.5rem', color: '#3D3D3D' }}
+                />
+                Cambiar foto
+              </span>
             </>
           )}
         </label>
