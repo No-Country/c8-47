@@ -1,0 +1,31 @@
+.g-hidden-placeholder {
+   visibility: hidden;
+   font-size: 1rem;
+   margin-bottom: .5rem;
+}
+
+.g-error-input {
+   text-align: center;
+   color: red;
+   font-weight: 300;
+   font-size: 1rem;
+   margin-bottom: .5rem;
+}
+
+.tag-form {
+   font-size: 1rem;
+}
+
+.tag-input {
+   color: black;
+}
+
+.tag-buttons-container {
+   display: flex;
+   justify-content: space-around;
+}
+
+.tag-buttons-container input:hover {
+   cursor: pointer;
+   color: red;
+}
