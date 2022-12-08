@@ -7,7 +7,7 @@ DataContext.displayName = 'DataContext';
 export const dataReducer = (state, action) => {
   switch (action.type) {
     case 'SETDATA':
-      return { data: action.payload };
+      return { data: { ...state.data, ...action.payload } };
     default:
       return state;
   }

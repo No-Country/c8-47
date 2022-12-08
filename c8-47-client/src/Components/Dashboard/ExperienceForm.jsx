@@ -6,9 +6,14 @@ import { ButtonPurple } from '../buttons/ButtonPurple';
 // import customAxios from './Config/interceptors';
 import { FaTrashAlt } from 'react-icons/fa';
 import customAxios from '../../Helpers/customAxios';
+import { useContext } from 'react';
+import { TagContext } from '../../Context/TagContext';
+import { DataContext } from '../../Context/DataContext';
 
-function ExperienceForm() {
+function ExperienceForm({ main = true }) {
   const [tasksQuantity, setTasksQuantity] = useState(1);
+  const { tag } = useContext(TagContext);
+  const { state, dispatch } = useContext(DataContext);
 
   const {
     register,
@@ -58,10 +63,15 @@ function ExperienceForm() {
       formData.tasks = tasksArray;
     }
 
-    formData.main_job = true;
+    formData.main_job = main;
 
-    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
-    const { data } = await customAxios.post('/job', formData);
+    const { data } = await customAxios.post('/job', { ...formData, tag: tag });
+
+    dispatch({
+      type: 'SETDATA',
+      payload: { experience: [...state.data.experience, data.job] },
+    });
+
     console.log(data);
   };
 
