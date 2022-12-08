@@ -26,7 +26,7 @@ const addSelector = async (req, res, next) => {
       organization,
       name,
       email,
-      curriculum: curriculumId, //!VOLVER A VER pasar variable a object id
+      curriculum: curriculumId,
     });
 
     await newSelector.save();

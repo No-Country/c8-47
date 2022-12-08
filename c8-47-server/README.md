@@ -218,6 +218,23 @@ RESPONSE
 }
 ```
 
+**Change picture**
+
+`POST /user/image`
+
+```
+REQUEST
+{
+   image_url: STRING
+}
+
+RESPONSE
+{
+   message: STRING
+   image_url: STRING
+}
+```
+
 ---
 
 ## Curriculum
