@@ -86,10 +86,14 @@ const Page = () => {
             <Title>{'Contacto'}</Title>
             <Contact type='email' contact={data?.personal?.email} key='1' />
             <Contact type='telefono' contact={data?.personal?.phone} key='2' />
-            <Contact type='telefono' contact={data?.personal?.birth} key='5' />
+            <Contact
+              type='Fecha de nacimiento'
+              contact={data?.personal?.birth}
+              key='5'
+            />
 
-            <Contact type='linkedin' contact='pablopastorino' key='3' />
-            <Contact type='github' contact='pablo-pastorino' key='4' />
+            {/* <Contact type='linkedin' contact='pablopastorino' key='3' />
+            <Contact type='github' contact='pablo-pastorino' key='4' /> */}
           </div>
           <div className='w-full mt-2'>
             <Title>{'Educación'}</Title>

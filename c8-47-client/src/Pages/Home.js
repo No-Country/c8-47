@@ -6,19 +6,19 @@ import { Cv } from '../Components/Cv/Cv';
 import foto from '../Assets/Images/foto.png';
 import { AuthContext } from '../Context/AuthContext';
 import { DataContext } from '../Context/DataContext';
+import customAxios from '../Helpers/customAxios';
 
 import './Home.css';
-import customAxios from '../Helpers/customAxios';
 import { TagContext } from '../Context/TagContext';
 
 const Home = () => {
   const [showInput, setShowInput] = useState(false);
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { dispatch } = useContext(TagContext);
   const {
     state: { data },
   } = useContext(DataContext);
-  const navigate = useNavigate();
 
   const {
     register,
