@@ -21,11 +21,11 @@ export const DarkMode = () => {
   return (
     
         <button onClick={handlerTheme}>     
-            <span className="dark:hidden flex flex-row items-center gap-x-3 text-sm" >
+            <span className="dark:hover:text-borderDarkmode dark:text-white hover:text-primarioH  dark:hidden flex flex-row items-center gap-x-3 text-sm" >
                 <IoMdMoon className='  text-bold text-xl'/> Modo oscuro
             </span>
 
-            <span className=" hidden dark:flex flex-row items-center gap-x-3 text-sm">                
+            <span className="dark:hover:text-borderDarkmode dark:text-white hover:text-primarioH  hidden dark:flex flex-row items-center gap-x-3 text-sm">                
                 <FiSun className=' text-xl'/> Modo claro
             </span>       
          </button>

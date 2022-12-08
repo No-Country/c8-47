@@ -22,8 +22,8 @@ export const Footer = () => {
         />
         <img src={Logo} alt='Logo' className=' dark:hidden w-36' />
 
-        <div className=' text-sm   pt-6 md:pt-2'>
-          <span className=' dark:text-white dark:border-white border-b-2 text-textColor border-textColor'>
+        <div className=' text-sm  pb-5 pt-6 md:pt-2'>
+        <span className=' dark:text-white underline  text-textColor  '>
             Terminos y condiciones.
           </span>
         </div>

@@ -15,8 +15,8 @@ export const Feature = (props) => {
           {props.paragraph}
         </p>
 
-        <div className=' md:col-end-3 justify-self-center dark:text-black flex fljustify-items-stretchex-col justify-center items-center h-72 w-3/4 bg-slate-200  '>
-          {props.gif}
+        <div className=' md:col-end-3 justify-self-center dark:text-black flex fljustify-items-stretchex-col justify-center items-center h-72 w-3/4  '>
+          <img src={props.gif} alt="gif" />
         </div>
       </div>
     </div>

@@ -1,24 +1,32 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 import Input from '../input/Input';
 
 import customAxios from '../../Helpers/customAxios';
+import { DataContext } from '../../Context/DataContext';
 
 function PersonalForm() {
+  const {
+    state: {
+      data: { personal },
+    },
+  } = useContext(DataContext);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-
-  // !VOLVER A VER eliminar useeffect
-  useEffect(() => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiZmVyLmV6ZS5yYW1AZ21haWwuY29tIiwiaWQiOiI2MzcxMmMxMTUzYjNjMmZiNTEwYjdjNWYifSwiaWF0IjoxNjcwMDIyNDAxLCJleHAiOjE2NzI2MTQ0MDF9.yOKSiW55hC9752ucryXLdTMy2WKIXPK-A9m4f8qwo4c';
-
-    localStorage.setItem('cevitaeToken', token);
-  }, []);
+  } = useForm({
+    defaultValues: {
+      name: personal?.name,
+      birth: personal?.birth,
+      email: personal?.email,
+      phone: personal?.phone,
+      title: '',
+      about: '',
+    },
+  });
 
   const submitForm = async (formData) => {
     const { name, email, birth, phone, title, about } = formData;
@@ -123,7 +131,7 @@ function PersonalForm() {
               message: 'El campo título es requerido.',
             },
             minLength: {
-              value: 64,
+              value: 4,
               message: 'El campo título debe tener al menos 64 caracteres.',
             },
           })}

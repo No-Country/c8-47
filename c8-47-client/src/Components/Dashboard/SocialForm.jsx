@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
+import { DataContext } from '../../Context/DataContext';
 import customAxios from '../../Helpers/customAxios';
 import ButtonTask from '../buttons/ButtonTask';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 function SocialForm() {
   const [socialsQuantity, setSocialsQuantity] = useState(1);
   const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  const {
+    state: {
+      data: {
+        personal: { socials },
+      },
+    },
+  } = useContext(DataContext);
 
   const {
     register,
@@ -16,7 +26,7 @@ function SocialForm() {
     watch,
   } = useForm({
     defaultValues: {
-      socials: [{ value: '' }],
+      socials: socials.map((s) => ({ value: s })),
     },
   });
 
@@ -56,14 +66,6 @@ function SocialForm() {
     }
   }, [watch({ nest: true })]);
 
-  // !VOLVER A VER eliminar useeffect
-  useEffect(() => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiZmVyLmV6ZS5yYW1AZ21haWwuY29tIiwiaWQiOiI2MzcxMmMxMTUzYjNjMmZiNTEwYjdjNWYifSwiaWF0IjoxNjcwMDIyNDAxLCJleHAiOjE2NzI2MTQ0MDF9.yOKSiW55hC9752ucryXLdTMy2WKIXPK-A9m4f8qwo4c';
-
-    localStorage.setItem('cevitaeToken', token);
-  }, []);
-
   const submitForm = async (formData) => {
     if (formData.socials.length >= 0) {
       const socialsArray = [];
@@ -76,7 +78,7 @@ function SocialForm() {
     }
 
     const { data } = await customAxios.post('/social', formData);
-    console.log(data);
+    console.log(data?.personal?.socials);
   };
 
   return (

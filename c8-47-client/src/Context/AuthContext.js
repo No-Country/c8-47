@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null });
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('cevitaeToken');
     if (user) dispatch({ type: 'LOGIN', payload: user });
   }, []);
 

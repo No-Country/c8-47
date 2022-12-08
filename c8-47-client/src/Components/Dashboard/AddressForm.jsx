@@ -3,20 +3,28 @@ import { useForm } from 'react-hook-form';
 import Input from '../input/Input';
 import customAxios from '../../Helpers/customAxios';
 import { ButtonPurple } from '../buttons/ButtonPurple';
+import { useContext } from 'react';
+import { DataContext } from '../../Context/DataContext';
+
 function AddressForm() {
+  const {
+    state: {
+      data: { address },
+    },
+  } = useContext(DataContext);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-
-  // !VOLVER A VER eliminar useeffect
-  useEffect(() => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiZmVyLmV6ZS5yYW1AZ21haWwuY29tIiwiaWQiOiI2MzcxMmMxMTUzYjNjMmZiNTEwYjdjNWYifSwiaWF0IjoxNjcwMDIyNDAxLCJleHAiOjE2NzI2MTQ0MDF9.yOKSiW55hC9752ucryXLdTMy2WKIXPK-A9m4f8qwo4c';
-
-    localStorage.setItem('cevitaeToken', token);
-  }, []);
+  } = useForm({
+    defaultValues: {
+      country: address?.country,
+      state: address?.state,
+      city: address?.city,
+      address: address?.address,
+    },
+  });
 
   const submitForm = async (formData) => {
     const { data } = await customAxios.post('/address', formData);

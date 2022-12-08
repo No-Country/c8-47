@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import Logo from '../Assets/Images/Logo.png';
-import LogoNegativo from '../Assets/Images/Logo_negativo.png';
+import Logo from '../Assets/Images/Logo.svg';
+import LogoNegativo from '../Assets/Images/Logo_negativo.svg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
@@ -57,12 +57,12 @@ export const Header = ({
           />
           <img src={Logo} alt='Logo' className=' dark:hidden w-36' />
         </div>
-        <div className='menuBurger absolute left-10 top-3 md:static	'>
+        <div className='menuBurger absolute left-[10%] top-3 md:static	'>
           <div
             onClick={() => setOpen(true)}
             className={
               (open || actionRegister ? 'hidden' : '') +
-              ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
+              ' text-3xl absolute left-[10%] top-6 cursor-pointer md:hidden'
             }
           >
             <AiOutlineMenu className=' dark:text-white' />
@@ -75,7 +75,7 @@ export const Header = ({
             }}
             className={
               (open || actionRegister ? '' : 'hidden') +
-              ' text-3xl absolute left-10 top-6 cursor-pointer md:hidden'
+              ' text-3xl absolute left-[10%] top-6 cursor-pointer md:hidden'
             }
           >
             <AiOutlineClose className=' dark:text-white' />
@@ -83,7 +83,7 @@ export const Header = ({
         </div>
 
         <ul
-          className={`  dark:text-white dark:bg-bgDarkMode md:flex md:items-center md:pb-0 pb-40 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-400 ease-in ${
+          className={`  dark:text-white dark:bg-bgDarkMode md:flex md:items-center md:pb-0 pb-80 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-400 ease-in ${
             open ? 'left-21 ' : 'left-[-800px]'
           }`}
         >
@@ -103,19 +103,19 @@ export const Header = ({
               </div>
             ) : (
               <>
-                <div className='py-8 md:py-0 md:ml-4 '>
+                <div className='py-4 md:py-0 md:ml-4 '>
                   <NavLink to='/'>
-                    <button className=' dark:border-white dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-20 md:px-6  lg:px6 rounded-[10px]  hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border border-[transparent] hover:border-textColor  disabled:text-btnDisable'>
+                    <button className=' dark:border-transparent max-w-[267.66px] border-transparent border  dark:hover:bg-bgDarkmodeHoverbtn dark:focus:text-white dark:hover:bgDarkmodeHoverbtn dark:disabled:text-btnDisable dark:focus:bg-bgDarkmodeHoverbtn dark:focus:border-bgDarkmodeHoverbtn dark:hover:border-white dark:text-white font-Mon text-textColor	transition-all duration-500 py-2 px-[68px] md:px-6  lg:px6 rounded-[10px]  hover:bg-btnHoverG focus:bg-btnHoverG focus:border-btnHoverG hover:border hover:border-textColor  disabled:text-btnDisable'>
                       Prueba Cevetae
                     </button>
                   </NavLink>
                 </div>
-                <div className='py-8 md:py-0 md:ml-4 '>
+                <div className='py-4 md:py-0 md:ml-4 '>
                   <ButtonGray onClick={onClickSignin}>
                     Iniciar Sesión
                   </ButtonGray>
                 </div>
-                <div className=' py-8 md:py-0 md:ml-4 '>
+                <div className=' py-4 md:py-0 md:ml-4 '>
                   <ButtonPurple onClick={onClickRegister}>
                     Registrarse
                   </ButtonPurple>
