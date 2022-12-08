@@ -31,17 +31,17 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
   } = useForm();
 
   const onSubmit = async (form) => {
-    console.log('REACT_APP_API_URL', REACT_APP_API_URL);
+    console.log(form);
     try {
       const { data } = await axios.post(
-        'https://cevetae-api.vercel.app/auth/signup',
+        `${REACT_APP_API_URL}auth/signup`,
         form
       );
       localStorage.setItem('cevitaeToken', data.token);
 
       const {
         data: { user_data },
-      } = await axios.get('https://cevetae-api.vercel.app/user/data', {
+      } = await axios.get(`${REACT_APP_API_URL}user/data`, {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
