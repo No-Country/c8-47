@@ -149,7 +149,7 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
               <MdClose style={{ width: '100%', height: '100%' }} />
             </button>
             <img
-              className='w-full h-full rounded-r-[10px] '
+              className='w-full h-full rounded-r-[10px] object-cover object-left-bottom'
               src={login}
               alt='login'
             />
