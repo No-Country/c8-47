@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Cv } from '../Components/Cv/Cv';
 import foto from '../Assets/Images/foto.png';
 import { AuthContext } from '../Context/AuthContext';
@@ -10,9 +10,6 @@ const Home = () => {
   const {
     state: { data },
   } = useContext(DataContext);
-
-  console.log('user', user);
-  console.log('data', data);
 
   const styling = {
     display: 'grid',
@@ -36,14 +33,16 @@ const Home = () => {
       </div>
       <div className=' w-full md:grid-cols-4	' style={styling}>
         <div className=''>
-          <div className='bg-gray-900 hover:bg-gray-800 w-[220px] h-[220px] text-white text-center grid place-content-center text-9xl cursor-pointer pb-1.5'>
-            +
-          </div>
+          <Link to={'/dashboard'}>
+            <div className='bg-gray-900 hover:bg-gray-800 w-[220px] h-[220px] text-white text-center grid place-content-center text-9xl cursor-pointer pb-1.5'>
+              +
+            </div>
+          </Link>
           <p className='mt-1 text-justify'>Crear un nuevo CV</p>
         </div>
-        <Cv />
-        <Cv />
-        <Cv />
+        <Cv key={'1'} />
+        <Cv key={'2'} />
+        <Cv key={'3'} />
       </div>
       <Outlet />
     </div>

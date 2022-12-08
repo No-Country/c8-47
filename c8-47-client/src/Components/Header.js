@@ -18,6 +18,7 @@ export const Header = ({
   onClose,
   actionRegister,
 }) => {
+  const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -46,7 +47,6 @@ export const Header = ({
       {/* </a> */}
     </li>
   ));
-  const [open, setOpen] = useState(false);
 
   return (
     <div className=' bg-white  dark:bg-bgDarkMode shadow-md w-full fixed top-0 left-0 grid place-items-center md:block'>
