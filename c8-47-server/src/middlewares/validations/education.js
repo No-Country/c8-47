@@ -24,7 +24,6 @@ const startDateValidation = check('start_date')
   .withMessage('Ingresa la fecha de inicio')
   .isLength({ max: 10 })
   .withMessage('La fecha de inicio acepta como máximo 10 caracteres')
-  .escape();
 
 const endDateValidation = check('end_date')
   .trim()
@@ -32,7 +31,6 @@ const endDateValidation = check('end_date')
   .withMessage('Ingresa la fecha de finalización')
   .isLength({ max: 10 })
   .withMessage('La fecha de finalización acepta como máximo 10 caracteres')
-  .escape();
 
 const commentValidation = check('comment')
   .trim()
