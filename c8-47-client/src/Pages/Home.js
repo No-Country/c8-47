@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, navigate } from 'react-router-dom';
 
 import { Cv } from '../Components/Cv/Cv';
 import foto from '../Assets/Images/foto.png';
@@ -35,6 +35,7 @@ const Home = () => {
       // const { data } = await customAxios.post('/tag', formData);
       console.log(formData);
       // redirigir a /dashboard si el tag se crea con éxito
+      // navigate('/dashboard')
     } catch (error) {
       console.log(error);
     }
@@ -103,9 +104,9 @@ const Home = () => {
           </div>
           <p className='mt-1 text-justify'>Crear un nuevo CV</p>
         </div>
-        <Cv />
-        <Cv />
-        <Cv />
+        <Cv key={'1'} />
+        <Cv key={'2'} />
+        <Cv key={'3'} />
       </div>
       <Outlet />
     </div>
