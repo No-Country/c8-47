@@ -6,7 +6,7 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { ButtonPurple } from './buttons/ButtonPurple';
 import { ButtonGray } from './buttons/ButtonGray';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { routes } from '../Config/routes';
 import { DarkMode } from '../Components/darkmode/DarkMode';
 import { NavLink } from 'react-router-dom';
@@ -20,6 +20,7 @@ export const Header = ({
 }) => {
   const { pathname } = useLocation();
   const { user, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   if (pathname === `/${routes.dashboard}`) return null;
 
@@ -29,8 +30,9 @@ export const Header = ({
   ];
 
   const logout = () => {
-    localStorage.removeItem('user');
-    dispatch('LOGOUT');
+    localStorage.removeItem('cevitaeToken');
+    dispatch({ type: 'LOGOUT' });
+    navigate('/');
   };
 
   const linkRender = Links.map((link) => (
@@ -99,7 +101,7 @@ export const Header = ({
             {/* {linkRender} */}
             {user ? (
               <div className=' py-8 md:py-0 md:ml-4 '>
-                <ButtonPurple onClick={logout}>Avatar</ButtonPurple>
+                <ButtonPurple onClick={logout}>Salir</ButtonPurple>
               </div>
             ) : (
               <>

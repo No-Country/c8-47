@@ -11,13 +11,13 @@ function SocialForm() {
   const [socialsQuantity, setSocialsQuantity] = useState(1);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
-  const {
-    state: {
-      data: {
-        personal: { socials },
-      },
-    },
-  } = useContext(DataContext);
+  // const {
+  //   state: {
+  //     data: {
+  //       personal: { socials },
+  //     },
+  //   },
+  // } = useContext(DataContext);
 
   const {
     register,
@@ -27,7 +27,8 @@ function SocialForm() {
     watch,
   } = useForm({
     defaultValues: {
-      socials: socials.map((s) => ({ value: s })),
+      socials:
+        /*socials.length > 0 ? socials?.map((s) => ({ value: s })) : */ [],
     },
   });
 
