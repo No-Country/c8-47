@@ -24,12 +24,7 @@ customAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (!error.response) {
-      return Promise.reject({
-        status: 500,
-        timestamp: new Date(),
-        message: 'Se ha producido un error',
-        error: 'Error inesperado',
-      });
+      return Promise.reject(new Error('Se ha producido un error'));
     }
     return Promise.reject(error.response.data);
   }
