@@ -61,6 +61,7 @@ Font.register({
 });
 
 const Resume = ({
+  value,
   image,
   certifications,
   contacts,
@@ -74,8 +75,8 @@ const Resume = ({
   options,
 }) => (
   <Page size='A4' style={styles.page} options={options}>
-    <Header person={person} />
-    <View style={styles.container}>
+    <Header value={value} />
+    {/* <View style={styles.container}>
       <View style={styles.leftColumn}>
         <Image src={image} style={styles.image} />
         <Contact contacts={contacts} />
@@ -89,7 +90,7 @@ const Resume = ({
         <Experience experience={experience} />
         <Other others={others} />
       </View>
-    </View>
+    </View> */}
   </Page>
 );
 

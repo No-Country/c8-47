@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import { DataContext } from '../../Context/DataContext';
+import customAxios from '../../Helpers/customAxios';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,14 +44,25 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = ({ person = {} }) => {
-  if (!Object.keys(person).length) return null;
+const Header = ({ value = {} }) => {
+  if (!Object.keys(value).length) return null;
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await customAxios.get('/user/data');
+      console.log(data);
+    };
+
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.detailColumn}>
-        <Text style={styles.name}>{person.name}</Text>
-        <Text style={styles.subtitle}>{person.header}</Text>
+        <Text style={styles.name}>{value.state.data.personal?.name}</Text>
+        <Text style={styles.subtitle}>
+          {/* {value.state.data?.presentations[0]['title']} */}
+        </Text>
       </View>
     </View>
   );
