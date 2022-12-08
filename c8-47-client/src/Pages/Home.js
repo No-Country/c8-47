@@ -9,10 +9,12 @@ import { DataContext } from '../Context/DataContext';
 
 import './Home.css';
 import customAxios from '../Helpers/customAxios';
+import { TagContext } from '../Context/TagContext';
 
 const Home = () => {
   const [showInput, setShowInput] = useState(false);
   const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(TagContext);
   const {
     state: { data },
   } = useContext(DataContext);
@@ -24,9 +26,6 @@ const Home = () => {
     handleSubmit,
   } = useForm();
 
-  console.log('user', user);
-  console.log('data', data);
-
   const handleShowInput = () => {
     if (!showInput) setShowInput(true);
   };
@@ -34,9 +33,10 @@ const Home = () => {
   const submitForm = async (formData) => {
     try {
       const { data } = await customAxios.post('/tag', formData);
-      console.log('data', data);
 
-      // navigate('/dashboard');
+      if (data.tag._id) dispatch({ type: 'SELECT', payload: data.tag._id });
+
+      navigate('/dashboard');
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +53,7 @@ const Home = () => {
       <div className='flex justify-start items-center gap-4 pb-5'>
         <div className=' '>
           <img
-            src={foto}
+            src={data?.image_url}
             alt='foto'
             className=' rounded-full object-cover w-20 h-20'
           />

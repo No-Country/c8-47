@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileForm from './ProfileForm';
+import PictureForm from './PictureForm';
 import AddressForm from './AddressForm';
 import SocialForm from './SocialForm';
 import ExperienceForm from './ExperienceForm';
@@ -10,7 +11,12 @@ import LanguageForm from './LanguageForm';
 const Forms = ({ name }) => {
   switch (name) {
     case 'profile':
-      return <ProfileForm />;
+      return (
+        <>
+          <PictureForm />
+          <ProfileForm />;
+        </>
+      );
     case 'location':
       return <AddressForm />;
     case 'socials':
@@ -18,11 +24,11 @@ const Forms = ({ name }) => {
     case 'work':
       return <ExperienceForm />;
     case 'other':
-      return;
+      return <ExperienceForm main={false} />;
     case 'education':
       return <EducationForm />;
     case 'certificates':
-      return;
+      return <EducationForm certification={true} />;
     case 'skills':
       return <SkillForm />;
     case 'languages':

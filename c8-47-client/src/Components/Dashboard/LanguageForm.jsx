@@ -5,6 +5,8 @@ import { ButtonPurple } from '../buttons/ButtonPurple';
 // import customAxios from './Config/interceptors';
 
 import customAxios from '../../Helpers/customAxios';
+import { useContext } from 'react';
+import { DataContext } from '../../Context/DataContext';
 
 function LanguageForm() {
   const {
@@ -12,10 +14,15 @@ function LanguageForm() {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { state, dispatch } = useContext(DataContext);
 
   const submitForm = async (formData) => {
     const { data } = await customAxios.post('/language', formData);
     console.log(data);
+    dispatch({
+      type: 'SETDATA',
+      payload: { languages: [...state.data.languages, data.language] },
+    });
   };
 
   return (

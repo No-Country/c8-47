@@ -5,6 +5,8 @@ import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
 import { uploadFile } from '../../Utils/S3';
 
 import './PictureForm.css';
+import { useContext } from 'react';
+import { DataContext } from '../../Context/DataContext';
 
 const PictureForm = () => {
   const [newAvatar, setNewAvatar] = useState(null);
@@ -12,6 +14,8 @@ const PictureForm = () => {
   const [avatarError, setAvatarError] = useState(null);
   const [loadingAvatar, setLoadingAvatar] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+
+  const { state, dispatch } = useContext(DataContext);
 
   const validateImg = (fileListArrayImg) => {
     const fileTypesAllowed = ['image/jpeg', 'image/png'];
@@ -56,6 +60,11 @@ const PictureForm = () => {
         image_url: imageUrl,
       });
 
+      dispatch({
+        type: 'SETDATA',
+        payload: { image_url: data.image_url },
+      });
+
       console.log(data);
     } catch (error) {
       setAvatarUrl(null);
@@ -86,7 +95,8 @@ const PictureForm = () => {
               <img
                 // eslint-disable-next-line global-require
                 src={
-                  avatarUrl || require('../../Assets/Images/avatardefault.png')
+                  state?.data?.image_url ||
+                  require('../../Assets/Images/avatardefault.png')
                 }
                 referrerPolicy='no-referrer'
                 alt='Foto de perfil'
