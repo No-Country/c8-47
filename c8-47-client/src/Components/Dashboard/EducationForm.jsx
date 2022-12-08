@@ -88,7 +88,7 @@ function EducationForm() {
           error={errors.comment}
         />
 
-        <div className='flex items-center justify-center '>
+        <div className='flex items-center justify-center mt-[10px]'>
           <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
         </div>
       </form>
