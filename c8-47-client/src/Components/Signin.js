@@ -13,6 +13,8 @@ import useWindowSize from './Hooks/WindowSize';
 import { AuthContext } from '../Context/AuthContext';
 import { DataContext } from '../Context/DataContext';
 
+const { REACT_APP_API_URL } = process.env;
+
 const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
   const [showPassword, setShowPassword] = useState(false);
   const size = useWindowSize();
@@ -28,16 +30,13 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
 
   const onSubmit = async (form) => {
     try {
-      const { data } = await axios.post(
-        'http://localhost:4000/auth/login',
-        form
-      );
+      const { data } = await axios.post(`${REACT_APP_API_URL}auth/login`, form);
 
       localStorage.setItem('cevitaeToken', data.token);
 
       const {
         data: { user_data },
-      } = await axios.get('http://localhost:4000/user/data', {
+      } = await axios.get(`${REACT_APP_API_URL}user/data`, {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
