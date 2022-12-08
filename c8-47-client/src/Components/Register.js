@@ -34,14 +34,14 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
     console.log(form);
     try {
       const { data } = await axios.post(
-        `https://cevetae-api.vercel.app/auth/signup`,
+        'https://cevetae-api.vercel.app/auth/signup',
         form
       );
       localStorage.setItem('cevitaeToken', data.token);
 
       const {
         data: { user_data },
-      } = await axios.get(`https://cevetae-api.vercel.app/user/data`, {
+      } = await axios.get('https://cevetae-api.vercel.app/user/data', {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
