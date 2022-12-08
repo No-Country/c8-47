@@ -23,16 +23,14 @@ const startDateValidation = check('start_date')
   .notEmpty()
   .withMessage('Ingresa la fecha de inicio')
   .isLength({ max: 10 })
-  .withMessage('La fecha de inicio acepta como máximo 10 caracteres')
-  .escape();
+  .withMessage('La fecha de inicio acepta como máximo 10 caracteres');
 
 const endDateValidation = check('end_date')
   .trim()
   .notEmpty()
   .withMessage('Ingresa la fecha de finalización')
   .isLength({ max: 10 })
-  .withMessage('La fecha de finalización acepta como máximo 10 caracteres')
-  .escape();
+  .withMessage('La fecha de finalización acepta como máximo 10 caracteres');
 
 const tasksValidation = check('tasks.*')
   .trim()
