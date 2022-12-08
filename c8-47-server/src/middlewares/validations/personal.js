@@ -21,8 +21,7 @@ const birthValidation = check('birth')
   .trim()
   .optional({ checkFalsy: true })
   .isLength({ max: 10 })
-  .withMessage('La fecha de nacimiento acepta como máximo 10 caracteres')
-  .escape();
+  .withMessage('La fecha de nacimiento acepta como máximo 10 caracteres');
 
 const emailValidation = check('email')
   .trim()
