@@ -72,4 +72,22 @@ const editName = async (req, res, next) => {
   }
 };
 
-export { getUserData, modifyPassword, editName };
+const changeImage = async (req, res, next) => {
+  const { user } = req;
+  const { image_url } = req.body;
+
+  const options = { new: true };
+
+  try {
+    await User.findOneAndUpdate({ _id: user.id }, { image_url }, options);
+
+    return res.status(201).json({
+      image_url,
+      message: 'Imágen actualizada con éxito',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getUserData, modifyPassword, editName, changeImage };
