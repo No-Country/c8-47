@@ -26,6 +26,7 @@ const addJob = async (req, res, next) => {
     start_date,
     end_date,
     tasks,
+    main_job,
     tag: tagId,
   } = req.body;
 
@@ -39,7 +40,7 @@ const addJob = async (req, res, next) => {
       start_date,
       end_date,
       tasks,
-      main_job: true,
+      main_job,
       user: user.id,
       tag: tagId,
     });
