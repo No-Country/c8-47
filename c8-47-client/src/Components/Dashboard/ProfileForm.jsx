@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 import Input from '../input/Input';
-
+import PictureForm from './PictureForm';
 import customAxios from '../../Helpers/customAxios';
 import { DataContext } from '../../Context/DataContext';
 
@@ -52,6 +52,7 @@ function PersonalForm() {
 
   return (
     <div className='w-[95%]'>
+      <PictureForm />
       <form onSubmit={handleSubmit(submitForm)}>
         <Input
           name={'Nombre'}

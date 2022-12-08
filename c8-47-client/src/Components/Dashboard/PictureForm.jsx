@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import customAxios from '../../Helpers/customAxios';
 import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
 import { uploadFile } from '../../Utils/S3';
-
+import { FaUserAlt } from 'react-icons/fa';
 import './PictureForm.css';
 
 const PictureForm = () => {
@@ -83,14 +83,18 @@ const PictureForm = () => {
             <Spinner className='cho-svg' />
           ) : (
             <>
-              <img
-                // eslint-disable-next-line global-require
-                src={
-                  avatarUrl || require('../../Assets/Images/avatardefault.png')
-                }
-                referrerPolicy='no-referrer'
-                alt='Foto de perfil'
-              />
+              {avatarUrl ? (
+                <img
+                  eslint-disable-next-line
+                  global-require
+                  src={avatarUrl}
+                  referrerPolicy='no-referrer'
+                  alt='Foto de perfil'
+                />
+              ) : (
+                <FaUserAlt style={{ color: '#3D3D3D' }} />
+              )}
+
               <span className='profile-avatar-background'>Cambiar foto</span>
             </>
           )}
