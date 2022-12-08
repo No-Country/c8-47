@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Outlet, Link, navigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 
 import { Cv } from '../Components/Cv/Cv';
 import foto from '../Assets/Images/foto.png';
 import { AuthContext } from '../Context/AuthContext';
 import { DataContext } from '../Context/DataContext';
-// import customAxios from '../../Helpers/customAxios';
+import customAxios from '../Helpers/customAxios';
 
 import './Home.css';
 
 const Home = () => {
   const [showInput, setShowInput] = useState(false);
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const {
     state: { data },
@@ -23,8 +24,8 @@ const Home = () => {
     handleSubmit,
   } = useForm();
 
-  console.log('user', user);
-  console.log('data', data);
+  /*   console.log('user', user);
+  console.log('data', data); */
 
   const handleShowInput = () => {
     if (!showInput) setShowInput(true);
@@ -32,10 +33,9 @@ const Home = () => {
 
   const submitForm = async (formData) => {
     try {
-      // const { data } = await customAxios.post('/tag', formData);
-      console.log(formData);
-      // redirigir a /dashboard si el tag se crea con éxito
-      // navigate('/dashboard')
+      const { data } = await customAxios.post('/tag', formData);
+
+      navigate('/dashboard');
     } catch (error) {
       console.log(error);
     }
