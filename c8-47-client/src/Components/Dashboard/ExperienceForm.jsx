@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import Input from '../input/Input';
+import ButtonTask from '../buttons/ButtonTask';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 // import customAxios from './Config/interceptors';
-
+import { FaTrashAlt } from 'react-icons/fa';
 import customAxios from '../../Helpers/customAxios';
 
 function ExperienceForm() {
@@ -95,6 +96,7 @@ function ExperienceForm() {
         <Input
           name={'Fecha de inicio'}
           type={'text'}
+          placeholder={'mm/aaaa'}
           register={register('start_date', {
             required: { value: true, message: 'Ingresa la fecha de inicio.' },
             maxLength: {
@@ -106,6 +108,7 @@ function ExperienceForm() {
         />
         <Input
           name={'Fecha de finalización'}
+          placeholder={'mm/aaaa'}
           type={'text'}
           register={register('end_date', {
             required: {
@@ -120,36 +123,58 @@ function ExperienceForm() {
           })}
           error={errors.end_date}
         />
-
-        <h2>Tareas</h2>
-
+        <label className='dark:text-[#FFFFFF] font-Mon text-[16px] ml-[4px]'>
+          Tareas
+        </label>
         {React.Children.toArray(
           fields.map((_, i) => (
-            <div>
-              <input
-                type='text'
-                autoComplete='off'
-                id={`task_${i}`}
-                {...register(`tasks.${i}.value`, {
-                  maxLength: 128,
-                })}
-              />
+            <div className='h-[85px] flex flex-col'>
+              <div className='relative flex items-center gap-3'>
+                <input
+                  className={`dark:bg-bgDarkMode w-full dark:text-[#FFFFFF] dark:hover:bg-[#353535] h-[48px]  font-Mon  text-lg text text-textColor pt-[9px] pb-[9px] pl-[12px] pr-[35px] mt-[1px] mb-[1px] rounded-[10px] outline-0 ${
+                    errors.tasks
+                      ? 'border border-errorColor dark:border-[#FF6161]'
+                      : 'border border-textColor dark:border-[#FFFFFF]'
+                  }`}
+                  type='text'
+                  autoComplete='off'
+                  id={`task_${i}`}
+                  {...register(`tasks.${i}.value`, {
+                    maxLength: 128,
+                  })}
+                />
 
-              {tasksQuantity > 1 && (
-                <span onClick={() => handleRemoveTask(i)}>remover</span>
-              )}
+                {tasksQuantity > 1 && (
+                  <span
+                    className='absolute top-[1.2rem] right-[0.8rem] cursor-pointer'
+                    onClick={() => handleRemoveTask(i)}
+                  >
+                    <FaTrashAlt
+                      style={{
+                        color: '#3D3D3D',
+                      }}
+                    />
+                  </span>
+                )}
+              </div>
+
               {errors.tasks?.[i]?.value.type === 'maxLength' && (
-                <p>Tarea acepta como máximo 128 caracteres</p>
+                <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
+                  Tarea acepta como máximo 128 caracteres
+                </span>
               )}
             </div>
           ))
         )}
+        <div>
+          <ButtonTask
+            type={'button'}
+            onClick={handleAddTask}
+            name={'Agregar tarea'}
+          />
+        </div>
 
-        <button type='button' onClick={handleAddTask}>
-          Agregar tarea
-        </button>
-
-        <div className='flex items-center justify-center '>
+        <div className='flex items-center justify-center mt-[35px]'>
           <ButtonPurple type={'submit'}>Guardar</ButtonPurple>
         </div>
       </form>

@@ -13,7 +13,7 @@ const Navbar = () => {
     education: 'Educación',
     certificates: 'Certificaciones',
     skills: 'Habilidades',
-    languages: 'Iidiomas',
+    languages: 'Idiomas',
   };
 
   const [selected, setSelected] = useState(items[0]);
@@ -50,7 +50,7 @@ const Navbar = () => {
             id={e}
             className={`${
               selected === e ? 'bg-white' : 'bg-white'
-            } flex justify-center items-center h-96 flex-col`}
+            } flex justify-center items-center h-125 flex-col`}
           >
             <div className='flex text-2xl justify-start w-full'>
               <span className='p-2 flex items-center justify-center'>
