@@ -16,12 +16,17 @@ export const dataReducer = (state, action) => {
 export const DataContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, { data: {} });
 
-  useEffect(async () => {
+  useEffect(() => {
     const data = localStorage.getItem('cevitaeData');
-    if (data) dispatch({ type: 'SETDATA', payload: JSON.parse(data) });
-    else {
+
+    const getData = async () => {
       const newData = await customAxios.get('/user/data');
       if (data) localStorage.setItem('cevitaeData', JSON.stringify(newData));
+    };
+
+    if (data) dispatch({ type: 'SETDATA', payload: JSON.parse(data) });
+    else {
+      getData();
     }
   }, []);
 
