@@ -12,8 +12,7 @@ const nameValidation = check('name')
 
 const descriptionValidation = check('description')
   .trim()
-  .notEmpty()
-  .withMessage('Ingresa la descripción')
+  .optional({ checkFalsy: true })
   .isLength({ max: 256 })
   .withMessage('La descripción acepta como máximo 256 caracteres')
   .escape();

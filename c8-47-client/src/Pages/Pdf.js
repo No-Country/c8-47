@@ -3,7 +3,7 @@ import { Document, PDFViewer } from '@react-pdf/renderer';
 
 import Resume from '../Components/Pdf';
 
-import * as data from '../Components/Pdf/MockData';
+// import * as data from '../Components/Pdf/MockData';
 
 const options = {
   leftProfile: false,
@@ -11,10 +11,10 @@ const options = {
   template: 'base', // skills, education
 };
 
-const MyDocument = () => (
+const MyDocument = ({ value }) => (
   <PDFViewer style={{ width: '100%', height: '100vh' }}>
     <Document>
-      <Resume {...data} options={options} />
+      <Resume value={value} options={options} />
     </Document>
   </PDFViewer>
 );

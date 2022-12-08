@@ -7,7 +7,7 @@ DataContext.displayName = 'DataContext';
 export const dataReducer = (state, action) => {
   switch (action.type) {
     case 'SETDATA':
-      return { ...state, data: action.payload };
+      return { data: action.payload };
     default:
       return state;
   }
@@ -21,11 +21,13 @@ export const DataContextProvider = ({ children }) => {
 
     const getData = async () => {
       const newData = await customAxios.get('/user/data');
-      if (data) localStorage.setItem('cevitaeData', JSON.stringify(newData));
+      dispatch({ type: 'SETDATA', payload: newData });
+      if (newData) localStorage.setItem('cevitaeData', JSON.stringify(newData));
     };
 
-    if (data) dispatch({ type: 'SETDATA', payload: JSON.parse(data) });
-    else {
+    if (data) {
+      dispatch({ type: 'SETDATA', payload: JSON.parse(data) });
+    } else {
       getData();
     }
   }, []);
