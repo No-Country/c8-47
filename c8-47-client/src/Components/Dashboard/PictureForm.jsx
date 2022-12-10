@@ -5,13 +5,18 @@ import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
 import { uploadFile } from '../../Utils/S3';
 import { FaUserAlt } from 'react-icons/fa';
 import './PictureForm.css';
+import { useContext } from 'react';
+import { DataContext } from '../../Context/DataContext';
 import { BsFillCameraFill } from 'react-icons/bs';
+
 const PictureForm = () => {
   const [newAvatar, setNewAvatar] = useState(null);
   const [avatarFlag, setAvatarFlag] = useState(false);
   const [avatarError, setAvatarError] = useState(null);
   const [loadingAvatar, setLoadingAvatar] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+
+  const { state, dispatch } = useContext(DataContext);
 
   const validateImg = (fileListArrayImg) => {
     const fileTypesAllowed = ['image/jpeg', 'image/png'];
@@ -56,6 +61,11 @@ const PictureForm = () => {
         image_url: imageUrl,
       });
 
+      dispatch({
+        type: 'SETDATA',
+        payload: { image_url: data.image_url },
+      });
+
       console.log(data);
     } catch (error) {
       setAvatarUrl(null);
@@ -83,11 +93,11 @@ const PictureForm = () => {
             <Spinner className='cho-svg' />
           ) : (
             <>
-              {avatarUrl ? (
+              {state?.data?.image_url ? (
                 <img
                   eslint-disable-next-line
                   global-require
-                  src={avatarUrl}
+                  src={state?.data?.image_url}
                   referrerPolicy='no-referrer'
                   alt='Foto de perfil'
                 />

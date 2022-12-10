@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Navbar from '../Components/Dashboard/Navbar';
 import { DataContext } from '../Context/DataContext';
-import Pdf from '../Pages/Pdf';
+import Page from '../Components/LivePdf/Page';
 import { AiOutlineFilePdf } from 'react-icons/ai';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 const Dashboard = () => {
@@ -10,8 +10,11 @@ const Dashboard = () => {
 
   console.log(value);
   return (
-    <div className='relative w-screen h-screen dark:text-white flex'>
-      <Navbar viewPDF={viewPDF} />
+    <div className='relative w-screen h-screen dark:text-white flex  '>
+      <div className='flex w-full md:w-[40%] md:fixed md:bottom-0  '>
+        <Navbar viewPDF={viewPDF} />
+      </div>
+
       <div
         className={`${
           !viewPDF ? 'fixed' : 'hidden'
@@ -30,9 +33,14 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className={`${viewPDF ? 'block' : 'hidden'}  w-[100%] md:block`}>
-        <Pdf value={value} viewPDF={viewPDF} />
+      <div
+        className={`${
+          viewPDF ? 'block' : 'hidden'
+        }  w-[100%] md:block md:ml-[39%] h-[100%] `}
+      >
+        <Page />
       </div>
+
       <div
         className={`${
           viewPDF ? 'fixed' : 'hidden'

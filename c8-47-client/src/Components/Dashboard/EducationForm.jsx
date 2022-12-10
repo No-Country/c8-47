@@ -5,19 +5,33 @@ import { ButtonPurple } from '../buttons/ButtonPurple';
 // import customAxios from './Config/interceptors';
 
 import customAxios from '../../Helpers/customAxios';
+import { useContext } from 'react';
+import { TagContext } from '../../Context/TagContext';
+import { DataContext } from '../../Context/DataContext';
 
-function EducationForm() {
+function EducationForm({ certification = false }) {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const submitForm = async (formData) => {
-    formData.certification = true;
+  const { tag } = useContext(TagContext);
+  const { dispatch, state } = useContext(DataContext);
 
-    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
-    const { data } = await customAxios.post('/education', formData);
+  const submitForm = async (formData) => {
+    formData.certification = certification;
+
+    const { data } = await customAxios.post('/education', {
+      ...formData,
+      tag: tag,
+    });
+
+    dispatch({
+      type: 'SETDATA',
+      payload: { education: [...state.data.education, data.education] },
+    });
+
     console.log(data);
   };
 

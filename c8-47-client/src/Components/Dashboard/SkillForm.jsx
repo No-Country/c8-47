@@ -4,11 +4,14 @@ import { FaTrashAlt } from 'react-icons/fa';
 import ButtonTask from '../buttons/ButtonTask';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 import customAxios from '../../Helpers/customAxios';
+import { useContext } from 'react';
+import { TagContext } from '../../Context/TagContext';
+import { DataContext } from '../../Context/DataContext';
 
 function SkillForm() {
   const [skillsQuantity, setSkillsQuantity] = useState(1);
   const [submitDisabled, setSubmitDisabled] = useState(true);
-
+  const { tag } = useContext(TagContext);
   const {
     register,
     formState: { errors },
@@ -20,6 +23,8 @@ function SkillForm() {
       skills: [{ name: '' }],
     },
   });
+
+  const { state, dispatch } = useContext(DataContext);
 
   const {
     fields,
@@ -65,10 +70,17 @@ function SkillForm() {
       }
     }
 
-    // ! VOLVER A VER agregar a este formulario una propiedad 'tag' con el id del tag
-    const { data } = await customAxios.post('/skill', formData);
+    const { data } = await customAxios.post('/skill', {
+      ...formData,
+      tag: tag,
+    });
 
     console.log(data);
+
+    dispatch({
+      type: 'SETDATA',
+      payload: { skills: [...state.data.skills, ...data.skills] },
+    });
   };
 
   const customSubmit = (e) => {

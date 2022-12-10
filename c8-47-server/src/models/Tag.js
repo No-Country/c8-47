@@ -8,6 +8,7 @@ const TagSchema = new Schema(
     },
     description: {
       type: String,
+      required: false,
     },
 
     user: {

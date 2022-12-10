@@ -1,21 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Outlet, Link, navigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Cv } from '../Components/Cv/Cv';
 import foto from '../Assets/Images/foto.png';
 import { AuthContext } from '../Context/AuthContext';
 import { DataContext } from '../Context/DataContext';
-// import customAxios from '../../Helpers/customAxios';
 
 import './Home.css';
+import customAxios from '../Helpers/customAxios';
+import { TagContext } from '../Context/TagContext';
 
 const Home = () => {
   const [showInput, setShowInput] = useState(false);
   const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(TagContext);
   const {
     state: { data },
   } = useContext(DataContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,19 +26,17 @@ const Home = () => {
     handleSubmit,
   } = useForm();
 
-  console.log('user', user);
-  console.log('data', data);
-
   const handleShowInput = () => {
     if (!showInput) setShowInput(true);
   };
 
   const submitForm = async (formData) => {
     try {
-      // const { data } = await customAxios.post('/tag', formData);
-      console.log(formData);
-      // redirigir a /dashboard si el tag se crea con éxito
-      // navigate('/dashboard')
+      const { data } = await customAxios.post('/tag', formData);
+
+      if (data.tag._id) dispatch({ type: 'SELECT', payload: data.tag._id });
+
+      navigate('/dashboard');
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +53,7 @@ const Home = () => {
       <div className='flex justify-start items-center gap-4 pb-5'>
         <div className=' '>
           <img
-            src={foto}
+            src={data?.image_url}
             alt='foto'
             className=' rounded-full object-cover w-20 h-20'
           />

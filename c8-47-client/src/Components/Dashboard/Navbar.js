@@ -66,8 +66,6 @@ const Navbar = ({ viewPDF }) => {
             </div>
 
             <Forms name={e} />
-
-            {/* <Input name={'name'} value={name} key={e} setter={setName} /> */}
           </div>
         ))}
       </div>

@@ -7,8 +7,7 @@ import customAxios from '../../Helpers/customAxios';
 import { DataContext } from '../../Context/DataContext';
 
 function PersonalForm() {
-  const result = useContext(DataContext);
-  console.log(result.state.data.personal);
+  const { state, dispatch } = useContext(DataContext);
 
   const {
     register,
@@ -16,12 +15,12 @@ function PersonalForm() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: result?.state?.data?.personal?.name,
-      birth: result?.state?.data?.personal?.birth,
-      email: result?.state?.data?.personal?.email,
-      phone: result?.state?.data?.personal?.phone,
-      title: '', // result?.state?.data?.presentations[0].title,
-      about: '', // result?.state?.data?.presentations[0].about,
+      name: state?.data?.personal?.name,
+      birth: state?.data?.personal?.birth,
+      email: state?.data?.personal?.email,
+      phone: state?.data?.personal?.phone,
+      title: '', // state?.data?.presentations[0].title,
+      about: '', // state?.data?.presentations[0].about,
     },
   });
 
@@ -42,11 +41,21 @@ function PersonalForm() {
       '/presentation',
       dataToPresentation
     );
+
+    console.log('personal', personalData);
+    console.log('presentation', presentationData);
+
+    dispatch({
+      type: 'SETDATA',
+      payload: {
+        personal: { ...personalData.personal },
+        presentations: { ...presentationData.presentation },
+      },
+    });
   };
 
   return (
     <div className='w-[95%]'>
-      <PictureForm />
       <form onSubmit={handleSubmit(submitForm)}>
         <Input
           name={'Nombre'}
