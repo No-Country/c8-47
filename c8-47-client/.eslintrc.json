@@ -13,6 +13,7 @@
   "plugins": ["react"],
   "rules": {
     "react/prop-types": 0,
+    "react/no-unknown-property": "off",
     "no-unused-vars": "off",
     "react/react-in-jsx-scope": ["off"]
   }

@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000';
-//! VOLVER A VER cambiar url al hacer deploy
+const { REACT_APP_API_URL } = process.env;
 
-const customAxios = axios.create({ baseURL: API_URL });
+const customAxios = axios.create({ baseURL: REACT_APP_API_URL });
 
 customAxios.interceptors.request.use(
   (req) => {
