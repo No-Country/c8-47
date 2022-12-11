@@ -10,8 +10,12 @@ const Dashboard = () => {
 
   console.log(value);
   return (
-    <div className='relative w-screen h-screen dark:text-white flex  '>
-      <div className='flex w-full md:w-[40%] md:fixed md:bottom-0  '>
+    <div className='relative w-screen h-screen dark:text-white flex '>
+      <div
+        className={`${
+          !viewPDF ? 'w-full md:w-[40%] ' : 'hidden w-screen'
+        } flex w-full md:w-[40%] md:fixed md:bottom-0`}
+      >
         <Navbar viewPDF={viewPDF} />
       </div>
 
@@ -25,8 +29,8 @@ const Dashboard = () => {
           style={{
             color: '#FFFFFF',
             position: 'fixed',
-            bottom: '20px',
-            right: '20px',
+            bottom: '22px',
+            right: '22px',
             width: '32px',
             height: '32px',
           }}
@@ -35,8 +39,8 @@ const Dashboard = () => {
 
       <div
         className={`${
-          viewPDF ? 'block' : 'hidden'
-        }  w-[100%] md:block md:ml-[39%] h-[100%] `}
+          viewPDF ? 'block w-screen' : 'hidden'
+        }  w-[100%] md:block md:ml-[39%] h-[100%] overflow-x-scroll md:overflow-x-hidden `}
       >
         <Page />
       </div>
@@ -51,7 +55,7 @@ const Dashboard = () => {
           style={{
             color: '#FFFFFF',
             position: 'fixed',
-            bottom: '20px',
+            bottom: '22px',
             right: '20px',
             width: '32px',
             height: '32px',

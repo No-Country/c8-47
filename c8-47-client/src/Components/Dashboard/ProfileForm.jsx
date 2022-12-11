@@ -160,12 +160,12 @@ function PersonalForm() {
 
           {errors.about?.type === 'required' && (
             <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
-              Completa el campo Acerca de mi
+              Completa el campo Acerca de mi.
             </span>
           )}
           {errors.about?.type === 'maxLength' && (
             <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
-              El campo Acerca de mi acepta como máximo 512 caracteres
+              El campo Acerca de mi acepta como máximo 512 caracteres.
             </span>
           )}
         </div>
