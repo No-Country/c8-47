@@ -98,10 +98,12 @@ const Signin = ({ isVisible, onClose, onSwitch, onView, viewButtons }) => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {!showPassword ? (
-                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
+                    <AiFillEye
+                      style={{ width: '2rem', height: '2rem', color: 'grey' }}
+                    />
                   ) : (
                     <AiFillEyeInvisible
-                      style={{ width: '2rem', height: '2rem' }}
+                      style={{ width: '2rem', height: '2rem', color: 'grey' }}
                     />
                   )}
                 </div>

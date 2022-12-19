@@ -14,7 +14,7 @@ const Forms = ({ name }) => {
       return (
         <>
           <PictureForm />
-          <ProfileForm />;
+          <ProfileForm />
         </>
       );
     case 'location':

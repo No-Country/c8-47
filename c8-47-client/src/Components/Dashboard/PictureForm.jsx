@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import customAxios from '../../Helpers/customAxios';
 import { ReactComponent as Spinner } from '../../Assets/svg/spinner.svg';
 import { uploadFile } from '../../Utils/S3';
-
+import { FaUserAlt } from 'react-icons/fa';
 import './PictureForm.css';
 import { useContext } from 'react';
 import { DataContext } from '../../Context/DataContext';
+import { BsFillCameraFill } from 'react-icons/bs';
 
 const PictureForm = () => {
   const [newAvatar, setNewAvatar] = useState(null);
@@ -92,16 +93,26 @@ const PictureForm = () => {
             <Spinner className='cho-svg' />
           ) : (
             <>
-              <img
-                // eslint-disable-next-line global-require
-                src={
-                  state?.data?.image_url ||
-                  require('../../Assets/Images/avatardefault.png')
-                }
-                referrerPolicy='no-referrer'
-                alt='Foto de perfil'
-              />
-              <span className='profile-avatar-background'>Cambiar foto</span>
+              {state?.data?.image_url ? (
+                <img
+                  eslint-disable-next-line
+                  global-require
+                  src={state?.data?.image_url}
+                  referrerPolicy='no-referrer'
+                  alt='Foto de perfil'
+                />
+              ) : (
+                <div className='iconAvatar'>
+                  <FaUserAlt style={{ color: '#3D3D3D' }} />
+                </div>
+              )}
+
+              <span className='profile-avatar-background'>
+                <BsFillCameraFill
+                  style={{ marginBottom: '0.5rem', color: '#3D3D3D' }}
+                />
+                Cambiar foto
+              </span>
             </>
           )}
         </label>

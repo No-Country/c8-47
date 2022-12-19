@@ -3,7 +3,7 @@ import Forms from './Forms';
 import Icon from './Icon';
 // import Input from './Input';
 
-const Navbar = () => {
+const Navbar = ({ viewPDF }) => {
   const items = {
     profile: 'Perfil',
     location: 'Ubicación',
@@ -20,7 +20,11 @@ const Navbar = () => {
   // const [name, setName] = useState('');
 
   return (
-    <div className='h-screen md:w-fit w-full rounded-r-3xl shadow-2xl flex'>
+    <div
+      className={`${
+        !viewPDF ? 'flex' : 'hidden'
+      } h-screen md:w-fit w-full rounded-r-3xl shadow-2xl md:flex`}
+    >
       <div className='h-screen w-16 rounded-r-full shadow-lg overflow-hidden'>
         <ul className='h-full flex flex-col justify-evenly items-stretch rounded-r-full py-8 bg-primarioP'>
           {Object.keys(items).map((e) => (

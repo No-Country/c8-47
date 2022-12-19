@@ -70,7 +70,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                     message: 'El campo nombres es requerido.',
                   },
                   pattern: {
-                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
                     message: 'Ingresa un nombre válido.',
                   },
                   minLength: {
@@ -93,7 +93,7 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                     message: 'El campo apellidos es requerido.',
                   },
                   pattern: {
-                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/,
+                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/,
                     message: 'Ingrese un apellido válido.',
                   },
                   minLength: {
@@ -149,10 +149,16 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                   className='absolute top-[2.1rem] right-[0.8rem]'
                 >
                   {!showPassword ? (
-                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
+                    <AiFillEye
+                      style={{
+                        width: '2rem',
+                        height: '2rem',
+                        color: 'grey',
+                      }}
+                    />
                   ) : (
                     <AiFillEyeInvisible
-                      style={{ width: '2rem', height: '2rem' }}
+                      style={{ width: '2rem', height: '2rem', color: 'grey' }}
                     />
                   )}
                 </div>
@@ -178,10 +184,12 @@ const Register = ({ isVisible, onClose, onSwitch, viewButtons, onView }) => {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {!showConfirmPassword ? (
-                    <AiFillEye style={{ width: '2rem', height: '2rem' }} />
+                    <AiFillEye
+                      style={{ width: '2rem', height: '2rem', color: 'grey' }}
+                    />
                   ) : (
                     <AiFillEyeInvisible
-                      style={{ width: '2rem', height: '2rem' }}
+                      style={{ width: '2rem', height: '2rem', color: 'grey' }}
                     />
                   )}
                 </div>

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ButtonPurple } from '../buttons/ButtonPurple';
 import Input from '../input/Input';
-
+import PictureForm from './PictureForm';
 import customAxios from '../../Helpers/customAxios';
 import { DataContext } from '../../Context/DataContext';
 
@@ -160,12 +160,12 @@ function PersonalForm() {
 
           {errors.about?.type === 'required' && (
             <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
-              Completa el campo Acerca de mi
+              Completa el campo Acerca de mi.
             </span>
           )}
           {errors.about?.type === 'maxLength' && (
             <span className='font-Mon ml-[4px] text-[14px] leading-none text-errorColor dark:text-[#FF6161]'>
-              El campo Acerca de mi acepta como máximo 512 caracteres
+              El campo Acerca de mi acepta como máximo 512 caracteres.
             </span>
           )}
         </div>
