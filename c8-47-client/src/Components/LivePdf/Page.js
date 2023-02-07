@@ -60,7 +60,7 @@ const Page = () => {
   console.log('data', data);
   return (
     <div
-      className='shadow-xl m-4 w-full h-full p-8 overflow-y-scroll font-medium'
+      className='shadow-xl m-4 w-full h-full p-8   font-medium'
       style={{ width: '21cm', minHeight: '29.7cm' }}
       size='A4'
     >
