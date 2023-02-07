@@ -49,7 +49,7 @@ export const Header = ({
   ));
 
   return (
-    <div className=' bg-white  dark:bg-bgDarkMode shadow-md w-full fixed top-0 left-0 grid place-items-center md:block'>
+    <div className=' bg-white  dark:bg-bgDarkMode shadow-md w-full sticky top-0 left-0 grid place-items-center md:block'>
       <div className='  dark:bg-bgDarkMode md:flex md:items-center md:justify-between bg-white py-4 md:px-10 px-7'>
         <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-textColor'>
           <img

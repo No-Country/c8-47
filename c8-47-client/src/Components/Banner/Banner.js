@@ -1,15 +1,15 @@
 import React from 'react';
 import { ButtonPurple } from '../buttons/ButtonPurple';
-import bannerImg from "../../Assets/Images/Ilus_principal.svg"
+import bannerImg from '../../Assets/Images/Ilus_principal.svg';
 
 export const Banner = ({ onView }) => {
   return (
-    <div className=' dark:text-white flex flex-col items-center	gap-12 pt-32 pb-32 '>
+    <div className=' dark:text-white flex flex-col items-center	gap-12 pt-24 pb-24 '>
       <h1 className=' font-Mon font-semibold text-2xl md:text-3xl '>
         A que nos postulamos hoy?
       </h1>
       <div className=' dark:text-black flex flex-col justify-center items-center h-72 w-4/5 md:w-2/4   '>
-        <img src={bannerImg} alt="banner" />
+        <img src={bannerImg} alt='banner' />
       </div>
       <div className=' md:hidden'>
         <ButtonPurple onClick={onView}>Registrate </ButtonPurple>
